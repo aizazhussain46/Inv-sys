@@ -2,18 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\ModelController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\StoreController;
+// use App\Http\Controllers\CategoryController;
+// use App\Http\Controllers\BranchController;
+// use App\Http\Controllers\DepartmentController;
+// use App\Http\Controllers\LocationController;
+// use App\Http\Controllers\ModelController;
+// use App\Http\Controllers\RoleController;
+// use App\Http\Controllers\StoreController;
 use App\Http\Controllers\FormController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\VendorController;
-use App\Http\Controllers\MakeController;
+// use App\Http\Controllers\UserController;
+// use App\Http\Controllers\InventoryController;
+// use App\Http\Controllers\VendorController;
+// use App\Http\Controllers\MakeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
