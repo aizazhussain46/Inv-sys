@@ -25,7 +25,8 @@ use App\Http\Controllers\FormController;
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
+    //return view('welcome');
 });
 
 Auth::routes();
