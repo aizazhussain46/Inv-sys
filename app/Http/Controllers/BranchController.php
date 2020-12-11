@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Models\Branch;
+use App\Branch;
 class BranchController extends Controller
 {
     public function index()

@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Models\Inventory;
-use App\Models\Category;
-use App\Models\Location;
-use App\Models\Department;
-use App\Models\Branch;
-use App\Models\Store;
-use App\Models\Modal;
-use App\Models\Makee;
-use App\Models\Vendor;
+use App\Inventory;
+use App\Category;
+use App\Location;
+use App\Department;
+use App\Branch;
+use App\Store;
+use App\Modal;
+use App\Makee;
+use App\Vendor;
 class InventoryController extends Controller
 {
     
