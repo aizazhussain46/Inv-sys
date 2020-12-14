@@ -8,6 +8,10 @@ use App\Vendor;
 
 class VendorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $vendor = Vendor::all();

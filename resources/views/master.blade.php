@@ -51,6 +51,8 @@
                                     <a class="nav-link" href="{{ url('add_inventory') }}">Add Inventory</a>
                                     <a class="nav-link" href="{{ url('inventory') }}">All Inventories</a>
                                     <a class="nav-link" href="{{ url('issue_inventory') }}">Issue Inventory</a>
+                                    <a class="nav-link" href="{{ url('transfer_inventory') }}">Transfer Inventory</a>
+                                    <a class="nav-link" href="{{ url('return_inventory') }}">Return Inventory</a>
                                 </nav>
                             </div>
 
@@ -211,3 +213,26 @@
         <script src="{{ asset('assets/assets/demo/datatables-demo.js') }}"></script>
     </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#show").click(function(){
+        $("#form").attr({method:'GET', action:'{{ url("filter_inventory") }}'})
+        $("#form").submit();
+    });
+    $("#transfer").click(function(){
+        $("#form").attr({method:'POST', action:'{{ url("transfer") }}'})
+        $("#form").submit();
+    });
+
+    $("#rshow").click(function(){
+        $("#rform").attr({method:'GET', action:'{{ url("filter_return") }}'})
+        $("#rform").submit();
+    });
+    $("#return").click(function(){
+        $("#rform").attr({method:'POST', action:'{{ url("return") }}'})
+        $("#rform").submit();
+    });
+    
+});
+</script> 

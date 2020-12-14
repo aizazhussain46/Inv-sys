@@ -11,23 +11,34 @@
                             {{ session('msg') }}
                         </div>
                     @endif
-                    <form  method="POST" action="{{ url('issue') }}">
+                    
+                    <form id="rform" method="" action="">
                     @csrf
+                    
                     <div class="row justify-content-center"> 
                     
                         <div class="col-md-6 col-lg-6">
                             <div class="card mt-3">
                             <div class="card-header bg-primary text-white">
-                            Issue Inventory
+                            Return Inventory
                             </div>
                                 <div class="card-body">
-                                <div class="form-group">
-                                    <input class="form-control py-4" id="employeecode" name="employee_code" type="text" placeholder="Enter Employee Code here" />
-                                    <span class="small text-danger">{{ $errors->first('employee_code') }}</span>
-                                    @if (session('emp_code'))
-                                    <span class="small text-danger">{{ session('emp_code') }}</span>
-                                    @endif
-                                </div>
+                                <table class="table table-borderless">
+                                        <tbody>
+                                                  
+                                            <tr>
+                                                <td>
+                                                    <input class="form-control" id="employee_code" name="employee_code" type="text" value="{{ isset($emp_code)?$emp_code->id:null }}" placeholder="Enter Employee Code here" />
+                                                    <span class="small text-danger">{{ $errors->first('employee_code') }}</span>
+                                                    @if (session('emp_code'))
+                                                    <span class="small text-danger">{{ session('emp_code') }}</span>
+                                                    @endif
+                                                
+                                                </td>
+                                                <td><button type="button" id="rshow" name="show" class="btn btn-primary">Show</button></td>
+                                            </tr>
+                                        </tbody>
+                                </table>            
                                 </div>
                             </div>
                         </div>   
@@ -45,6 +56,8 @@
                                                 <th>Model</th>
                                                 <th>Purchase Date</th>
                                                 <th>Category</th>
+                                                <th>Employee Code</th>
+                                                <th>Employee Name</th>
                                                 <th>Price</th>
                                                 <th>Created at</th>
                                             </tr>
@@ -55,16 +68,22 @@
                                         @foreach ($inventories as $inventory)
                                             <tr>
                                                 <td>
+                                                @if(isset($filter))
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name='inv_id[]' value="{{ $inventory->id }}">
-                                                    <label class="form-check-label" for="exampleCheck1">{{ $i++ }}</label>
+                                                    <input type="checkbox" class="form-check-input" id="inv{{ $inventory->id }}" name="inv_id[]" value="{{ $inventory->id }}">
+                                                    <label class="form-check-label" for="inv{{ $inventory->id }}">{{ $i++ }}</label>
                                                 </div>
+                                                @else
+                                                {{ $i++ }}
+                                                @endif
                                                 </td>
                                                 <td>{{ $inventory->product_sn }}</td>
                                                 <td>{{ $inventory->make_id?$inventory->make->make_name:'' }}</td>
                                                 <td>{{ $inventory->model_id?$inventory->model->model_name:'' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
                                                 <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
+                                                <td>{{ $inventory->user->id }}</td>
+                                                <td>{{ $inventory->user->name }}</td>
                                                 <td>{{ $inventory->item_price }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
                                             </tr>
@@ -74,15 +93,18 @@
                                 </div>
                             </div>
                         </div>
+                        @if(isset($filter))
                     <div class="col-md-12 col-lg-12">
                         <div class="form-group">
                         <textarea class="form-control" id="remarks" name="remarks" rows="4" placeholder="Enter Remarks here"></textarea>
                         <span class="small text-danger">{{ $errors->first('remarks') }}</span>
                         </div>    
                     </div>
+                 
                     <div class="form-group mt-4 mb-0">
-                        <input type="submit" name="issue_inventory" value="Issue Inventory" class="btn btn-primary btn-block">
-                        </div>
+                        <button type="button" name="return_inventory" class="btn btn-primary btn-block" id="return">Return Inventory</button>
+                        </div>  
+                        @endif             
                 </form>
                 </div>
                 </main>
@@ -99,4 +121,5 @@
                     </div>
                 </footer>
             </div>
+           
 @endsection

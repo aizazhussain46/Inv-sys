@@ -34,6 +34,7 @@
                                                 <th>Purchase Date</th>
                                                 <th>Category</th>
                                                 <th>Price</th>
+                                                <th>Issued</th>
                                                 <th>Created at</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -50,6 +51,7 @@
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
                                                 <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
                                                 <td>{{ $inventory->item_price }}</td>
+                                                <td>{{ $inventory->issued_to?$inventory->user->name:'' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
                                                 <td class="text-center">
                                                 <a href="{{ url('inventory/'.$inventory->id) }}" class="btn btn-sm btn-success">

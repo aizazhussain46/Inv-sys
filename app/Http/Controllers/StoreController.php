@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Store;
 class StoreController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $store = Store::all();

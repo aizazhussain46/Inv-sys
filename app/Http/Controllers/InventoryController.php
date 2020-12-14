@@ -10,14 +10,25 @@ use App\Department;
 use App\Branch;
 use App\Store;
 use App\Modal;
+use App\User;
 use App\Makee;
 use App\Vendor;
 class InventoryController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $inventory = Inventory::orderBy('id', 'desc')->get();
+        
+        foreach($inventory as $inv){
+            $user = User::where('id', $inv->issued_to)->first();
+            if($user){
+                $inv['user'] = $user;
+            }
+        }
         return view('inventory', ['inventories' => $inventory]);
     }
 

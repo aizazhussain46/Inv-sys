@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Branch;
 class BranchController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $branch = Branch::all();

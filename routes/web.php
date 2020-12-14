@@ -58,3 +58,11 @@ Route::get('/add_inventory', [FormController::class, 'add_inventory']);
 Route::get('/add_vendor', [FormController::class, 'add_vendor']);
 Route::get('/add_make', [FormController::class, 'add_make']);
 Route::get('/issue_inventory', [FormController::class, 'issue_inventory']);
+Route::get('/transfer_inventory', [FormController::class, 'transfer_inventory']);
+Route::get('/return_inventory', [FormController::class, 'return_inventory']);
+
+Route::post('/issue', 'FormController@submitt_issue');
+Route::post('/transfer', 'FormController@submitt_transfer');
+Route::get('/filter_inventory', 'FormController@filter_inventory');
+Route::post('/return', 'FormController@submitt_return');
+Route::get('/filter_return', 'FormController@filter_return');

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Modal;
 class modelController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $model = Modal::all();
