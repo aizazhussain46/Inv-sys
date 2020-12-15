@@ -53,6 +53,7 @@
                                     <a class="nav-link" href="{{ url('issue_inventory') }}">Issue Inventory</a>
                                     <a class="nav-link" href="{{ url('transfer_inventory') }}">Transfer Inventory</a>
                                     <a class="nav-link" href="{{ url('return_inventory') }}">Return Inventory</a>
+                                    <a class="nav-link" href="{{ url('repair') }}">Asset Repairing</a>
                                 </nav>
                             </div>
 
@@ -72,6 +73,7 @@
 
                             <!-- User Management -->
                             <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
+                            @if(Auth::user()->role_id == 1)
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 User Management
@@ -191,7 +193,7 @@
                                     </div>
                                 </nav>
                             </div>
-                            
+                            @endif
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

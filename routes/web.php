@@ -31,38 +31,42 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::resource('/category', CategoryController::class);
-Route::resource('/branch', BranchController::class);
-Route::resource('/department', DepartmentController::class);
-Route::resource('/location', LocationController::class);
-Route::resource('/model', ModelController::class);
-Route::resource('/role', RoleController::class);
-Route::resource('/store', StoreController::class);
-Route::resource('/user', UserController::class);
+Route::resource('/category', CategoryController::class)->middleware('role:1');
+Route::resource('/branch', BranchController::class)->middleware('role:1');
+Route::resource('/department', DepartmentController::class)->middleware('role:1');
+Route::resource('/location', LocationController::class)->middleware('role:1');
+Route::resource('/model', ModelController::class)->middleware('role:1');
+Route::resource('/role', RoleController::class)->middleware('role:1');
+Route::resource('/store', StoreController::class)->middleware('role:1');
+Route::resource('/user', UserController::class)->middleware('role:1');
 Route::resource('/inventory', InventoryController::class);
-Route::resource('/vendor', VendorController::class);
-Route::resource('/make', MakeController::class);
+Route::resource('/vendor', VendorController::class)->middleware('role:1');
+Route::resource('/make', MakeController::class)->middleware('role:1');
 
 /* Forms */
-Route::get('/add_category', [FormController::class, 'add_category']);
-Route::get('/add_branch', [FormController::class, 'add_branch']);
-Route::get('/add_department', [FormController::class, 'add_department']);
-Route::get('/add_location', [FormController::class, 'add_location']);
-Route::get('/add_model', [FormController::class, 'add_model']);
-Route::get('/add_role', [FormController::class, 'add_role']);
-Route::get('/add_store', [FormController::class, 'add_store']);
-Route::get('/add_user', [FormController::class, 'add_user']);
+Route::get('/add_category', [FormController::class, 'add_category'])->middleware('role:1');
+Route::get('/add_branch', [FormController::class, 'add_branch'])->middleware('role:1');
+Route::get('/add_department', [FormController::class, 'add_department'])->middleware('role:1');
+Route::get('/add_location', [FormController::class, 'add_location'])->middleware('role:1');
+Route::get('/add_model', [FormController::class, 'add_model'])->middleware('role:1');
+Route::get('/add_role', [FormController::class, 'add_role'])->middleware('role:1');
+Route::get('/add_store', [FormController::class, 'add_store'])->middleware('role:1');
+Route::get('/add_user', [FormController::class, 'add_user'])->middleware('role:1');
+Route::get('/add_vendor', [FormController::class, 'add_vendor'])->middleware('role:1');
+Route::get('/add_make', [FormController::class, 'add_make'])->middleware('role:1');
+
 Route::get('/add_inventory', [FormController::class, 'add_inventory']);
-Route::get('/add_vendor', [FormController::class, 'add_vendor']);
-Route::get('/add_make', [FormController::class, 'add_make']);
 Route::get('/issue_inventory', [FormController::class, 'issue_inventory']);
 Route::get('/transfer_inventory', [FormController::class, 'transfer_inventory']);
 Route::get('/return_inventory', [FormController::class, 'return_inventory']);
+Route::get('/repair', [FormController::class, 'repair']);
 
 Route::post('/issue', 'FormController@submitt_issue');
 Route::post('/transfer', 'FormController@submitt_transfer');
 Route::get('/filter_inventory', 'FormController@filter_inventory');
 Route::post('/return', 'FormController@submitt_return');
 Route::get('/filter_return', 'FormController@filter_return');
+Route::post('/repair_inventory', 'FormController@repair_inventory');

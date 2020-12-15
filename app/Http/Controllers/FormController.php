@@ -17,6 +17,7 @@ use App\User;
 use App\Issue;
 use App\Transfer;
 use App\Inventory;
+use App\Repairing;
 class FormController extends Controller
 {
     public function __construct()
@@ -181,5 +182,28 @@ class FormController extends Controller
             $insert = Transfer::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
         }
         return redirect('return_inventory')->with('msg','Inventory Returned!');
+    }
+    public function repair(){
+        $inventory = Inventory::orderBy('id', 'desc')->select('id','product_sn')->get();
+        
+        return view('repair_inventory', ['inventories' => $inventory]);
+    }
+    public function repair_inventory(Request $request){
+        $validator = Validator::make($request->all(), [
+            'item_id' => 'required',
+            'date' => 'required',
+            'actual_price_value' => 'required',
+            'price_value' => 'required',  
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        $repair = Repairing::create($request->all());
+        if($repair){
+            return redirect()->back()->with('msg', 'Repairing asset Added Successfully!');
+        }
+        else{
+            return redirect()->back()->with('msg', 'Could not add repairing asset, Try Again!');
+        }
     }
 }
