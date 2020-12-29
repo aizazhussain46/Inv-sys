@@ -48,9 +48,12 @@
                             </a>
                             <div class="collapse" id="inventories" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ url('add_inventory') }}">Add Inventory</a>
+                                    <a class="nav-link" href="{{ url('add_inventory') }}">Add</a>
+                                    <a class="nav-link" href="{{ url('add_with_grn') }}">Add with GRN</a>
+                                    <a class="nav-link" href="{{ url('pendings') }}">Pendings</a>
                                     <a class="nav-link" href="{{ url('inventory') }}">All Inventories</a>
                                     <a class="nav-link" href="{{ url('issue_inventory') }}">Issue Inventory</a>
+                                    <a class="nav-link" href="{{ url('issue_with_gin') }}">Issue with GIN</a>
                                     <a class="nav-link" href="{{ url('transfer_inventory') }}">Transfer Inventory</a>
                                     <a class="nav-link" href="{{ url('return_inventory') }}">Return Inventory</a>
                                     <a class="nav-link" href="{{ url('repair') }}">Asset Repairing</a>
@@ -104,7 +107,7 @@
                                         </nav>
                                     </div>
                                     <!-- Branch -->
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#branch" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#branch" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Branch
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
@@ -113,9 +116,9 @@
                                             <a class="nav-link" href="{{ url('add_branch') }}">Add Branch</a>
                                             <a class="nav-link" href="{{ url('branch') }}">List Branch</a>
                                         </nav>
-                                    </div>
+                                    </div> -->
                                     <!-- Department -->
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#department" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#department" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Department
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
@@ -124,9 +127,9 @@
                                             <a class="nav-link" href="{{ url('add_department') }}">Add Department</a>
                                             <a class="nav-link" href="{{ url('department') }}">List Department</a>
                                         </nav>
-                                    </div>
+                                    </div> -->
                                     <!-- Location -->
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#location" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#location" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Location
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
@@ -135,7 +138,7 @@
                                             <a class="nav-link" href="{{ url('add_location') }}">Add Location</a>
                                             <a class="nav-link" href="{{ url('location') }}">List Location</a>
                                         </nav>
-                                    </div>
+                                    </div> -->
                                     <!-- Model -->
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#model" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                     Model

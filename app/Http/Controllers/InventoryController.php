@@ -34,6 +34,7 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|not_in:0',
             'product_sn' => 'required',
@@ -42,8 +43,8 @@ class InventoryController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-        
-        $create = Inventory::create($request->all());
+        $fields = $request->all();
+        $create = Inventory::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Inventory Added Successfully!');
         }

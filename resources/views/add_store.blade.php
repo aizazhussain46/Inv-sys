@@ -29,8 +29,36 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">Store Name</label>
-                                                        <input class="form-control py-4" id="inputFirstName" type="text" name="store_name" placeholder="Enter store name here" Required="required" />
+                                                        <input class="form-control" id="inputFirstName" type="text" name="store_name" placeholder="Enter store name here" Required="required" />
                                                         <span class="small text-danger">{{ $errors->first('store_name') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="location">Location</label>
+                                                        <select class="custom-select" id="location" name="location">
+                                                            <option value=null>Select Location here</option>
+                                                            <option value="location1">Location 1</option>
+                                                            <option value="location2">Location 2</option>
+                                                            <option value="location3">Location 3</option>
+                                                        </select>
+                                                        <span class="small text-danger">{{ $errors->first('location') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="administrator">Administrator</label>
+                                                        <select class="custom-select" id="administrator" name="administrator">
+                                                            <option value=null>Select Administrator here</option>
+                                                            @foreach ($users as $user)
+                                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="small text-danger">{{ $errors->first('administrator') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

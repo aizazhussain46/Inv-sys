@@ -28,17 +28,22 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Name</th>
+                                                <th>Threshold</th>
                                                 <th>Craeted at</th>
+                                                <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach ($categories as $category)
                                             <tr>
-                                                <td>{{ $category->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $category->category_name }}</td>
+                                                <td>{{ $category->threshold }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($category->created_at)) }}</td>
+                                                <td>{{ $category->status == 1?'Active':'Inactive' }}</td>
                                                 <td class="text-center">
                                                 <a href="{{ url('category/'.$category->id) }}" class="btn btn-sm btn-success">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

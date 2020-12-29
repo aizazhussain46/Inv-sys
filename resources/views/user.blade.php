@@ -30,19 +30,24 @@
                                                 <th>Role</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Craeted at</th>
+                                                <th>Emp Code</th>
+                                                <th>Designation</th>
+                                                <th>Contact No</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $user->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $user->role->role }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>{{ date('Y-m-d' ,strtotime($user->created_at)) }}</td>
+                                                <td>{{ $user->emp_no }}</td>
+                                                <td>{{ $user->designation }}</td>
+                                                <td>{{ $user->contact }}</td>
                                                 <td class="text-center">
                                                 <a href="{{ url('user/'.$user->id) }}" class="btn btn-sm btn-success">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -34,6 +34,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="threshold">Threshold Value</label>
+                                                        <input class="form-control py-4" id="threshold" type="text" name="threshold" placeholder="Enter Threshold value here" Required="required" />
+                                                        <span class="small text-danger">{{ $errors->first('threshold') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group mt-4 mb-0">
                                             <input type="submit" name="add_category" value="Add Category" class="btn btn-primary btn-block">
                                             </div>

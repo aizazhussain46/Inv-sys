@@ -28,16 +28,21 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Store admin</th>
                                                 <th>Craeted at</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach ($stores as $store)
                                             <tr>
-                                                <td>{{ $store->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $store->store_name }}</td>
+                                                <td>{{ $store->location }}</td>
+                                                <td>{{ $store->user }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($store->created_at)) }}</td>
                                                 <td class="text-center">
                                                 <a href="{{ url('store/'.$store->id) }}" class="btn btn-sm btn-success">

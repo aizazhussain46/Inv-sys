@@ -22,12 +22,23 @@ class VendorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'vendor_name' => 'required',
+            'address' => 'required',
+            'contact_person' => 'required',
+            'email' => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $create = Vendor::create($request->all());
+        $fields = array(
+            'vendor_name'=>$request->vendor_name, 
+            'address'=>$request->address, 
+            'contact_person'=>$request->contact_person,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'cell' => $request->cell,
+        );
+        
+        $create = Vendor::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Vendor Added Successfully!');
         }
@@ -46,12 +57,22 @@ class VendorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'vendor_name' => 'required',
+            'address' => 'required',
+            'contact_person' => 'required',
+            'email' => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $update = Vendor::where('id', $id)->update(['vendor_name'=>$request->vendor_name]);
+        $fields = array(
+            'vendor_name'=>$request->vendor_name, 
+            'address'=>$request->address, 
+            'contact_person'=>$request->contact_person,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'cell' => $request->cell,
+        );
+        $update = Vendor::where('id', $id)->update($fields);
         if($update){
             return redirect()->back()->with('msg', 'Vendor Updated Successfully!');
         }

@@ -35,6 +35,27 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="threshold">Threshold Value</label>
+                                                        <input class="form-control py-4" id="threshold" type="text" name="threshold" value="{{ $category->threshold }}" placeholder="Enter Threshold value here" Required="required" />
+                                                        <span class="small text-danger">{{ $errors->first('threshold') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="status">Status</label>
+                                                        <select class="custom-select" id="status" name="status">
+                                                        <option value="1" {{ $category->status == '1'? 'selected':''}}>Active</option>
+                                                            <option value="0" {{ $category->status == '0'? 'selected':''}}>Inactive</option>
+                                                        </select>
+                                                        <span class="small text-danger">{{ $errors->first('status') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group mt-4 mb-0">
                                             <input type="submit" name="update_category" value="Update Category" class="btn btn-primary btn-block">
                                             </div>

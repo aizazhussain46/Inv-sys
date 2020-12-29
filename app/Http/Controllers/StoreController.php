@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Store;
+use App\User;
 class StoreController extends Controller
 {
     public function __construct()
@@ -13,6 +14,12 @@ class StoreController extends Controller
     public function index()
     {
         $store = Store::all();
+        foreach($store as $st){
+            $user = User::where('id', $st->emp_id)->first();
+            if($user){
+                $st['user'] = $user->name;
+            }
+        }
         return view('store', ['stores' => $store]);
     }
 
@@ -20,12 +27,14 @@ class StoreController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'store_name' => 'required',
+            'location' => 'required|not_in:null',
+            'administrator' => 'required|not_in:null',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $create = Store::create($request->all());
+        $fields = array('store_name'=>$request->store_name, 'location'=>$request->location, 'emp_id'=>$request->administrator);
+        $create = Store::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Store Added Successfully!');
         }
@@ -37,19 +46,22 @@ class StoreController extends Controller
     public function show($id)
     {
         $store = Store::find($id);
-        return view('edit_store', ['store'=> $store]);
+        $user = User::where('status',1)->where('role_id',2)->get();
+        return view('edit_store', ['store'=> $store, 'users' => $user]);
     }
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'store_name' => 'required',
+            'location' => 'required|not_in:null',
+            'administrator' => 'required|not_in:null',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $update = Store::where('id', $id)->update(['store_name'=>$request->store_name]);
+        $fields = array('store_name'=>$request->store_name, 'location'=>$request->location, 'emp_id'=>$request->administrator);
+        $update = Store::where('id', $id)->update($fields);
         if($update){
             return redirect()->back()->with('msg', 'Store Updated Successfully!');
         }

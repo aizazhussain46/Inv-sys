@@ -28,16 +28,21 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Name</th>
+                                                <th>Make</th>
+                                                <th>Status</th>
                                                 <th>Craeted at</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach ($models as $model)
                                             <tr>
-                                                <td>{{ $model->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $model->model_name }}</td>
+                                                <td>{{ $model->make->make_name }}</td>
+                                                <td>{{ $model->status==1?'Active':'Inactive' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($model->created_at)) }}</td>
                                                 <td class="text-center">
                                                 <a href="{{ url('model/'.$model->id) }}" class="btn btn-sm btn-success">

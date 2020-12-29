@@ -26,12 +26,42 @@
                                         <form  method="POST" action="{{ url('model/'.$model->id) }}">
                                         @method('PUT')
                                         @csrf
+                                        <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="make">Make</label>
+                                                        <select class="custom-select" id="make" name="make_id">
+                                                            <option value=null>Select Make here</option>
+                                                            @foreach ($makes as $make)
+                                                            @if($make->id == $model->make_id)
+                                                            <option value="{{ $make->id }}" selected>{{ $make->make_name }}</option>
+                                                            @else
+                                                            <option value="{{ $make->id }}">{{ $make->make_name }}</option>
+                                                            @endif
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="small text-danger">{{ $errors->first('make_id') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">Model Name</label>
                                                         <input class="form-control py-4" id="inputFirstName" type="text" name="model_name" value="{{$model->model_name}}" placeholder="Enter model name here" Required="required" />
                                                         <span class="small text-danger">{{ $errors->first('model_name') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="status">Status</label>
+                                                        <select class="custom-select" id="status" name="status">
+                                                            <option value="1" {{ $make->status == '1'? 'selected':''}}>Active</option>
+                                                            <option value="0" {{ $make->status == '0'? 'selected':''}}>Inactive</option>
+                                                        </select>
+                                                        <span class="small text-danger">{{ $errors->first('status') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

@@ -25,6 +25,20 @@
                                     <div class="card-body">
                                         <form  method="POST" action="{{ url('model') }}">
                                         @csrf
+                                        <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="make">Make</label>
+                                                        <select class="custom-select" id="make" name="make_id">
+                                                            <option value=null>Select Make here</option>
+                                                            @foreach ($makes as $make)
+                                                            <option value="{{ $make->id }}">{{ $make->make_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="small text-danger">{{ $errors->first('make_id') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">

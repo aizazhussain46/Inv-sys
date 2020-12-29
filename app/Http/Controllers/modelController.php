@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Modal;
+use App\Makee;
 class modelController extends Controller
 {
     public function __construct()
@@ -20,12 +21,13 @@ class modelController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'model_name' => 'required',
+            'make_id' => 'required|not_in:null'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $create = Modal::create($request->all());
+        $fields = array('model_name'=>$request->model_name, 'make_id'=>$request->make_id, 'status'=>1);
+        $create = Modal::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Model Added Successfully!');
         }
@@ -36,20 +38,22 @@ class modelController extends Controller
 
     public function show($id)
     {
+        $make = Makee::where('status',1)->get();
         $model = Modal::find($id);
-        return view('edit_model', ['model'=> $model]);
+        return view('edit_model', ['model'=> $model, 'makes' => $make]);
     }
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'model_name' => 'required',
+            'make_id' => 'required|not_in:null'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
 
-        $update = Modal::where('id', $id)->update(['model_name'=>$request->model_name]);
+        $update = Modal::where('id', $id)->update(['model_name'=>$request->model_name,'make_id'=>$request->make_id, 'status'=>$request->status]);
         if($update){
             return redirect()->back()->with('msg', 'Model Updated Successfully!');
         }

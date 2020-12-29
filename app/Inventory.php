@@ -30,7 +30,8 @@ class Inventory extends Model
         'good_condition',
         'verification',
         'issued_to',
-        'issued_by'
+        'issued_by',
+        'status'
     ];
 
     protected $with = [

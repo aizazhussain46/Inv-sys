@@ -26,8 +26,8 @@ class MakeController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $create = Makee::create($request->all());
+        $fields = array('make_name'=>$request->make_name, 'status'=>1);
+        $create = Makee::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Make Added Successfully!');
         }
@@ -51,7 +51,7 @@ class MakeController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        $update = Makee::where('id', $id)->update(['make_name'=>$request->make_name]);
+        $update = Makee::where('id', $id)->update(['make_name'=>$request->make_name, 'status'=>$request->status]);
         if($update){
             return redirect()->back()->with('msg', 'Make Updated Successfully!');
         }

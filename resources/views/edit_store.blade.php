@@ -30,8 +30,42 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">Store Name</label>
-                                                        <input class="form-control py-4" id="inputFirstName" type="text" name="store_name" value="{{ $store->store_name }}" placeholder="Enter store name here" Required="required" />
+                                                        <input class="form-control" id="inputFirstName" type="text" name="store_name" value="{{ $store->store_name }}" placeholder="Enter store name here" Required="required" />
                                                         <span class="small text-danger">{{ $errors->first('store_name') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="location">Location</label>
+                                                        <select class="custom-select" id="location" name="location">
+                                                            <option value=null>Select Location here</option>
+                                                            <option value="location1" {{ $store->location == 'location1'? 'selected':''}}>Location 1</option>
+                                                            <option value="location2" {{ $store->location == 'location2'? 'selected':''}}>Location 2</option>
+                                                            <option value="location3" {{ $store->location == 'location3'? 'selected':''}}>Location 3</option>
+                                                    </select>
+                                                        <span class="small text-danger">{{ $errors->first('location') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="administrator">Administrator</label>
+                                                        <select class="custom-select" id="administrator" name="administrator">
+                                                            <option value=null>Select Administrator here</option>
+                                                            @foreach ($users as $user)
+                                                                @if($store->emp_id == $user->id){
+                                                                <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                                                                }
+                                                                @else{
+                                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                                }
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="small text-danger">{{ $errors->first('administrator') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

@@ -16,6 +16,7 @@ use App\Role;
 use App\User;
 use App\Issue;
 use App\Transfer;
+use App\Rturn;
 use App\Inventory;
 use App\Repairing;
 class FormController extends Controller
@@ -37,13 +38,15 @@ class FormController extends Controller
         return view('add_location');
     }
     public function add_model(){
-        return view('add_model');
+        $make = Makee::where('status',1)->get();
+        return view('add_model', ['makes' => $make]);
     }
     public function add_role(){
         return view('add_role');
     }
     public function add_store(){
-        return view('add_store');
+        $user = User::where('status',1)->where('role_id',2)->get();
+        return view('add_store', ['users' => $user]);
     }
     public function add_user(){
         $role = Role::all();
@@ -61,6 +64,18 @@ class FormController extends Controller
         $data['vendors'] = Vendor::all();
         return view('add_inventory', $data);
     }
+    public function add_with_grn(){
+        $data = array();
+        $data['categories'] = Category::all();
+        $data['departments'] = Department::all();
+        $data['locations'] = Location::all();
+        $data['branches'] = Branch::all();
+        $data['stores'] = Store::all();
+        $data['models'] = Modal::all();
+        $data['makes'] = Makee::all();
+        $data['vendors'] = Vendor::all();
+        return view('addwithgrn', $data);
+    }
     public function add_make(){
         return view('add_make');
     }
@@ -68,7 +83,7 @@ class FormController extends Controller
         return view('add_vendor');
     }
     public function issue_inventory(){
-        $inventory = Inventory::where('issued_to', NULL)->orderBy('id', 'desc')->get();
+        $inventory = Inventory::where('issued_to', NULL)->where('status', 1)->orderBy('id', 'desc')->get();
         return view('issue_inventory', ['inventories' => $inventory]);
     }
     public function submitt_issue(Request $request){
@@ -88,6 +103,31 @@ class FormController extends Controller
 
         foreach($request->inv_id as $id){
             $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user]);
+            $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
+        }
+        return redirect()->back()->with('msg','Inventory issued to '.$employee->name);
+    }
+    public function issue_with_gin(){
+        $inventory = Inventory::where('issued_to', NULL)->where('status', 2)->orderBy('id', 'desc')->get();
+        return view('issuewithgin', ['inventories' => $inventory]);
+    }
+    public function submit_gin(Request $request){
+        
+        $validator = Validator::make($request->all(), [
+            'inv_id' => 'required',
+            'employee_code' => 'required'  
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        $employee = User::where(['id'=>$request->employee_code, 'role_id'=>2])->first();
+        if(!$employee){
+            return redirect()->back()->with('emp_code','employee code does not exists');
+        }
+        $loggedin_user = Auth::id();
+
+        foreach($request->inv_id as $id){
+            $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user, 'status'=>3]);
             $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
         }
         return redirect()->back()->with('msg','Inventory issued to '.$employee->name);
@@ -179,7 +219,7 @@ class FormController extends Controller
 
         foreach($request->inv_id as $id){
             $update = Inventory::where('id',$id)->update(['issued_to'=>null]);
-            $insert = Transfer::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
+            $insert = Rturn::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
         }
         return redirect('return_inventory')->with('msg','Inventory Returned!');
     }
@@ -205,5 +245,15 @@ class FormController extends Controller
         else{
             return redirect()->back()->with('msg', 'Could not add repairing asset, Try Again!');
         }
+    }
+    public function pendings()
+    {
+        $inventory = Inventory::where('status', 0)->orderBy('id', 'desc')->get();
+        return view('addtogrn', ['inventories' => $inventory]);
+    }
+    public function pending_gins()
+    {
+        $inventory = Inventory::where('status', 3)->orderBy('id', 'desc')->get();
+        return view('addtogin', ['inventories' => $inventory]);
     }
 }

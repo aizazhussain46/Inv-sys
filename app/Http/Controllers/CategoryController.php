@@ -20,12 +20,13 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_name' => 'required',
+            'threshold' => 'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
-        $create = Category::create($request->all());
+        $fields = array('category_name'=>$request->category_name,'threshold'=>$request->threshold,'status'=>1);
+        $create = Category::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Category Added Successfully!');
         }
@@ -44,12 +45,13 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_name' => 'required',
+            'threshold' => 'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
 
-        $update = Category::where('id', $id)->update(['category_name'=>$request->category_name]);
+        $update = Category::where('id', $id)->update(['category_name'=>$request->category_name, 'threshold'=>$request->threshold, 'status'=>$request->status]);
         if($update){
             return redirect()->back()->with('msg', 'Category Updated Successfully!');
         }

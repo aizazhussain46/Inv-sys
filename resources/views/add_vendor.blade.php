@@ -26,11 +26,50 @@
                                         <form  method="POST" action="{{ url('vendor') }}">
                                         @csrf
                                             <div class="form-row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">Vendor Name</label>
-                                                        <input class="form-control py-4" id="inputFirstName" type="text" name="vendor_name" placeholder="Enter vendor name here" Required="required" />
+                                                        <input class="form-control" id="inputFirstName" type="text" name="vendor_name" placeholder="Enter vendor name here" Required="required" />
                                                         <span class="small text-danger">{{ $errors->first('vendor_name') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="address">Address</label>
+                                                        <input class="form-control" id="address" type="text" name="address" placeholder="Enter address here" Required="required" />
+                                                        <span class="small text-danger">{{ $errors->first('address') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="telephone">Telephone No</label>
+                                                        <input class="form-control" id="telephone" type="text" name="telephone" placeholder="Enter telephone no here" />
+                                                        <span class="small text-danger">{{ $errors->first('telephone') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="contact_person">Contact Person</label>
+                                                        <input class="form-control" id="contact_person" type="text" name="contact_person" placeholder="Enter contact person here" Required="required" />
+                                                        <span class="small text-danger">{{ $errors->first('contact_person') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="email">Email</label>
+                                                        <input class="form-control" id="email" type="text" name="email" placeholder="Enter email here" Required="required" />
+                                                        <span class="small text-danger">{{ $errors->first('email') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="cell">Cell Number</label>
+                                                        <input class="form-control" id="cell" type="text" name="cell" placeholder="Enter cell number here" />
+                                                        <span class="small text-danger">{{ $errors->first('cell') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

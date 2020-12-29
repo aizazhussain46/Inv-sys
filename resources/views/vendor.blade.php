@@ -28,16 +28,27 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Name</th>
+                                                <th>Address</th>
+                                                <th>Contact Person</th>
+                                                <th>Telephone</th>
+                                                <th>Email</th>
+                                                <th>Cell</th>
                                                 <th>Craeted at</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach ($vendors as $vendor)
                                             <tr>
-                                                <td>{{ $vendor->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $vendor->vendor_name }}</td>
+                                                <td>{{ $vendor->address }}</td>
+                                                <td>{{ $vendor->contact_person }}</td>
+                                                <td>{{ $vendor->telephone }}</td>
+                                                <td>{{ $vendor->email }}</td>
+                                                <td>{{ $vendor->cell }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($vendor->created_at)) }}</td>
                                                 <td class="text-center">
                                                 <a href="{{ url('vendor/'.$vendor->id) }}" class="btn btn-sm btn-success">

@@ -28,16 +28,19 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Name</th>
+                                                <th>Status</th>
                                                 <th>Craeted at</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach ($makes as $make)
                                             <tr>
-                                                <td>{{ $make->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $make->make_name }}</td>
+                                                <td>{{ $make->status==1?'Active':'Inactive' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($make->created_at)) }}</td>
                                                 <td class="text-center">
                                                 <a href="{{ url('make/'.$make->id) }}" class="btn btn-sm btn-success">
