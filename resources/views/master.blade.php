@@ -50,10 +50,11 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ url('add_inventory') }}">Add</a>
                                     <a class="nav-link" href="{{ url('add_with_grn') }}">Add with GRN</a>
-                                    <a class="nav-link" href="{{ url('pendings') }}">Pendings</a>
+                                    <a class="nav-link" href="{{ url('pendings') }}">Pending GRNs</a>
                                     <a class="nav-link" href="{{ url('inventory') }}">All Inventories</a>
                                     <a class="nav-link" href="{{ url('issue_inventory') }}">Issue Inventory</a>
                                     <a class="nav-link" href="{{ url('issue_with_gin') }}">Issue with GIN</a>
+                                    <a class="nav-link" href="{{ url('pending_gins') }}">Pending GINs</a>
                                     <a class="nav-link" href="{{ url('transfer_inventory') }}">Transfer Inventory</a>
                                     <a class="nav-link" href="{{ url('return_inventory') }}">Return Inventory</a>
                                     <a class="nav-link" href="{{ url('repair') }}">Asset Repairing</a>
@@ -104,6 +105,17 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="{{ url('add_user') }}">Add User</a>
                                             <a class="nav-link" href="{{ url('user') }}">List Users</a>
+                                        </nav>
+                                    </div>
+                                    <!-- Employees -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#emp" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Employees
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="emp" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_employee') }}">Add Employee</a>
+                                            <a class="nav-link" href="{{ url('employee') }}">List Employees</a>
                                         </nav>
                                     </div>
                                     <!-- Branch -->
@@ -239,5 +251,16 @@ $(document).ready(function(){
         $("#rform").submit();
     });
     
+
+
+    var settings = {
+    "url": "https://cloud.efulife.com:8080/devinv/empdata.php?uid=1208",
+    "method": "GET",
+    "timeout": 0,
+    };
+
+    $.ajax(settings).done(function (response) {
+    console.log(response);
+    });
 });
 </script> 
