@@ -252,15 +252,57 @@ $(document).ready(function(){
     });
     
 
+    $('#emp_code').keydown(function(e) {
+        var code = e.keyCode || e.which;
+        if (code === 9 || code === 13) {  
+            e.preventDefault();
+            var emp_code = $('#emp_code').val();
+            
+            var settings = {
+            "url": "https://cloud.efulife.com:8080/devinv/empdata.php?uid="+emp_code,
+            "method": "GET",
+            "timeout": 0,
+            };
+            $.ajax(settings).done(function (response) {
+                if(response.Login != null){
+                    var res = response.Login[0];
+                    console.log(response);
+                    $('#name').val(res.EMPLOYEE_NAME);
+                    $('#designation').val(res.DESIGNATION);
+                    $('#department').val(res.DEPARTMENT);
+                    $('#dept_id').val(res.DEPARTMENT_ID);
+                    $('#location').val(res.LOCATION);
+                    $('#hod').val(res.HOD_NAME);
+                    $('#email').val(res.EMPLOYEE_EMAIL);
+                    $('#status').val(res.EMPLOYEE_STATUS);
+                }
+                else{
+                    alert('Entered employee code does not exists!');
+                }
+            });
+        }
+    });
+
 
     var settings = {
-    "url": "https://cloud.efulife.com:8080/devinv/empdata.php?uid=1208",
-    "method": "GET",
-    "timeout": 0,
-    };
+            "url": "https://cloud.efulife.com:8080/devinv/branchdata.php?uid=1",
+            "method": "GET",
+            "timeout": 0,
+            };
+            $.ajax(settings).done(function (response) {
+                if(response.Login != null){
+                    var res = response.Login;
+                    var branch = $('#branches');
+                    $.each( res, function(index, value){
+                        branch.append(
+                            $('<option></option>').val(value.BRANCH_ID).html(value.BRANCH_NAME)
+                        );
+                    });
+                }
+            });
 
-    $.ajax(settings).done(function (response) {
-    console.log(response);
-    });
+    $('#branches').change(function(){
+        $('#branch').val($("#branches option:selected" ).text());   
+    });        
 });
 </script> 

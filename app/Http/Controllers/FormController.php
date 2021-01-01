@@ -52,6 +52,9 @@ class FormController extends Controller
         $role = Role::all();
         return view('add_user', ['roles'=>$role]);
     }
+    public function add_employee(){
+        return view('add_employee');
+    }
     public function add_inventory(){
         $data = array();
         $data['categories'] = Category::all();

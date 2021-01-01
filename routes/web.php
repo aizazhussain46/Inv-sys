@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 // use App\Http\Controllers\RoleController;
 // use App\Http\Controllers\StoreController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\ApiController;
 // use App\Http\Controllers\UserController;
 // use App\Http\Controllers\InventoryController;
 // use App\Http\Controllers\VendorController;
@@ -42,6 +43,7 @@ Route::resource('/model', ModelController::class)->middleware('role:1');
 Route::resource('/role', RoleController::class)->middleware('role:1');
 Route::resource('/store', StoreController::class)->middleware('role:1');
 Route::resource('/user', UserController::class)->middleware('role:1');
+Route::resource('/employee', EmployeeController::class)->middleware('role:1');
 Route::resource('/inventory', InventoryController::class);
 Route::resource('/vendor', VendorController::class)->middleware('role:1');
 Route::resource('/make', MakeController::class)->middleware('role:1');
@@ -57,6 +59,7 @@ Route::get('/add_store', [FormController::class, 'add_store'])->middleware('role
 Route::get('/add_user', [FormController::class, 'add_user'])->middleware('role:1');
 Route::get('/add_vendor', [FormController::class, 'add_vendor'])->middleware('role:1');
 Route::get('/add_make', [FormController::class, 'add_make'])->middleware('role:1');
+Route::get('/add_employee', [FormController::class, 'add_employee'])->middleware('role:1');
 
 Route::get('/add_inventory', [FormController::class, 'add_inventory']);
 Route::get('/add_with_grn', [FormController::class, 'add_with_grn']);
@@ -77,3 +80,5 @@ Route::get('/filter_return', 'FormController@filter_return');
 Route::post('/repair_inventory', 'FormController@repair_inventory');
 Route::post('/process_to_grn', 'GrnController@create_grn');
 Route::post('/process_to_gin', 'GinController@create_gin');
+
+Route::get('/get_employee', [ApiController::class, 'get_employee']);

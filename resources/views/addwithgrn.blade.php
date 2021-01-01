@@ -9,7 +9,7 @@
                             <h1 class="">Add With GRN</h1>
                         </div>
                         <div class="col-md-2 col-lg-2 text-right">
-                            <a href="{{ url('inventory') }}" class="btn btn-success">View List</a>
+                            <a href="{{ url('pendings') }}" class="btn btn-success">View List</a>
                         </div>
                     </div>
                     <hr />
