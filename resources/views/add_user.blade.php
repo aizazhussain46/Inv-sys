@@ -28,40 +28,35 @@
                                         <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="emp_no">Employee No</label>
-                                                        <input class="form-control" id="emp_no" name="emp_no" type="text" placeholder="Enter employee no here" />
+                                                        <label class="small mb-1" for="emp_no">Employee Code</label>
+                                                        <input class="form-control" id="emp_code" name="emp_no" type="text" placeholder="Enter employee code here" />
                                                         <span class="small text-danger">{{ $errors->first('emp_no') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="name">Name</label>
-                                                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter name here" />
+                                                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter name here" disabled />
                                                         <span class="small text-danger">{{ $errors->first('name') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             
-
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                    <label class="small mb-1" for="branch">Branch</label>
-                                                    <select class="custom-select" id="branch" name="branch">
-                                                        <option value=null>Select Branch here</option>
-                                                        <option value="branch1">Branch 1</option>
-                                                        <option value="branch2">Branch 2</option>
-                                                        <option value="branch3">Branch 3</option>
-                                                    </select>
-                                                    <span class="small text-danger">{{ $errors->first('branch') }}</span>
+                                                    <label class="small mb-1" for="designation">Designation</label>
+                                                        <input class="form-control" id="designation" name="designation" type="text" placeholder="Enter Designation here" disabled />
+                                                        <span class="small text-danger">{{ $errors->first('designation') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                    <label class="small mb-1" for="email">Email</label>
-                                                    <input class="form-control" id="email" type="email" name="email" aria-describedby="emailHelp" placeholder="Enter email here" />
-                                                    <span class="small text-danger">{{ $errors->first('email') }}</span>
-                                                        
+                                                    <label class="small mb-1" for="department">Department</label>
+                                                        <input class="form-control" id="department" name="department" type="text" placeholder="Enter Department here" disabled />
+                                                        <span class="small text-danger">{{ $errors->first('department') }}</span>
+
+                                                        <input name="dept_id" id="dept_id" type="hidden" value='' />
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,92 +64,49 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="location">Location</label>
-                                                    <select class="custom-select" id="location" name="location">
-                                                        <option value=null>Select Location here</option>
-                                                        <option value="location1">Location 1</option>
-                                                        <option value="location2">Location 2</option>
-                                                        <option value="location3">Location 3</option>
-                                                    </select>
-                                                    <span class="small text-danger">{{ $errors->first('location') }}</span>
+                                                        <input class="form-control" id="location" name="location" type="text" placeholder="Enter Location here" disabled />
+                                                        <span class="small text-danger">{{ $errors->first('location') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="contact">Contact No</label>
-                                                        <input class="form-control" id="contact" name="contact" type="text" placeholder="Enter contact no here" />
-                                                        <span class="small text-danger">{{ $errors->first('contact') }}</span>
+                                                    <label class="small mb-1" for="hod">HOD Name</label>
+                                                        <input class="form-control" id="hod" name="hdd" type="text" placeholder="Enter HOD name here" disabled />
+                                                        <span class="small text-danger">{{ $errors->first('hdd') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                    <label class="small mb-1" for="department">Department</label>
-                                                    <select class="custom-select" id="department" name="department">
-                                                        <option value=null>Select Department here</option>
-                                                        <option value="department1">Department 1</option>
-                                                        <option value="department2">Department 2</option>
-                                                        <option value="department3">Department 3</option>
-                                                    </select>
-                                                    <span class="small text-danger">{{ $errors->first('department') }}</span>
+                                                    <label class="small mb-1" for="email">Email Address</label>
+                                                        <input class="form-control" id="email" name="email" type="text" placeholder="Enter Email here" disabled />
+                                                        <span class="small text-danger">{{ $errors->first('email') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="cell">Cell No</label>
-                                                        <input class="form-control" id="cell" name="cell" type="text" placeholder="Enter cell no here" />
-                                                        <span class="small text-danger">{{ $errors->first('cell') }}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                    <label class="small mb-1" for="designation">Designation</label>
-                                                    <select class="custom-select" id="designation" name="designation">
-                                                        <option value=null>Select Designation here</option>
-                                                        <option value="designation1">Designation 1</option>
-                                                        <option value="designation2">Designation 2</option>
-                                                        <option value="designation3">Designation 3</option>
-                                                    </select>
-                                                    <span class="small text-danger">{{ $errors->first('designation') }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="extention">Extention No</label>
-                                                        <input class="form-control" id="extention" name="extention" type="text" placeholder="Enter extention no here" />
-                                                        <span class="small text-danger">{{ $errors->first('extention') }}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                    <label class="small mb-1" for="hdd">HDD</label>
-                                                    <select class="custom-select" id="hdd" name="hdd">
-                                                        <option value=null>Select HDD here</option>
-                                                        <option value="hdd1">HDD 1</option>
-                                                        <option value="hdd2">HDD 2</option>
-                                                        <option value="hdd3">HDD 3</option>
-                                                    </select>
-                                                    <span class="small text-danger">{{ $errors->first('hdd') }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="status">Status</label>
-                                                        <select class="custom-select" id="status" name="status">
-                                                            <option value=null>Select Status here</option>
-                                                            <option value="1">Active</option>
-                                                            <option value="0">Inactive</option>
-                                                        </select>
+                                                    <label class="small mb-1" for="status">Status</label>
+                                                        <input class="form-control" id="status" name="status" type="text" placeholder="Enter Status here" disabled />
                                                         <span class="small text-danger">{{ $errors->first('status') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
 
-
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="branches">Branch</label>
+                                                    <select class="custom-select" id="branches" name="branch_id">
+                                                        <option value=null>Select Branch here</option>
+                                                    </select>
+                                                    <span class="small text-danger">{{ $errors->first('branch_id') }}</span>
+                                                    <input name="branch" id="branch" type="hidden" value='' />
+                                                    
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">

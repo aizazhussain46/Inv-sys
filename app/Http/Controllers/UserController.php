@@ -23,9 +23,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'emp_no' => 'required',
             'name' => 'required',
-            'branch' => 'required|not_in:null',
+            'branch_id' => 'required|not_in:null',
             'location' => 'required|not_in:null',
-            'contact' => 'required',
             'department' => 'required|not_in:null',
             'designation' => 'required|not_in:null',
             'hdd' => 'required|not_in:null',
@@ -60,48 +59,48 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'emp_no' => 'required',
-            'name' => 'required',
-            'branch' => 'required|not_in:null',
-            'location' => 'required|not_in:null',
-            'contact' => 'required',
-            'department' => 'required|not_in:null',
-            'designation' => 'required|not_in:null',
-            'hdd' => 'required|not_in:null',
-            'status' => 'required|not_in:null',
-            'email' => 'required',
-            'confirm_password' => 'same:password',
-            'role_id' => 'required|not_in:null'   
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'emp_no' => 'required',
+        //     'name' => 'required',
+        //     'branch' => 'required|not_in:null',
+        //     'location' => 'required|not_in:null',
+        //     'contact' => 'required',
+        //     'department' => 'required|not_in:null',
+        //     'designation' => 'required|not_in:null',
+        //     'hdd' => 'required|not_in:null',
+        //     'status' => 'required|not_in:null',
+        //     'email' => 'required',
+        //     'confirm_password' => 'same:password',
+        //     'role_id' => 'required|not_in:null'   
+        // ]);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator);
+        // }
 
-        $fields = array(
-            'name'=>$request->name, 
-            'email' => $request->email, 
-            'role_id' => $request->role_id,
-            'emp_no' => $request->emp_no,
-            'branch' => $request->branch,
-            'location' => $request->location,
-            'contact' => $request->contact,
-            'department' => $request->department,
-            'designation' => $request->designation,
-            'hdd' => $request->hdd,
-            'status' => $request->status,
-        );
-        if($request->password){
-            $fields['password'] = bcrypt($request->password);
-        }
+        // $fields = array(
+        //     'name'=>$request->name, 
+        //     'email' => $request->email, 
+        //     'role_id' => $request->role_id,
+        //     'emp_no' => $request->emp_no,
+        //     'branch' => $request->branch,
+        //     'location' => $request->location,
+        //     'contact' => $request->contact,
+        //     'department' => $request->department,
+        //     'designation' => $request->designation,
+        //     'hdd' => $request->hdd,
+        //     'status' => $request->status,
+        // );
+        // if($request->password){
+        //     $fields['password'] = bcrypt($request->password);
+        // }
         
-        $update = User::where('id', $id)->update($fields);
-        if($update){
-            return redirect()->back()->with('msg', 'User Updated Successfully!');
-        }
-        else{
-            return redirect()->back()->with('msg', 'Could not update user, Try Again!');
-        }
+        // $update = User::where('id', $id)->update($fields);
+        // if($update){
+        //     return redirect()->back()->with('msg', 'User Updated Successfully!');
+        // }
+        // else{
+        //     return redirect()->back()->with('msg', 'Could not update user, Try Again!');
+        // }
     }
 
     public function destroy($id)
