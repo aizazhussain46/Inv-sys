@@ -7,7 +7,7 @@
                     <div class="container-fluid">
                     
                     @if (session('msg'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success mt-4">
                             {{ session('msg') }}
                         </div>
                     @endif
@@ -15,18 +15,84 @@
                     @csrf
                     <div class="row justify-content-center"> 
                     
-                        <div class="col-md-6 col-lg-6">
+                        <div class="col-md-8 col-lg-8">
                             <div class="card mt-3">
                             <div class="card-header bg-primary text-white">
                             Issue Inventory
                             </div>
                                 <div class="card-body">
                                 <div class="form-group">
-                                    <input class="form-control py-4" id="employeecode" name="employee_code" type="text" placeholder="Enter Employee Code here" />
-                                    <span class="small text-danger">{{ $errors->first('employee_code') }}</span>
-                                    @if (session('emp_code'))
-                                    <span class="small text-danger">{{ session('emp_code') }}</span>
-                                    @endif
+                                    
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="emp_no">Employee Code</label>
+                                                        <input class="form-control" id="emp_code" name="employee_code" type="text" placeholder="Enter Employee Code here" autofocus />
+                                                        <span class="small text-danger">{{ $errors->first('employee_code') }}</span>
+                                                        @if (session('emp_code'))
+                                                        <span class="small text-danger">{{ session('emp_code') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="name">Name</label>
+                                                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter name here" readonly />
+                                                        <span class="small text-danger">{{ $errors->first('name') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="designation">Designation</label>
+                                                        <input class="form-control" id="designation" name="designation" type="text" placeholder="Enter Designation here" readonly />
+                                                        <span class="small text-danger">{{ $errors->first('designation') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="department">Department</label>
+                                                        <input class="form-control" id="department" name="department" type="text" placeholder="Enter Department here" readonly />
+                                                        <span class="small text-danger">{{ $errors->first('department') }}</span>
+
+                                                        <input name="dept_id" id="dept_id" type="hidden" value='' />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="location">Location</label>
+                                                        <input class="form-control" id="location" name="location" type="text" placeholder="Enter Location here" readonly />
+                                                        <span class="small text-danger">{{ $errors->first('location') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="hod">HOD Name</label>
+                                                        <input class="form-control" id="hod" name="hod" type="text" placeholder="Enter HOD name here" readonly />
+                                                        <span class="small text-danger">{{ $errors->first('hod') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="email">Email Address</label>
+                                                        <input class="form-control" id="email" name="email" type="text" placeholder="Enter Email here" readonly />
+                                                        <span class="small text-danger">{{ $errors->first('email') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="small mb-1" for="status">Status</label>
+                                                        <input class="form-control" id="status" name="status" type="text" placeholder="Enter Status here" readonly />
+                                                        <span class="small text-danger">{{ $errors->first('status') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                 </div>
                                 </div>
                             </div>

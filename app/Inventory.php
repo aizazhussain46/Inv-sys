@@ -8,6 +8,7 @@ class Inventory extends Model
 {
     protected $fillable = [
         'category_id',
+        'sub_cat_id',
         'location_id',
         'department_id',
         'branch_id',
@@ -15,10 +16,11 @@ class Inventory extends Model
         'model_id',
         'make_id',
         'vendor_id',
-        'device_type',
+        'device_type_id',
+        'inventory_type_id',
         'product_sn',
         'purchase_date',
-        'item_nature',
+        'item_nature_id',
         'item_price',
         'remarks',
         'delivery_challan',
@@ -36,6 +38,7 @@ class Inventory extends Model
 
     protected $with = [
         'category:id,category_name',
+        'subcategory:id,sub_cat_name',
         'branch:id,branch_name',
         'department:id,department_name',
         'location:id,location',
@@ -48,6 +51,10 @@ class Inventory extends Model
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+    public function subcategory()
+    {
+        return $this->belongsTo('App\Subcategory');
     }
     public function branch()
     {
