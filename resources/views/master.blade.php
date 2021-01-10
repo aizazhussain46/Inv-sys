@@ -60,10 +60,9 @@
                                     <a class="nav-link" href="{{ url('repair') }}">Asset Repairing</a>
                                 </nav>
                             </div>
-
+                            @if(Auth::user()->role_id == 1)
                             <!-- Reports -->
-                            <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
-                            <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Reports
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -73,11 +72,10 @@
                                     <a class="nav-link" href="layout-static.html">Static Navigation</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                                 </nav>
-                            </div> -->
+                            </div>
 
                             <!-- User Management -->
-                            <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
-                            @if(Auth::user()->role_id == 1)
+                            
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 User Management
@@ -94,6 +92,17 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="{{ url('add_category') }}">Add Category</a>
                                             <a class="nav-link" href="{{ url('category') }}">List Category</a>
+                                        </nav>
+                                    </div>
+                                    <!-- Sub Category -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#subcategories" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Sub Categories
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="subcategories" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_subcategory') }}">Add Sub Category</a>
+                                            <a class="nav-link" href="{{ url('sub_category') }}">List Sub Category</a>
                                         </nav>
                                     </div>
                                     <!-- Users -->
@@ -151,6 +160,17 @@
                                             <a class="nav-link" href="{{ url('location') }}">List Location</a>
                                         </nav>
                                     </div> -->
+                                    <!-- Make -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#make" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Make
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="make" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_make') }}">Add Make</a>
+                                            <a class="nav-link" href="{{ url('make') }}">List Makes</a>
+                                        </nav>
+                                    </div>
                                     <!-- Model -->
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#model" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                     Model
@@ -162,15 +182,37 @@
                                             <a class="nav-link" href="{{ url('model') }}">List Model</a>
                                         </nav>
                                     </div>
-                                    <!-- Make -->
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#make" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Make
+                                    <!-- Device Type -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dtype" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Device Type
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
-                                    <div class="collapse" id="make" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                    <div class="collapse" id="dtype" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="{{ url('add_make') }}">Add Make</a>
-                                            <a class="nav-link" href="{{ url('make') }}">List Makes</a>
+                                            <a class="nav-link" href="{{ url('add_devicetype') }}">Add Device Type</a>
+                                            <a class="nav-link" href="{{ url('devicetype') }}">List Device Types</a>
+                                        </nav>
+                                    </div>
+                                    <!-- Item Nature -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#nature" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Item Nature
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="nature" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_itemnature') }}">Add Item Nature</a>
+                                            <a class="nav-link" href="{{ url('itemnature') }}">List Item Natures</a>
+                                        </nav>
+                                    </div>
+                                    <!-- Inventory Type -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#invtype" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Inventory Type
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="invtype" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_inventorytype') }}">Add Inventory Type</a>
+                                            <a class="nav-link" href="{{ url('inventorytype') }}">List Inventory Types</a>
                                         </nav>
                                     </div>
                                     <!-- Role -->
@@ -285,7 +327,7 @@ $(document).ready(function(){
 
 
     var settings = {
-            "url": "https://cloud.efulife.com:8080/devinv/branchdata.php?uid=1",
+            "url": "https://cloud.efulife.com:8080/devinv/branchdataall.php?uid=1",
             "method": "GET",
             "timeout": 0,
             };
@@ -303,6 +345,37 @@ $(document).ready(function(){
 
     $('#branches').change(function(){
         $('#branch').val($("#branches option:selected" ).text());   
-    });        
+    });  
+
+    $(".make").on("change",function(){
+        var id = $(this).val();
+        $.get("{{ url('model_by_make') }}/"+id, function(data){
+            
+            var model = $('.model');
+            model.empty();
+            model.append('<option value=0 class="o1">Select Model here</option>');
+                    $.each( data, function(index, value){
+                        model.append(
+                            $('<option></option>').val(value.id).html(value.model_name)
+                        );
+                    });
+        });    
+    }); 
+    $(".category").on("change",function(){
+        var id = $(this).val();
+        $.get("{{ url('subcat_by_category') }}/"+id, function(data){
+            
+            var subcategory = $('.subcategory');
+            subcategory.empty();
+            subcategory.append('<option value=0 class="o1">Select Sub Category here</option>');
+                    $.each( data, function(index, value){
+                        subcategory.append(
+                            $('<option></option>').val(value.id).html(value.sub_cat_name)
+                        );
+                    });
+        });    
+    });
+
+
 });
 </script> 

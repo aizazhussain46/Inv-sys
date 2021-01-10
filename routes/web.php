@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 // use App\Http\Controllers\StoreController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\PDFController;
 // use App\Http\Controllers\UserController;
 // use App\Http\Controllers\InventoryController;
 // use App\Http\Controllers\VendorController;
@@ -36,6 +37,7 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::resource('/category', CategoryController::class)->middleware('role:1');
+Route::resource('/sub_category', SubcategoryController::class)->middleware('role:1');
 //Route::resource('/branch', BranchController::class)->middleware('role:1');
 //Route::resource('/department', DepartmentController::class)->middleware('role:1');
 //Route::resource('/location', LocationController::class)->middleware('role:1');
@@ -47,9 +49,13 @@ Route::resource('/employee', EmployeeController::class)->middleware('role:1');
 Route::resource('/inventory', InventoryController::class);
 Route::resource('/vendor', VendorController::class)->middleware('role:1');
 Route::resource('/make', MakeController::class)->middleware('role:1');
+Route::resource('/devicetype', DevicetypeController::class)->middleware('role:1');
+Route::resource('/itemnature', ItemnatureController::class)->middleware('role:1');
+Route::resource('/inventorytype', InventorytypeController::class)->middleware('role:1');
 
 /* Forms */
 Route::get('/add_category', [FormController::class, 'add_category'])->middleware('role:1');
+Route::get('/add_subcategory', [FormController::class, 'add_subcategory'])->middleware('role:1');
 //Route::get('/add_branch', [FormController::class, 'add_branch'])->middleware('role:1');
 //Route::get('/add_department', [FormController::class, 'add_department'])->middleware('role:1');
 //Route::get('/add_location', [FormController::class, 'add_location'])->middleware('role:1');
@@ -60,6 +66,11 @@ Route::get('/add_user', [FormController::class, 'add_user'])->middleware('role:1
 Route::get('/add_vendor', [FormController::class, 'add_vendor'])->middleware('role:1');
 Route::get('/add_make', [FormController::class, 'add_make'])->middleware('role:1');
 Route::get('/add_employee', [FormController::class, 'add_employee'])->middleware('role:1');
+Route::get('/add_devicetype', [FormController::class, 'add_devicetype'])->middleware('role:1');
+Route::get('/add_itemnature', [FormController::class, 'add_itemnature'])->middleware('role:1');
+Route::get('/add_inventorytype', [FormController::class, 'add_inventorytype'])->middleware('role:1');
+Route::get('/model_by_make/{id}', [FormController::class, 'model_by_make'])->middleware('role:1');
+Route::get('/subcat_by_category/{id}', [FormController::class, 'subcat_by_category'])->middleware('role:1');
 
 Route::get('/add_inventory', [FormController::class, 'add_inventory']);
 Route::get('/add_with_grn', [FormController::class, 'add_with_grn']);
@@ -82,3 +93,5 @@ Route::post('/process_to_grn', 'GrnController@create_grn');
 Route::post('/process_to_gin', 'GinController@create_gin');
 
 Route::get('/get_employee', [ApiController::class, 'get_employee']);
+
+Route::get('generate-pdf','PDFController@generatePDF');

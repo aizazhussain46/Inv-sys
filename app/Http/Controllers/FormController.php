@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Category;
+use App\Subcategory;
 use App\Location;
 use App\Department;
 use App\Branch;
@@ -12,6 +13,9 @@ use App\Store;
 use App\Modal;
 use App\Makee;
 use App\Vendor;
+use App\Devicetype;
+use App\Itemnature;
+use App\Inventorytype;
 use App\Role;
 use App\User;
 use App\Issue;
@@ -19,6 +23,7 @@ use App\Transfer;
 use App\Rturn;
 use App\Inventory;
 use App\Repairing;
+use App\Employee;
 class FormController extends Controller
 {
     public function __construct()
@@ -27,6 +32,10 @@ class FormController extends Controller
     }
     public function add_category(){
         return view('add_category');
+    }
+    public function add_subcategory(){
+        $category = Category::all();
+        return view('add_subcategory', ['categories' => $category]);
     }
     public function add_branch(){
         return view('add_branch');
@@ -44,6 +53,15 @@ class FormController extends Controller
     public function add_role(){
         return view('add_role');
     }
+    public function add_devicetype(){
+        return view('add_devicetype');
+    }
+    public function add_itemnature(){
+        return view('add_itemnature');
+    }
+    public function add_inventorytype(){
+        return view('add_inventorytype');
+    }
     public function add_store(){
         $user = User::where('status',1)->where('role_id',2)->get();
         return view('add_store', ['users' => $user]);
@@ -57,26 +75,34 @@ class FormController extends Controller
     }
     public function add_inventory(){
         $data = array();
-        $data['categories'] = Category::all();
-        $data['departments'] = Department::all();
-        $data['locations'] = Location::all();
-        $data['branches'] = Branch::all();
+        $data['categories'] = Category::where('status',1)->get();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        // $data['departments'] = Department::where('status',1)->get();
+        // $data['locations'] = Location::where('status',1)->get();
+        // $data['branches'] = Branch::where('status',1)->get();
         $data['stores'] = Store::all();
-        $data['models'] = Modal::all();
-        $data['makes'] = Makee::all();
+        $data['models'] = Modal::where('status',1)->get();
+        $data['makes'] = Makee::where('status',1)->get();
         $data['vendors'] = Vendor::all();
+        $data['devicetypes'] = Devicetype::where('status',1)->get();
+        $data['itemnatures'] = Itemnature::where('status',1)->get();
+        $data['inventorytypes'] = Inventorytype::where('status',1)->get();
         return view('add_inventory', $data);
     }
     public function add_with_grn(){
         $data = array();
-        $data['categories'] = Category::all();
-        $data['departments'] = Department::all();
-        $data['locations'] = Location::all();
-        $data['branches'] = Branch::all();
+        $data['categories'] = Category::where('status',1)->get();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        // $data['departments'] = Department::where('status',1)->get();
+        // $data['locations'] = Location::where('status',1)->get();
+        // $data['branches'] = Branch::where('status',1)->get();
         $data['stores'] = Store::all();
-        $data['models'] = Modal::all();
-        $data['makes'] = Makee::all();
+        $data['models'] = Modal::where('status',1)->get();
+        $data['makes'] = Makee::where('status',1)->get();
         $data['vendors'] = Vendor::all();
+        $data['devicetypes'] = Devicetype::where('status',1)->get();
+        $data['itemnatures'] = Itemnature::where('status',1)->get();
+        $data['inventorytypes'] = Inventorytype::where('status',1)->get();
         return view('addwithgrn', $data);
     }
     public function add_make(){
@@ -98,7 +124,7 @@ class FormController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-        $employee = User::where(['id'=>$request->employee_code, 'role_id'=>2])->first();
+        $employee = Employee::where('emp_code',$request->employee_code)->first();
         if(!$employee){
             return redirect()->back()->with('emp_code','employee code does not exists');
         }
@@ -123,7 +149,7 @@ class FormController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-        $employee = User::where(['id'=>$request->employee_code, 'role_id'=>2])->first();
+        $employee = Employee::where('emp_code',$request->employee_code)->first();
         if(!$employee){
             return redirect()->back()->with('emp_code','employee code does not exists');
         }
@@ -138,7 +164,7 @@ class FormController extends Controller
     public function transfer_inventory(){
         $inventory = Inventory::whereNotNull('issued_to')->orderBy('id', 'desc')->get();
         foreach($inventory as $inv){
-            $user = User::where('id', $inv->issued_to)->first();
+            $user = Employee::where('emp_code', $inv->issued_to)->first();
             if($user){
                 $inv['user'] = $user;
             }
@@ -154,12 +180,12 @@ class FormController extends Controller
         }
         $inventory = Inventory::where('issued_to', $request->from_employee_code)->orderBy('id', 'desc')->get();
         foreach($inventory as $inv){
-            $user = User::where('id', $inv->issued_to)->first();
+            $user = Employee::where('emp_code', $inv->issued_to)->first();
             if($user){
                 $inv['user'] = $user;
             }
         }
-        $emp = User::find($request->from_employee_code);
+        $emp = Employee::where('emp_code', $request->from_employee_code)->first();
         return view('transfer_inventory', ['inventories' => $inventory, 'filter'=>1, 'from_emp'=>$emp]);
     }
     public function submitt_transfer(Request $request){
@@ -171,7 +197,7 @@ class FormController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-        $to_employee = User::where(['id'=>$request->to_employee_code, 'role_id'=>2])->first();
+        $to_employee = Employee::where('emp_code',$request->to_employee_code)->first();
         if(!$to_employee){
             return redirect()->back()->with('to_emp_code','to employee code does not exists');
         }
@@ -179,14 +205,14 @@ class FormController extends Controller
 
         foreach($request->inv_id as $id){
             $update = Inventory::where('id',$id)->update(['issued_to'=>$request->to_employee_code, 'issued_by'=>$request->$loggedin_user]);
-            $insert = Transfer::create(['from_employee_id'=>$request->from_employee, 'to_employee_id'=>$request->to_employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
+            $insert = Transfer::create(['from_employee_id'=>$request->from_employee_code, 'to_employee_id'=>$request->to_employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
         }
         return redirect('transfer_inventory')->with('msg','Inventory transfered to '.$to_employee->name);
     }
     public function return_inventory(){
         $inventory = Inventory::whereNotNull('issued_to')->orderBy('id', 'desc')->get();
         foreach($inventory as $inv){
-            $user = User::where('id', $inv->issued_to)->first();
+            $user = Employee::where('emp_code', $inv->issued_to)->first();
             if($user){
                 $inv['user'] = $user;
             }
@@ -202,12 +228,12 @@ class FormController extends Controller
         }
         $inventory = Inventory::where('issued_to', $request->employee_code)->orderBy('id', 'desc')->get();
         foreach($inventory as $inv){
-            $user = User::where('id', $inv->issued_to)->first();
+            $user = Employee::where('emp_code', $inv->issued_to)->first();
             if($user){
                 $inv['user'] = $user;
             }
         }
-        $emp = User::find($request->employee_code);
+        $emp = Employee::where('emp_code', $request->employee_code)->first();
         return view('return_inventory', ['inventories' => $inventory, 'filter'=>1, 'emp_code'=>$emp]);
     }
     public function submitt_return(Request $request){
@@ -258,5 +284,15 @@ class FormController extends Controller
     {
         $inventory = Inventory::where('status', 3)->orderBy('id', 'desc')->get();
         return view('addtogin', ['inventories' => $inventory]);
+    }
+    public function model_by_make($id)
+    {
+        $get = Modal::where('make_id', $id)->where('status', 1)->get();
+        return $get;
+    }
+    public function subcat_by_category($id)
+    {
+        $get = Subcategory::where('category_id', $id)->where('status', 1)->get();
+        return $get;
     }
 }

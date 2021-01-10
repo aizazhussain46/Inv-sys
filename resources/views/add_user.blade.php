@@ -36,7 +36,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="name">Name</label>
-                                                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter name here" disabled />
+                                                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter name here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('name') }}</span>
                                                     </div>
                                                 </div>
@@ -46,14 +46,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="designation">Designation</label>
-                                                        <input class="form-control" id="designation" name="designation" type="text" placeholder="Enter Designation here" disabled />
+                                                        <input class="form-control" id="designation" name="designation" type="text" placeholder="Enter Designation here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('designation') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="department">Department</label>
-                                                        <input class="form-control" id="department" name="department" type="text" placeholder="Enter Department here" disabled />
+                                                        <input class="form-control" id="department" name="department" type="text" placeholder="Enter Department here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('department') }}</span>
 
                                                         <input name="dept_id" id="dept_id" type="hidden" value='' />
@@ -64,14 +64,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="location">Location</label>
-                                                        <input class="form-control" id="location" name="location" type="text" placeholder="Enter Location here" disabled />
+                                                        <input class="form-control" id="location" name="location" type="text" placeholder="Enter Location here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('location') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="hod">HOD Name</label>
-                                                        <input class="form-control" id="hod" name="hdd" type="text" placeholder="Enter HOD name here" disabled />
+                                                        <input class="form-control" id="hod" name="hdd" type="text" placeholder="Enter HOD name here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('hdd') }}</span>
                                                     </div>
                                                 </div>
@@ -80,14 +80,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="email">Email Address</label>
-                                                        <input class="form-control" id="email" name="email" type="text" placeholder="Enter Email here" disabled />
+                                                        <input class="form-control" id="email" name="email" type="text" placeholder="Enter Email here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('email') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="status">Status</label>
-                                                        <input class="form-control" id="status" name="status" type="text" placeholder="Enter Status here" disabled />
+                                                        <input class="form-control" id="status" name="status" type="text" placeholder="Enter Status here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('status') }}</span>
                                                     </div>
                                                 </div>

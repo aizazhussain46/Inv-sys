@@ -28,10 +28,10 @@
                                         @csrf
                                 
                                         <div class="form-row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="category">Category</label>
-                                                <select class="custom-select" id="category" name="category_id">
+                                                <select class="custom-select category" id="category" name="category_id">
                                                     <option value=0>Select Category here</option>
                                                     @foreach ($categories as $category)
                                                     @if($category->id == $inventory->category_id)
@@ -44,56 +44,22 @@
                                                 <span class="small text-danger">{{ $errors->first('category_id') }}</span>
                                             </div>
                                             </div>
-                                            <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="location">Location</label>
-                                                <select class="custom-select" id="location" name="location_id">
-                                                    <option value=0>Select Location here</option>
-                                                    @foreach ($locations as $location)
-                                                    @if($location->id == $inventory->location_id)
-                                                    <option value="{{ $location->id }}" selected>{{ $location->location }}</option>
-                                                    @else
-                                                    <option value="{{ $location->id }}">{{ $location->location }}</option>
-                                                    @endif
-                                                    @endforeach
-                                                </select>
-                                                <span class="small text-danger">{{ $errors->first('location_id') }}</span>
-                                            </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="department">Department</label>
-                                                <select class="custom-select" id="department" name="department_id">
-                                                    <option value=0>Select Department here</option>
-                                                    @foreach ($departments as $department)
-                                                    @if($department->id == $inventory->department_id)
-                                                    <option value="{{ $department->id }}" selected>{{ $department->department_name }}</option>
-                                                    @else
-                                                    <option value="{{ $department->id }}">{{ $department->department_name }}</option>
-                                                    @endif
-                                                    @endforeach
-                                                </select>
-                                                <span class="small text-danger">{{ $errors->first('department_id') }}</span>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
                                             <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="branch">Branch</label>
-                                                <select class="custom-select" id="branch" name="branch_id">
-                                                    <option value=0>Select Branch here</option>
-                                                    @foreach ($branches as $branch)
-                                                    @if($branch->id == $inventory->branch_id)
-                                                    <option value="{{ $branch->id }}" selected>{{ $branch->branch_name }}</option>
-                                                    @else
-                                                    <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
+                                                <label class="small mb-1" for="subcategory">Sub Category</label>
+                                                <select class="custom-select subcategory" id="subcategory" name="sub_cat_id">
+                                                <option value=0>Select Sub Category here</option>
+                                                    @foreach ($subcategories as $subcategory)
+                                                    @if($subcategory->id == $inventory->sub_cat_id)
+                                                        <option value="{{ $subcategory->id }}" selected>{{ $subcategory->sub_cat_name }}</option>
                                                     @endif
                                                     @endforeach
                                                 </select>
-                                                <span class="small text-danger">{{ $errors->first('branch_id') }}</span>
+                                                <span class="small text-danger">{{ $errors->first('sub_cat_id') }}</span>
                                             </div>
-                                            </div>
+                                            </div> 
+                                        </div>
+                                        <div class="form-row">
                                             <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="store">Store</label>
@@ -110,6 +76,23 @@
                                                 <span class="small text-danger">{{ $errors->first('store_id') }}</span>
                                             </div>
                                             </div>
+                                            <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="invtype">Inventory Type</label>
+                                                <select class="custom-select" id="invtype" name="inventory_type_id">
+                                                    <option value=0>Select Inventory type here</option>
+                                                    @foreach ($inventorytypes as $inventorytype)
+                                                    @if($inventorytype->id == $inventory->inventory_type_id)
+                                                    <option value="{{ $inventorytype->id }}" selected>{{ $inventorytype->inventorytype_name }}</option>
+                                                    @else
+                                                    <option value="{{ $inventorytype->id }}">{{ $inventorytype->inventorytype_name }}</option>
+                                                    @endif
+                                                    @endforeach
+
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('inventory_type_id') }}</span>
+                                            </div>
+                                            </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12">
@@ -121,26 +104,10 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="model">Model</label>
-                                                <select class="custom-select" id="model" name="model_id">
-                                                    <option value=0>Select Model here</option>
-                                                    @foreach ($models as $model)
-                                                    @if($model->id == $inventory->model_id)
-                                                    <option value="{{ $model->id }}" selected>{{ $model->model_name }}</option>
-                                                    @else
-                                                    <option value="{{ $model->id }}">{{ $model->model_name }}</option>
-                                                    @endif
-                                                    @endforeach
-                                                </select>
-                                                <span class="small text-danger">{{ $errors->first('model_id') }}</span>
-                                            </div>
-                                            </div>
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="make">Make</label>
-                                                <select class="custom-select" id="make" name="make_id">
+                                                <select class="custom-select make" id="make" name="make_id">
                                                     <option value=0>Select Make here</option>
                                                     @foreach ($makes as $make)
                                                     @if($make->id == $inventory->make_id)
@@ -151,6 +118,22 @@
                                                     @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('make_id') }}</span>
+                                            </div>
+                                            </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="model">Model</label>
+                                                <select class="custom-select model" id="model" name="model_id">
+                                                    <option value=0>Select Model here</option>
+                                                    @foreach ($models as $model)
+                                                    @if($model->id == $inventory->model_id)
+                                                    <option value="{{ $model->id }}" selected>{{ $model->model_name }}</option>
+                                                    @else
+                                                    <option value="{{ $model->id }}">{{ $model->model_name }}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('model_id') }}</span>
                                             </div>
                                             </div>
                                             <div class="col-md-4">
@@ -173,21 +156,31 @@
 
                                         <div class="form-row">
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                        <div class="form-group">
                                                 <label class="small mb-1" for="type">Device Type</label>
-                                                <select class="custom-select" id="type" name="device_type">
+                                                <select class="custom-select" id="type" name="device_type_id">
                                                     <option value=0>Select Device Type here</option>
-                                                    <option value="type1" {{ $inventory->device_type == 'type1'? 'selected':''}}>Type One</option>
-                                                    <option value="type2" {{ $inventory->device_type == 'type2'? 'selected':''}}>Type Two</option>
+                                                    @foreach ($devicetypes as $devicetype)
+                                                    @if($devicetype->id == $inventory->device_type_id)
+                                                    <option value="{{ $devicetype->id }}" selected>{{ $devicetype->devicetype_name }}</option>
+                                                    @else
+                                                    <option value="{{ $devicetype->id }}">{{ $devicetype->devicetype_name }}</option>
+                                                    @endif
+                                                    @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('device_type') }}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="nature">Item Nature</label>
-                                                <select class="custom-select" id="nature" name="item_nature">
+                                                <select class="custom-select" id="nature" name="item_nature_id">
                                                     <option value=0>Select Item Nature here</option>
-                                                    <option value="nature1" {{ $inventory->item_nature == 'nature1'? 'selected':''}}>Nature One</option>
-                                                    <option value="nature2" {{ $inventory->item_nature == 'nature2'? 'selected':''}}>Nature Two</option>
+                                                    @foreach ($itemnatures as $itemnature)
+                                                    @if($itemnature->id == $inventory->item_nature_id)
+                                                    <option value="{{ $itemnature->id }}" selected>{{ $itemnature->itemnature_name }}</option>
+                                                    @else
+                                                    <option value="{{ $itemnature->id }}">{{ $itemnature->itemnature_name }}</option>
+                                                    @endif
+                                                    @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('item_nature') }}</span>
                                             </div>

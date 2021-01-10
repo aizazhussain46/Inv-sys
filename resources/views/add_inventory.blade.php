@@ -27,10 +27,10 @@
                                         @csrf
                                         <input type='hidden' name='status' value='1'>
                                         <div class="form-row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="category">Category</label>
-                                                <select class="custom-select" id="category" name="category_id">
+                                                <select class="custom-select category" id="category" name="category_id">
                                                     <option value=0>Select Category here</option>
                                                     @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->category_name }}</option>
@@ -39,45 +39,19 @@
                                                 <span class="small text-danger">{{ $errors->first('category_id') }}</span>
                                             </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="location">Location</label>
-                                                <select class="custom-select" id="location" name="location_id">
-                                                    <option value=0>Select Location here</option>
-                                                    @foreach ($locations as $location)
-                                                    <option value="{{ $location->id }}">{{ $location->location }}</option>
-                                                    @endforeach
+                                                <label class="small mb-1" for="subcategory">Sub Category</label>
+                                                <select class="custom-select subcategory" id="subcategory" name="sub_cat_id">
+                                                <option value=0>Select Sub Category here</option>
                                                 </select>
-                                                <span class="small text-danger">{{ $errors->first('location_id') }}</span>
+                                                <span class="small text-danger">{{ $errors->first('sub_cat_id') }}</span>
                                             </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="department">Department</label>
-                                                <select class="custom-select" id="department" name="department_id">
-                                                    <option value=0>Select Department here</option>
-                                                    @foreach ($departments as $department)
-                                                    <option value="{{ $department->id }}">{{ $department->department_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <span class="small text-danger">{{ $errors->first('department_id') }}</span>
-                                            </div>
-                                            </div>
+                                            </div>                                             
+                                            
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="branch">Branch</label>
-                                                <select class="custom-select" id="branch" name="branch_id">
-                                                    <option value=0>Select Branch here</option>
-                                                    @foreach ($branches as $branch)
-                                                    <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <span class="small text-danger">{{ $errors->first('branch_id') }}</span>
-                                            </div>
-                                            </div>
-                                            <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="store">Store</label>
                                                 <select class="custom-select" id="store" name="store_id">
@@ -87,6 +61,18 @@
                                                     @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('store_id') }}</span>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="invtype">Inventory Type</label>
+                                                <select class="custom-select" id="invtype" name="inventory_type_id">
+                                                    <option value=0>Select Inventory type here</option>
+                                                    @foreach ($inventorytypes as $inventorytype)
+                                                    <option value="{{ $inventorytype->id }}">{{ $inventorytype->inventorytype_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('inventory_type_id') }}</span>
                                             </div>
                                             </div>
                                         </div>
@@ -102,26 +88,24 @@
                                         <div class="form-row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="model">Model</label>
-                                                <select class="custom-select" id="model" name="model_id">
-                                                    <option value=0>Select Model here</option>
-                                                    @foreach ($models as $model)
-                                                    <option value="{{ $model->id }}">{{ $model->model_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <span class="small text-danger">{{ $errors->first('model_id') }}</span>
-                                            </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                            <div class="form-group">
                                                 <label class="small mb-1" for="make">Make</label>
-                                                <select class="custom-select" id="make" name="make_id">
+                                                <select class="custom-select make" id="make" name="make_id">
                                                     <option value=0>Select Make here</option>
                                                     @foreach ($makes as $make)
                                                     <option value="{{ $make->id }}">{{ $make->make_name }}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('make_id') }}</span>
+                                            </div>
+                                            </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="model">Model</label>
+                                                <select class="custom-select model" id="model" name="model_id">
+                                                    <option value=0>Select Model here</option>
+                                                    
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('model_id') }}</span>
                                             </div>
                                             </div>
                                             <div class="col-md-4">
@@ -142,19 +126,21 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="type">Device Type</label>
-                                                <select class="custom-select" id="type" name="device_type">
+                                                <select class="custom-select" id="type" name="device_type_id">
                                                     <option value=0>Select Device Type here</option>
-                                                    <option value="type1">Type One</option>
-                                                    <option value="type2">Type Two</option>
+                                                    @foreach ($devicetypes as $devicetype)
+                                                    <option value="{{ $devicetype->id }}">{{ $devicetype->devicetype_name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('device_type') }}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="nature">Item Nature</label>
-                                                <select class="custom-select" id="nature" name="item_nature">
+                                                <select class="custom-select" id="nature" name="item_nature_id">
                                                     <option value=0>Select Item Nature here</option>
-                                                    <option value="nature1">Nature One</option>
-                                                    <option value="nature2">Nature Two</option>
+                                                    @foreach ($itemnatures as $itemnature)
+                                                    <option value="{{ $itemnature->id }}">{{ $itemnature->itemnature_name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('item_nature') }}</span>
                                             </div>
