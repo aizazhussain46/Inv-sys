@@ -37,4 +37,15 @@ class GinController extends Controller
             return redirect()->back()->with('msg', 'Could not issue items, Try Again!');
         }  
     }
+    public function get_gins(){
+        $fetch = GIN::orderByDesc('id')->get();
+        return view('gins', ['gins' => $fetch]);
+    }
+    public function filter_gin(Request $request){
+        $from = $request->from;
+        $to = $request->to;
+        $range = array('from'=>$from, 'to'=>$to);
+        $fetch = GIN::whereBetween('created_at', [$from, $to])->orderByDesc('id')->get();
+        return view('gins', ['gins' => $fetch, 'range'=>$range]);
+    }
 }

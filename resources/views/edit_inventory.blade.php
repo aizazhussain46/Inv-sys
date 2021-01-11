@@ -60,7 +60,23 @@
                                             </div> 
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="location">Location</label>
+                                                <select class="custom-select" id="location" name="location_id">
+                                                    <option value=0>Select Location here</option>
+                                                    @foreach ($locations as $location)
+                                                    @if($location->id == $inventory->location_id)
+                                                    <option value="{{ $location->id }}" selected>{{ $location->location }}</option>
+                                                    @else
+                                                    <option value="{{ $location->id }}">{{ $location->location }}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('location_id') }}</span>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="store">Store</label>
                                                 <select class="custom-select" id="store" name="store_id">
@@ -76,7 +92,7 @@
                                                 <span class="small text-danger">{{ $errors->first('store_id') }}</span>
                                             </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="invtype">Inventory Type</label>
                                                 <select class="custom-select" id="invtype" name="inventory_type_id">

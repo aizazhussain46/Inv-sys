@@ -38,4 +38,15 @@ class GrnController extends Controller
             return redirect()->back()->with('msg', 'Could not add items in inventory, Try Again!');
         }  
     }
+    public function get_grns(){
+        $fetch = GRN::orderByDesc('id')->get();
+        return view('grns', ['grns' => $fetch]);
+    }
+    public function filter_grn(Request $request){
+        $from = $request->from;
+        $to = $request->to;
+        $range = array('from'=>$from, 'to'=>$to);
+        $fetch = GRN::whereBetween('created_at', [$from, $to])->orderByDesc('id')->get();
+        return view('grns', ['grns' => $fetch, 'range'=>$range]);
+    }
 }

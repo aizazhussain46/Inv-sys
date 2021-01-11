@@ -65,7 +65,7 @@ class InventoryController extends Controller
         $data['categories'] = Category::where('status',1)->get();
         $data['subcategories'] = Subcategory::where('status',1)->get();
         // $data['departments'] = Department::where('status',1)->get();
-        // $data['locations'] = Location::where('status',1)->get();
+        $data['locations'] = Location::all();
         // $data['branches'] = Branch::where('status',1)->get();
         $data['stores'] = Store::all();
         $data['models'] = Modal::where('status',1)->get();
