@@ -115,8 +115,8 @@
                         <tr>
                             <td>
                                 <p class="font-12"><b>Issued To:</b></p>
-                                <p class="font-12"><b>Name:</b><u> {{ $employee->name }}</u></p>
-                                <p class="font-12 pd-20"><b>Department/Company:</b><u> {{ $employee->department }}</u></p>
+                                <p class="font-12"><b>Name:</b><u> {{ isset($employee->name)?$employee->name:'' }}</u></p>
+                                <p class="font-12 pd-20"><b>Department/Company:</b><u> {{ isset($employee->department)?$employee->department:'' }}</u></p>
                                 <p class="font-12 pd-20"><b>Signature with Date:</b> ----------------------------</p>
                             </td>
                         </tr>    
