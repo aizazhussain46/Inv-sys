@@ -45,7 +45,7 @@ class Inventory extends Model
         'store:id,store_name',
         'model:id,model_name',
         'make:id,make_name',
-        'vendor:id,vendor_name'
+        'vendor:id,vendor_name,contact_person'
     ];
 
     public function category()

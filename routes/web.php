@@ -40,7 +40,7 @@ Route::resource('/category', CategoryController::class)->middleware('role:1');
 Route::resource('/sub_category', SubcategoryController::class)->middleware('role:1');
 //Route::resource('/branch', BranchController::class)->middleware('role:1');
 //Route::resource('/department', DepartmentController::class)->middleware('role:1');
-//Route::resource('/location', LocationController::class)->middleware('role:1');
+Route::resource('/location', LocationController::class)->middleware('role:1');
 Route::resource('/model', ModelController::class)->middleware('role:1');
 Route::resource('/role', RoleController::class)->middleware('role:1');
 Route::resource('/store', StoreController::class)->middleware('role:1');
@@ -58,7 +58,7 @@ Route::get('/add_category', [FormController::class, 'add_category'])->middleware
 Route::get('/add_subcategory', [FormController::class, 'add_subcategory'])->middleware('role:1');
 //Route::get('/add_branch', [FormController::class, 'add_branch'])->middleware('role:1');
 //Route::get('/add_department', [FormController::class, 'add_department'])->middleware('role:1');
-//Route::get('/add_location', [FormController::class, 'add_location'])->middleware('role:1');
+Route::get('/add_location', [FormController::class, 'add_location'])->middleware('role:1');
 Route::get('/add_model', [FormController::class, 'add_model'])->middleware('role:1');
 Route::get('/add_role', [FormController::class, 'add_role'])->middleware('role:1');
 Route::get('/add_store', [FormController::class, 'add_store'])->middleware('role:1');
@@ -71,6 +71,12 @@ Route::get('/add_itemnature', [FormController::class, 'add_itemnature'])->middle
 Route::get('/add_inventorytype', [FormController::class, 'add_inventorytype'])->middleware('role:1');
 Route::get('/model_by_make/{id}', [FormController::class, 'model_by_make'])->middleware('role:1');
 Route::get('/subcat_by_category/{id}', [FormController::class, 'subcat_by_category'])->middleware('role:1');
+Route::get('/get_grns', 'GrnController@get_grns')->middleware('role:1');
+Route::post('/filter_grn', 'GrnController@filter_grn')->middleware('role:1');
+Route::get('/get_gins', 'GinController@get_gins')->middleware('role:1');
+Route::post('/filter_gin', 'GinController@filter_gin')->middleware('role:1');
+Route::get('generate-grn/{id}/{from}/{to}','PDFController@generateGRN')->middleware('role:1');
+Route::get('generate-gin/{id}/{from}/{to}','PDFController@generateGIN')->middleware('role:1');
 
 Route::get('/add_inventory', [FormController::class, 'add_inventory']);
 Route::get('/add_with_grn', [FormController::class, 'add_with_grn']);

@@ -69,8 +69,8 @@
                             </a>
                             <div class="collapse" id="reports" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                    <a class="nav-link" href="{{ url('get_grns') }}">GRN</a>
+                                    <a class="nav-link" href="{{ url('get_gins') }}">GIN</a>
                                 </nav>
                             </div>
 
@@ -150,7 +150,7 @@
                                         </nav>
                                     </div> -->
                                     <!-- Location -->
-                                    <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#location" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#location" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Location
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
@@ -159,7 +159,7 @@
                                             <a class="nav-link" href="{{ url('add_location') }}">Add Location</a>
                                             <a class="nav-link" href="{{ url('location') }}">List Location</a>
                                         </nav>
-                                    </div> -->
+                                    </div>
                                     <!-- Make -->
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#make" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                     Make
