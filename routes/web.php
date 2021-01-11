@@ -41,7 +41,7 @@ Route::resource('/sub_category', SubcategoryController::class)->middleware('role
 //Route::resource('/branch', BranchController::class)->middleware('role:1');
 //Route::resource('/department', DepartmentController::class)->middleware('role:1');
 Route::resource('/location', LocationController::class)->middleware('role:1');
-Route::resource('/model', ModelController::class)->middleware('role:1');
+Route::resource('/model', modelController::class)->middleware('role:1');
 Route::resource('/role', RoleController::class)->middleware('role:1');
 Route::resource('/store', StoreController::class)->middleware('role:1');
 Route::resource('/user', UserController::class)->middleware('role:1');
