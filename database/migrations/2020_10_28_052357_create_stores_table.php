@@ -16,6 +16,8 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('store_name');
+            $table->string('location')->nullable();
+            $table->integer('emp_id')->nullable();
             $table->timestamps();
         });
     }

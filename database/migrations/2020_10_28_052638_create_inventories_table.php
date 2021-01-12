@@ -24,11 +24,11 @@ class CreateInventoriesTable extends Migration
             $table->integer('model_id')->nullable();
             $table->integer('make_id')->nullable();
             $table->integer('vendor_id')->nullable();
-            $table->string('device_type')->nullable();
-            $table->string('inventory_type')->nullable();
+            $table->string('device_type_id')->nullable();
+            $table->string('inventory_type_id')->nullable();
             $table->string('product_sn')->nullable();
             $table->string('purchase_date')->nullable();
-            $table->string('item_nature')->nullable();
+            $table->string('item_nature_id')->nullable();
             $table->string('item_price')->nullable();
             $table->string('remarks')->nullable();
             $table->string('delivery_challan')->nullable();
@@ -41,6 +41,7 @@ class CreateInventoriesTable extends Migration
             $table->string('verification')->nullable();
             $table->integer('issued_to')->nullable();
             $table->integer('issued_by')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

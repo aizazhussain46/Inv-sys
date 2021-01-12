@@ -15,6 +15,11 @@ class CreateRepairingsTable extends Migration
     {
         Schema::create('repairings', function (Blueprint $table) {
             $table->id();
+            $table->integer('item_id')->nullable();
+            $table->string('date')->nullable();
+            $table->text('remarks')->nullable();
+            $table->integer('actual_price_value')->nullable();
+            $table->string('price_value')->nullable();
             $table->timestamps();
         });
     }
