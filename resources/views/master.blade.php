@@ -251,6 +251,52 @@
                                 </nav>
                             </div>
                             @endif
+                            <!-- Budget System -->
+                            <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#budget" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Budget System
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="budget" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                
+                                    <a class="nav-link" href="{{ url('add_budget') }}">Add Budget</a>
+                                    <!-- Type -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Type" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Type
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="Type" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_type') }}">Add Type</a>
+                                            <a class="nav-link" href="{{ url('types') }}">List types</a>
+                                        </nav>
+                                    </div>
+                                    <!-- Year -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Year" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Year
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="Year" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_year') }}">Add Year</a>
+                                            <a class="nav-link" href="{{ url('years') }}">List Years</a>
+                                        </nav>
+                                    </div>
+                                    <!-- Dollar -->
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dollar" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Dollar Price
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="dollar" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ url('add_dollar_price') }}">Add Price</a>
+                                            <a class="nav-link" href="{{ url('dollars') }}">List Prices</a>
+                                        </nav>
+                                    </div>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -376,6 +422,50 @@ $(document).ready(function(){
         });    
     });
 
+
+    var settings = {
+            "url": "https://cloud.efulife.com:8080/devinv/deptdataall.php?uid=1",
+            "method": "GET",
+            "timeout": 0,
+            };
+            $.ajax(settings).done(function (response) {
+                if(response.Login != null){
+                    var res = response.Login;
+                    var dept_id = $('#dept_id');
+                    $.each( res, function(index, value){
+                        dept_id.append(
+                            $('<option></option>').val(value.DEPARTMENT_ID).html(value.DEPARTMENT)
+                        );
+                    });
+                }
+            });
+    $('#dept_id').change(function(){
+        $('#dept').val($("#dept_id option:selected" ).text());   
+    });  
+
+
+    $("#year").on("change",function(){
+        var id = $(this).val();
+        $.get("{{ url('pkr_by_year') }}/"+id, function(data){
+            console.log(data);
+            $('#pkr').val(data.pkr_val);
+        });    
+    });
+
+    $('#qty').keyup(function(){
+          var qty = $(this).val();
+          var dollar = $('#u_dollar').val();
+          var pkr = $('#pkr').val();
+          var total_dollar = dollar*qty;
+          var total_pkr = total_dollar*pkr;
+          console.log(qty);
+          console.log(dollar);
+          console.log(pkr);
+          console.log(total_dollar);
+          console.log(total_pkr);
+          $('#t_dollar').val(total_dollar);
+          $('#t_pkr').val(total_pkr);
+    }); 
 
 });
 </script> 

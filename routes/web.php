@@ -52,6 +52,10 @@ Route::resource('/make', MakeController::class)->middleware('role:1');
 Route::resource('/devicetype', DevicetypeController::class)->middleware('role:1');
 Route::resource('/itemnature', ItemnatureController::class)->middleware('role:1');
 Route::resource('/inventorytype', InventorytypeController::class)->middleware('role:1');
+Route::resource('/dollars', DollarController::class);
+Route::resource('/types', TypeController::class);
+Route::resource('/years', YearController::class);
+Route::resource('/budget', BudgetController::class);
 
 /* Forms */
 Route::get('/add_category', [FormController::class, 'add_category'])->middleware('role:1');
@@ -87,6 +91,11 @@ Route::get('/issue_with_gin', [FormController::class, 'issue_with_gin']);
 Route::get('/transfer_inventory', [FormController::class, 'transfer_inventory']);
 Route::get('/return_inventory', [FormController::class, 'return_inventory']);
 Route::get('/repair', [FormController::class, 'repair']);
+Route::get('/add_dollar_price', [FormController::class, 'add_dollar_price']);
+Route::get('/add_year', [FormController::class, 'add_year']);
+Route::get('/add_type', [FormController::class, 'add_type']);
+Route::get('/add_budget', [FormController::class, 'add_budget']);
+Route::get('/pkr_by_year/{id}', [FormController::class, 'pkr_by_year']);
 
 Route::post('/issue', 'FormController@submitt_issue');
 Route::post('/submit_gin', 'FormController@submit_gin');

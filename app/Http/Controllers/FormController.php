@@ -24,6 +24,9 @@ use App\Rturn;
 use App\Inventory;
 use App\Repairing;
 use App\Employee;
+use App\Year;
+use App\Dollar;
+use App\Type;
 class FormController extends Controller
 {
     public function __construct()
@@ -62,6 +65,25 @@ class FormController extends Controller
     public function add_inventorytype(){
         return view('add_inventorytype');
     }
+    public function add_dollar_price(){
+        $year = Year::all();
+        return view('add_dollar_price', ['years' => $year]);
+    }
+    public function add_year(){
+        return view('add_year');
+    }
+    public function add_type(){
+        return view('add_type');
+    }
+    public function add_budget(){
+        $data = array();
+        $data['categories'] = Category::where('status',1)->get();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['types'] = Type::all();
+        $data['years'] = Year::all();
+        return view('add_budget', $data);
+    }
+
     public function add_store(){
         $user = User::where('status',1)->where('role_id',2)->get();
         return view('add_store', ['users' => $user]);
@@ -293,6 +315,11 @@ class FormController extends Controller
     public function subcat_by_category($id)
     {
         $get = Subcategory::where('category_id', $id)->where('status', 1)->get();
+        return $get;
+    }
+    public function pkr_by_year($id)
+    {
+        $get = Dollar::where('year_id', $id)->first();
         return $get;
     }
 }
