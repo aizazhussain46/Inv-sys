@@ -52,7 +52,7 @@
                 </td>
                 <td style="width:40%;">
                     <p class="font-12"><b>Date/Time:</b><u> {{ date('Y-m-d H:i:s', strtotime($grn_date)) }}</u></p>
-                    <p class="font-12"><b>User:</b><u> Farukh majid</u></p>
+                    <p class="font-12"><b>User:</b><u> {{ Auth::user()->name }}</u></p>
                     <p class="font-12"><b>Date Range:</b><u> {{ date('Y-m-d', strtotime($range['from'])) }} To {{ date('Y-m-d', strtotime($range['to'])) }}</u></p>
                 </td>
             </tr>

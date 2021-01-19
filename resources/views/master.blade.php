@@ -359,7 +359,7 @@ $(document).ready(function(){
                     $('#designation').val(res.DESIGNATION);
                     $('#department').val(res.DEPARTMENT);
                     $('#dept_id').val(res.DEPARTMENT_ID);
-                    $('#location').val(res.LOCATION);
+                    $('.location').val(res.LOCATION);
                     $('#hod').val(res.HOD_NAME);
                     $('#email').val(res.EMPLOYEE_EMAIL);
                     $('#status').val(res.EMPLOYEE_STATUS);

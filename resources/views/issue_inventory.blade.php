@@ -65,7 +65,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="location">Location</label>
-                                                        <input class="form-control" id="location" name="location" type="text" placeholder="Enter Location here" readonly />
+                                                        <input class="form-control location" id="location" name="location" type="text" placeholder="Enter Location here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('location') }}</span>
                                                     </div>
                                                 </div>
