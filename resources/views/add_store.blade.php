@@ -38,13 +38,13 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="location">Location</label>
-                                                        <select class="custom-select" id="location" name="location">
-                                                            <option value=null>Select Location here</option>
-                                                            <option value="location1">Location 1</option>
-                                                            <option value="location2">Location 2</option>
-                                                            <option value="location3">Location 3</option>
-                                                        </select>
-                                                        <span class="small text-danger">{{ $errors->first('location') }}</span>
+                                                        <select class="custom-select" id="location" name="location_id">
+                                                    <option value=0>Select Location here</option>
+                                                    @foreach ($locations as $location)
+                                                    <option value="{{ $location->id }}">{{ $location->location }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('location_id') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

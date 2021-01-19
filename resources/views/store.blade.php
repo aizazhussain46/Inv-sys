@@ -41,7 +41,7 @@
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $store->store_name }}</td>
-                                                <td>{{ $store->location }}</td>
+                                                <td>{{ $store->location != null?$store->location->location:'' }}</td>
                                                 <td>{{ $store->user }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($store->created_at)) }}</td>
                                                 <td class="text-center">

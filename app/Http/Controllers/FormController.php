@@ -85,8 +85,9 @@ class FormController extends Controller
     }
 
     public function add_store(){
-        $user = User::where('status',1)->where('role_id',2)->get();
-        return view('add_store', ['users' => $user]);
+        $user = User::where('role_id',2)->get();
+        $location = Location::all();
+        return view('add_store', ['users' => $user, 'locations' => $location]);
     }
     public function add_user(){
         $role = Role::all();
