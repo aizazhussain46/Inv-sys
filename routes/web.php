@@ -95,7 +95,12 @@ Route::get('/add_dollar_price', [FormController::class, 'add_dollar_price']);
 Route::get('/add_year', [FormController::class, 'add_year']);
 Route::get('/add_type', [FormController::class, 'add_type']);
 Route::get('/add_budget', [FormController::class, 'add_budget']);
+Route::get('/show_budget', [FormController::class, 'show_budget']);
+Route::get('/summary', [FormController::class, 'summary']);
 Route::get('/pkr_by_year/{id}', [FormController::class, 'pkr_by_year']);
+Route::post('/budget_by_year', 'BudgetController@budget_by_year');
+Route::post('/summary_by_year', 'BudgetController@summary_by_year');
+Route::get('/lock_budget/{id}', 'BudgetController@lock_budget');
 
 Route::post('/issue', 'FormController@submitt_issue');
 Route::post('/submit_gin', 'FormController@submit_gin');

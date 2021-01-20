@@ -27,6 +27,7 @@ use App\Employee;
 use App\Year;
 use App\Dollar;
 use App\Type;
+use App\Budgetitem as Budget;
 class FormController extends Controller
 {
     public function __construct()
@@ -82,6 +83,16 @@ class FormController extends Controller
         $data['types'] = Type::all();
         $data['years'] = Year::all();
         return view('add_budget', $data);
+    }
+    public function show_budget(){
+        $data = array();
+        $data['years'] = Year::all();
+        $data['budgets'] = array();
+        return view('show_budget', $data);
+    }
+    public function summary(){
+        
+        return view('summary', ['categories'=>array(), 'years'=>Year::all()]);
     }
 
     public function add_store(){
