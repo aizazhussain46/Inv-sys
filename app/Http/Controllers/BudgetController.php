@@ -76,7 +76,7 @@ class BudgetController extends Controller
         $data['categories'] = Category::where('status',1)->get();
         $data['subcategories'] = Subcategory::where('status',1)->get();
         $data['types'] = Type::all();
-        $data['years'] = Year::all();
+        $data['years'] = Year::where('locked', null)->get();
         $data['pkr'] = Dollar::where('year_id', $budget->year_id)->first();
         // echo "<pre>";
         // print_r($data);
@@ -128,13 +128,21 @@ class BudgetController extends Controller
     public function destroy($id)
     {
         $find = Budget::find($id);
-        return $find->delete() ? redirect('show_budget')->with('msg', 'Budget Deleted Successfully!') : redirect('show_budget')->with('msg', 'Could not delete budget, Try Again!');
+        return $find->delete() ? redirect()->back()->with('msg', 'Budget Deleted Successfully!') : redirect()->back()->with('msg', 'Could not delete budget, Try Again!');
     }
     public function budget_by_year(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'category_id' => 'required|not_in:0',
+            'year_id' => 'required|not_in:0'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
         $data = array();
         $data['years'] = Year::all();
-        $data['budgets'] = Budget::where('year_id', $request->year_id)->get();
+        $data['categories'] = Category::where('status',1)->get();
+        $data['budgets'] = Budget::where('year_id', $request->year_id)->where('category_id',$request->category_id)->get();
         $data['filter'] = Year::find($request->year_id);
         return view('show_budget', $data);
     }
@@ -149,6 +157,8 @@ class BudgetController extends Controller
                 $cat['unit_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('unit_price_pkr');
                 $cat['total_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('total_price_dollar');
                 $cat['total_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('total_price_pkr');
+                $cat['consumed'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('consumed');
+                $cat['remaining'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('remaining');
             }
         }
         else{
@@ -163,14 +173,14 @@ class BudgetController extends Controller
         if(!empty($budget)){
             $year = Year::where('id',$id)->update(['locked'=>1]);
             if($year){
-                return redirect('show_budget')->with('msg', 'Budget Locked Successfully!');
+                return redirect()->back()->with('msg', 'Budget Locked Successfully!');
             }
             else{
-                return redirect('show_budget')->with('msg', 'Could not lock budget, Try Again!');
+                return redirect()->back()->with('msg', 'Could not lock budget, Try Again!');
             }
         }
         else{
-            return redirect('show_budget')->with('msg', 'No any budget found in selected year, Kindly add budget and try again!');
+            return redirect()->back()->with('msg', 'No any budget found in selected year, Kindly add budget and try again!');
         }    
     }
 }

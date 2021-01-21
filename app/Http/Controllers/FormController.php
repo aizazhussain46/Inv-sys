@@ -81,12 +81,13 @@ class FormController extends Controller
         $data['categories'] = Category::where('status',1)->get();
         $data['subcategories'] = Subcategory::where('status',1)->get();
         $data['types'] = Type::all();
-        $data['years'] = Year::all();
+        $data['years'] = Year::where('locked', null)->get();
         return view('add_budget', $data);
     }
     public function show_budget(){
         $data = array();
         $data['years'] = Year::all();
+        $data['categories'] = Category::where('status',1)->get();
         $data['budgets'] = array();
         return view('show_budget', $data);
     }

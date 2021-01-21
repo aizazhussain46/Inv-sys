@@ -98,7 +98,7 @@ Route::get('/add_budget', [FormController::class, 'add_budget']);
 Route::get('/show_budget', [FormController::class, 'show_budget']);
 Route::get('/summary', [FormController::class, 'summary']);
 Route::get('/pkr_by_year/{id}', [FormController::class, 'pkr_by_year']);
-Route::post('/budget_by_year', 'BudgetController@budget_by_year');
+Route::get('/budget_by_year', 'BudgetController@budget_by_year');
 Route::post('/summary_by_year', 'BudgetController@summary_by_year');
 Route::get('/lock_budget/{id}', 'BudgetController@lock_budget');
 

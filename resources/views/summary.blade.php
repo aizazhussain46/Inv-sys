@@ -59,6 +59,8 @@
                                                 <th>Price Unit PKR</th>
                                                 <th>Price Total $</th>
                                                 <th>Price Total PKR</th>
+                                                <th>Consumed</th>
+                                                <th>Remaining</th>
                                             </tr>
                                         </thead>
                                         
@@ -78,6 +80,8 @@
                                                 <td>Rs{{ $budget->unit_price_pkr }}</td>
                                                 <td>{{ $budget->total_price_dollar }}$</td>
                                                 <td>Rs{{ $budget->total_price_pkr }}</td>
+                                                <td>{{ $budget->consumed }}</td>
+                                                <td>{{ $budget->remaining }}</td>
                                             </tr>
                                             <?php
                                             $unit_b_d += $budget->unit_price_dollar;
@@ -94,6 +98,8 @@
                                                 <td>Rs{{ $unit_b_p }}</td>
                                                 <td>{{ $total_b_d }}$</td>
                                                 <td>Rs{{ $total_b_p }}</td>
+                                                <td></td>
+                                                <td></td>
                                             </tr>
                                         </tfoot>
                                     </table>
