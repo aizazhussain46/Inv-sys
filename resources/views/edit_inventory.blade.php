@@ -47,7 +47,7 @@
                                             <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="subcategory">Sub Category</label>
-                                                <select class="custom-select subcategory" id="subcategory" name="sub_cat_id">
+                                                <select class="custom-select subcategory" id="subcategory" name="subcategory_id">
                                                 <option value=0>Select Sub Category here</option>
                                                     @foreach ($subcategories as $subcategory)
                                                     @if($subcategory->id == $inventory->sub_cat_id)

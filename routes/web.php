@@ -112,6 +112,6 @@ Route::post('/repair_inventory', 'FormController@repair_inventory');
 Route::post('/process_to_grn', 'GrnController@create_grn');
 Route::post('/process_to_gin', 'GinController@create_gin');
 
-Route::get('/get_employee', [ApiController::class, 'get_employee']);
+Route::get('/get_employee/{id}', 'EmployeeController@get_employee');
 
 Route::get('generate-pdf','PDFController@generatePDF');

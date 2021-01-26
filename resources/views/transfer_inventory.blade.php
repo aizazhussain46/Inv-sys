@@ -110,7 +110,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="emp_no">Employee Code</label>
-                                                        <input class="form-control" id="emp_code" name="to_employee_code" type="text" placeholder="Enter To Employee Code here" />
+                                                        <input class="form-control" id="emp_no" name="to_employee_code" type="text" placeholder="Enter To Employee Code here" />
                                                 <span class="small text-danger">{{ $errors->first('to_employee_code') }}</span>
                                                 @if (session('to_emp_code'))
                                                 <span class="small text-danger">{{ session('to_emp_code') }}</span>

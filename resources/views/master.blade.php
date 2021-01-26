@@ -374,6 +374,36 @@ $(document).ready(function(){
     });
 
 
+    $('#emp_no').keydown(function(e) {
+        var code = e.keyCode || e.which;
+        if (code === 9 || code === 13) {  
+            e.preventDefault();
+            var emp_no = $('#emp_no').val();
+            var settings = {
+            "url": "{{ url('get_employee') }}/"+emp_no,
+            "method": "GET",
+            "timeout": 0,
+            };
+            $.ajax(settings).done(function (response) {
+                //console.log(response);
+                if(response != 0){
+                    var res = response;
+                    $('#name').val(res.name);
+                    $('#designation').val(res.designation);
+                    $('#department').val(res.department);
+                    $('#dept_id').val(res.dept_id);
+                    $('.location').val(res.location);
+                    $('#hod').val(res.hod);
+                    $('#email').val(res.email);
+                    $('#status').val(res.status);
+                }
+                else{
+                    alert('Entered employee code does not exists!');
+                }
+            });
+        }
+    });    
+
     var settings = {
             "url": "https://cloud.efulife.com:8080/devinv/branchdataall.php?uid=1",
             "method": "GET",
@@ -460,11 +490,11 @@ $(document).ready(function(){
           var pkr = $('#pkr').val();
           var total_dollar = dollar*qty;
           var total_pkr = total_dollar*pkr;
-          console.log(qty);
-          console.log(dollar);
-          console.log(pkr);
-          console.log(total_dollar);
-          console.log(total_pkr);
+        //   console.log(qty);
+        //   console.log(dollar);
+        //   console.log(pkr);
+        //   console.log(total_dollar);
+        //   console.log(total_pkr);
           $('#t_dollar').val(total_dollar);
           $('#t_pkr').val(total_pkr);
     }); 

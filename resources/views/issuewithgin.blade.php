@@ -27,7 +27,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="emp_no">Employee Code</label>
-                                                        <input class="form-control" id="emp_code" name="employee_code" type="text" placeholder="Enter Employee Code here" autofocus />
+                                                        <input class="form-control" id="emp_no" name="employee_code" type="text" placeholder="Enter Employee Code here" autofocus />
                                                         <span class="small text-danger">{{ $errors->first('employee_code') }}</span>
                                                         @if (session('emp_code'))
                                                         <span class="small text-danger">{{ session('emp_code') }}</span>
@@ -111,6 +111,7 @@
                                                 <th>Model</th>
                                                 <th>Purchase Date</th>
                                                 <th>Category</th>
+                                                <th>Sub Category</th>
                                                 <th>Price</th>
                                                 <th>Created at</th>
                                             </tr>
@@ -131,6 +132,7 @@
                                                 <td>{{ $inventory->model_id?$inventory->model->model_name:'' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
                                                 <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
+                                                <td>{{ $inventory->subcategory_id?$inventory->subcategory->sub_cat_name:'' }}</td>
                                                 <td>{{ $inventory->item_price }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
                                             </tr>

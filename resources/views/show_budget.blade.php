@@ -71,6 +71,7 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
+                                                <th>Date</th>
                                                 <th>Category</th>
                                                 <th>Item</th>
                                                 <th>Type</th>
@@ -99,6 +100,7 @@
                                         @foreach ($budgets as $budget)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
+                                                <td>{{ date('Y-m-d' ,strtotime($budget->created_at)) }}</td>
                                                 <td>{{ $budget->category_id?$budget->category->category_name:'' }}</td>
                                                 <td>{{ $budget->subcategory_id?$budget->subcategory->sub_cat_name:'' }}</td>
                                                 <td>{{ $budget->type_id?$budget->type->type:'' }}</td>

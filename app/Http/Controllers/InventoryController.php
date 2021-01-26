@@ -42,7 +42,7 @@ class InventoryController extends Controller
         
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|not_in:0',
-            'sub_cat_id' => 'required|not_in:0',
+            'subcategory_id' => 'required|not_in:0',
             'product_sn' => 'required',
             'item_price' => 'required'   
         ]);
@@ -82,7 +82,7 @@ class InventoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|not_in:0',
-            'sub_cat_id' => 'required|not_in:0',
+            'subcategory_id' => 'required|not_in:0',
             'product_sn' => 'required',
             'item_price' => 'required'   
         ]);
@@ -91,7 +91,7 @@ class InventoryController extends Controller
         }
         $arr = array();
         $arr['category_id'] = $request->category_id;
-        $arr['sub_cat_id'] = $request->sub_cat_id;
+        $arr['subcategory_id'] = $request->sub_cat_id;
         $arr['location_id'] = $request->location_id;
         $arr['department_id'] = $request->department_id;
         $arr['branch_id'] = $request->branch_id;

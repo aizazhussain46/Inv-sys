@@ -29,7 +29,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="emp_no">Employee Code</label>
-                                                        <input class="form-control" id="emp_code" name="emp_no" type="text" placeholder="Enter employee code here" />
+                                                        <input class="form-control" id="emp_no" name="emp_no" type="text" placeholder="Enter employee code here" />
                                                         <span class="small text-danger">{{ $errors->first('emp_no') }}</span>
                                                     </div>
                                                 </div>
@@ -93,20 +93,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                    <label class="small mb-1" for="branches">Branch</label>
-                                                    <select class="custom-select" id="branches" name="branch_id">
-                                                        <option value=null>Select Branch here</option>
-                                                    </select>
-                                                    <span class="small text-danger">{{ $errors->first('branch_id') }}</span>
-                                                    <input name="branch" id="branch" type="hidden" value='' />
-                                                    
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
