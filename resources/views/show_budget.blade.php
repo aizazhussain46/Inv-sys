@@ -39,7 +39,11 @@
                                                     <select class="custom-select" name="category_id" required>
                                                     <option value=0>Select Category here</option>
                                                     @foreach ($categories as $category)
+                                                    @if($category->id == $filters->catid)
+                                                    <option value="{{ $category->id }}" selected>{{ $category->category_name }}</option>
+                                                    @else
                                                     <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                    @endif
                                                     @endforeach
                                                     </select>
                                                     <span class="small text-danger">{{ $errors->first('category_id') }}</span>
@@ -48,7 +52,11 @@
                                                     <select class="custom-select" name="year_id" required>
                                                     <option value=0>Select Year here</option>
                                                     @foreach ($years as $year)
+                                                    @if($year->id == $filters->yearid)
+                                                    <option value="{{ $year->id }}" selected>{{ $year->year }}</option>
+                                                    @else
                                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                                    @endif
                                                     @endforeach
                                                     </select>
                                                     <span class="small text-danger">{{ $errors->first('year_id') }}</span>
@@ -65,6 +73,10 @@
                     </div>    
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
+                            @if(empty($budgets))
+                            @else
+                            <a class="btn btn-danger mb-1 float-right" href="{{ url('itemexport/'.json_encode($filters)) }}">Export <i class="fa fa-download" aria-hidden="true"></i></a>
+                            @endif
                             <span class="text-danger">{{ $errors->first('inv_id') }}</span>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -145,7 +157,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan='6' style="text-align:right;">Total</th>
+                                                <th colspan='7' style="text-align:right;">Total</th>
                                                 <td>{{ $unit_b_d }}$/<br>Rs{{ $unit_b_p }}</td>
                                                 <td>{{ $qty }}</td>
                                                 <td>{{ $total_b_d }}$/<br>Rs{{ $total_b_p }}</td>

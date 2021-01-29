@@ -31,7 +31,11 @@
                                                     <select class="custom-select" name="year_id" required>
                                                     <option value=0>Select Year here</option>
                                                     @foreach ($years as $year)
+                                                    @if($year->id == $filter)
+                                                    <option value="{{ $year->id }}" selected>{{ $year->year }}</option>
+                                                    @else
                                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                                    @endif
                                                     @endforeach
                                                     </select>
                                                     <span class="small text-danger">{{ $errors->first('year_id') }}</span>
@@ -48,6 +52,10 @@
                     </div>   
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
+                            @if(empty($categories))
+                            @else
+                            <a class="btn btn-danger mb-1 float-right" href="{{ url('budgetexport/'.$filter) }}">Export <i class="fa fa-download" aria-hidden="true"></i></a>
+                            @endif
                             <span class="text-danger">{{ $errors->first('inv_id') }}</span>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" width="100%" cellspacing="0">

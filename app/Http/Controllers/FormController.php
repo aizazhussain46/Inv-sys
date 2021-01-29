@@ -89,11 +89,12 @@ class FormController extends Controller
         $data['years'] = Year::all();
         $data['categories'] = Category::where('status',1)->get();
         $data['budgets'] = array();
+        $data['filters'] = (object)array('catid'=>'', 'yearid'=>'');
         return view('show_budget', $data);
     }
     public function summary(){
         
-        return view('summary', ['categories'=>array(), 'years'=>Year::all()]);
+        return view('summary', ['filter'=>'', 'categories'=>array(), 'years'=>Year::all()]);
     }
 
     public function add_store(){

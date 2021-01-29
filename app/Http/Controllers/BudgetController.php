@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BudgetExport;
+use App\Exports\ItemsExport;
 use App\Category;
 use App\Subcategory;
 use App\User;
@@ -144,6 +147,7 @@ class BudgetController extends Controller
         $data['categories'] = Category::where('status',1)->get();
         $data['budgets'] = Budget::where('year_id', $request->year_id)->where('category_id',$request->category_id)->get();
         $data['filter'] = Year::find($request->year_id);
+        $data['filters'] = (object)array('catid'=>$request->category_id, 'yearid'=>$request->year_id);
         return view('show_budget', $data);
     }
     public function summary_by_year(Request $request)
@@ -164,7 +168,7 @@ class BudgetController extends Controller
         else{
             $category = array();
         }
-        return view('summary', ['categories'=>$category, 'years'=>Year::all()]);
+        return view('summary', ['filter'=>$request->year_id,'categories'=>$category, 'years'=>Year::all()]);
     }
     public function lock_budget($id)
     {
@@ -182,5 +186,19 @@ class BudgetController extends Controller
         else{
             return redirect()->back()->with('msg', 'No any budget found in selected year, Kindly add budget and try again!');
         }    
+    }
+
+
+    public function budgetexport($data) 
+    {
+        $year = Year::find($data);
+        return Excel::download(new BudgetExport($data), 'budgetsummary_'.$year->year.'.xlsx'); 
+    }
+    public function itemexport($data) 
+    {
+        $filters = json_decode($data);
+        $year = Year::find($filters->yearid);
+        $category = Category::find($filters->catid);
+        return Excel::download(new ItemsExport($data), 'Itemsexport_'.$category->category_name.'_'.$year->year.'.xlsx'); 
     }
 }
