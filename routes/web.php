@@ -113,5 +113,7 @@ Route::post('/process_to_grn', 'GrnController@create_grn');
 Route::post('/process_to_gin', 'GinController@create_gin');
 
 Route::get('/get_employee/{id}', 'EmployeeController@get_employee');
-
 Route::get('generate-pdf','PDFController@generatePDF');
+
+Route::get('budgetexport/{data}','BudgetController@budgetexport');
+Route::get('itemexport/{data}','BudgetController@itemexport');
