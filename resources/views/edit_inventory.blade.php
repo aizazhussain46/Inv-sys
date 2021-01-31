@@ -238,6 +238,125 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="po">PO Number</label>
+                                                    <input class="form-control py-2" id="po" name="po_number" type="text" value="{{ $inventory->po_number }}" placeholder="Enter PO Number here" />
+                                                    <span class="small text-danger">{{ $errors->first('po_number') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Warrenty">Warrenty Period</label>
+                                                    <input class="form-control py-2" id="Warrenty" name="warrenty_period" type="text" value="{{ $inventory->warrenty_period }}" placeholder="Enter Warrenty Period here" />
+                                                    <span class="small text-danger">{{ $errors->first('warrenty_period') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Insurance">Insurance</label>
+                                                    <input class="form-control py-2" id="Insurance" name="insurance" type="text" value="{{ $inventory->insurance }}" placeholder="Enter Insurance here" />
+                                                    <span class="small text-danger">{{ $errors->first('insurance') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="licence">Licence Key</label>
+                                                    <input class="form-control py-2" id="licence" name="licence_key" type="text" value="{{ $inventory->licence_key }}" placeholder="Enter Licence Key here" />
+                                                    <span class="small text-danger">{{ $errors->first('licence_key') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="SLA">SLA</label>
+                                                    <input class="form-control py-2" id="SLA" name="sla" type="text" value="{{ $inventory->sla }}" placeholder="Enter SLA here" />
+                                                    <span class="small text-danger">{{ $errors->first('sla') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="warrentycheck">Warrenty Check</label>
+                                                    <input class="form-control py-2" id="warrentycheck" name="warrenty_check" type="text" value="{{ $inventory->warrenty_check }}" placeholder="Enter Warrenty Check here" />
+                                                    <span class="small text-danger">{{ $errors->first('warrenty_check') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="operating_system">Operating System</label>
+                                                    <input class="form-control py-2" id="operating_system" name="operating_system" type="text" value="{{ $inventory->operating_system }}" placeholder="Enter Operating System here" />
+                                                    <span class="small text-danger">{{ $errors->first('operating_system') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="SAP_tag">SAP Tag</label>
+                                                    <input class="form-control py-2" id="SAP_tag" name="SAP_tag" type="text" value="{{ $inventory->SAP_tag }}" placeholder="Enter SAP Tag here" />
+                                                    <span class="small text-danger">{{ $errors->first('SAP_tag') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Capacity">Capacity</label>
+                                                    <input class="form-control py-2" id="Capacity" name="capacity" type="text" value="{{ $inventory->capacity }}" placeholder="Enter Capacity here" />
+                                                    <span class="small text-danger">{{ $errors->first('capacity') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="hard_drive">Hard Drive</label>
+                                                    <input class="form-control py-2" id="hard_drive" name="hard_drive" type="text" value="{{ $inventory->hard_drive }}" placeholder="Enter Hard Drive here" />
+                                                    <span class="small text-danger">{{ $errors->first('hard_drive') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Processor">Processor</label>
+                                                    <input class="form-control py-2" id="Processor" name="processor" type="text" value="{{ $inventory->processor }}" placeholder="Enter Processor here" />
+                                                    <span class="small text-danger">{{ $errors->first('processor') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="process_generation">Process Generation</label>
+                                                    <input class="form-control py-2" id="process_generation" name="process_generation" type="text" value="{{ $inventory->process_generation }}" placeholder="Enter Process Generation here" />
+                                                    <span class="small text-danger">{{ $errors->first('process_generation') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="display_type">Display Type</label>
+                                                    <input class="form-control py-2" id="display_type" name="display_type" type="text" value="{{ $inventory->display_type }}" placeholder="Enter Display Type here" />
+                                                    <span class="small text-danger">{{ $errors->first('display_type') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="DVD_rom">DVD Rom</label>
+                                                    <input class="form-control py-2" id="DVD_rom" name="DVD_rom" type="text" value="{{ $inventory->DVD_rom }}" placeholder="Enter DVD Rom here" />
+                                                    <span class="small text-danger">{{ $errors->first('DVD_rom') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="RAM">RAM</label>
+                                                    <input class="form-control py-2" id="RAM" name="RAM" type="text" value="{{ $inventory->RAM }}" placeholder="Enter RAM here" />
+                                                    <span class="small text-danger">{{ $errors->first('RAM') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                         <div class="form-row">
                                             <div class="col-md-4">
                                                 <div class="form-group">

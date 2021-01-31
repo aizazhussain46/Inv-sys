@@ -33,7 +33,22 @@ class Inventory extends Model
         'verification',
         'issued_to',
         'issued_by',
-        'status'
+        'status',
+        'po_number',
+        'warrenty_period',
+        'insurance',
+        'licence_key',
+        'sla',
+        'warrenty_check',
+        'operating_system',
+        'SAP_tag',
+        'capacity',
+        'hard_drive',
+        'processor',
+        'process_generation',
+        'display_type',
+        'DVD_rom',
+        'RAM'
     ];
 
     protected $with = [
