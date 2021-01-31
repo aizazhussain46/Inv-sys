@@ -94,7 +94,7 @@ class FormController extends Controller
     }
     public function summary(){
         
-        return view('summary', ['filter'=>'', 'categories'=>array(), 'years'=>Year::all()]);
+        return view('summary', ['filter'=>'', 'types'=>array(), 'years'=>Year::all()]);
     }
 
     public function add_store(){

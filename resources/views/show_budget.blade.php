@@ -75,7 +75,7 @@
                             <div class="card-body">
                             @if(empty($budgets))
                             @else
-                            <a class="btn btn-danger mb-1 float-right" href="{{ url('itemexport/'.json_encode($filters)) }}">Export <i class="fa fa-download" aria-hidden="true"></i></a>
+                            <a class="btn btn-danger mb-1 float-right" href="{{ url('itemexport/'.json_encode($filters)) }}">Print <i class="fa fa-download" aria-hidden="true"></i></a>
                             @endif
                             <span class="text-danger">{{ $errors->first('inv_id') }}</span>
                                 <div class="table-responsive">
