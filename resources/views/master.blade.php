@@ -349,8 +349,8 @@ $(document).ready(function(){
             var emp_code = $('#emp_code').val();
             
             var settings = {
-            //"url": "https://cloud.efulife.com:8080/devinv/empdata.php?uid="+emp_code,
-            "url": "https://devinv.efulife.com/empdata.php?uid="+emp_code,
+            "url": "https://cloud.efulife.com:8080/devinv/empdata.php?uid="+emp_code,
+            // "url": "https://devinv.efulife.com/empdata.php?uid="+emp_code,
             "method": "GET",
             "timeout": 0,
             };
@@ -406,8 +406,8 @@ $(document).ready(function(){
     });    
 
     var settings = {
-            //"url": "https://cloud.efulife.com:8080/devinv/branchdataall.php?uid=1",
-            "url": "https://devinv.efulife.com/branchdataall.php?uid=1",
+            "url": "https://cloud.efulife.com:8080/devinv/branchdataall.php?uid=1",
+            // "url": "https://devinv.efulife.com/branchdataall.php?uid=1",
             "method": "GET",
             "timeout": 0,
             };
@@ -458,8 +458,8 @@ $(document).ready(function(){
 
 
     var settings = {
-            //"url": "https://cloud.efulife.com:8080/devinv/deptdataall.php?uid=1",
-            "url": "https://devinv.efulife.com/deptdataall.php?uid=1",
+            "url": "https://cloud.efulife.com:8080/devinv/deptdataall.php?uid=1",
+            // "url": "https://devinv.efulife.com/deptdataall.php?uid=1",
             "method": "GET",
             "timeout": 0,
             };
