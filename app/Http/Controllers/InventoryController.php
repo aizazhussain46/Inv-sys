@@ -51,16 +51,21 @@ class InventoryController extends Controller
             return redirect()->back()->withErrors($validator);
         }
         $budget = Budget::where('subcategory_id', $request->subcategory_id)->first();
-        if($budget->consumed >= $budget->qty){
-            return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
+        if($budget){
+            if($budget->consumed >= $budget->qty){
+                return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
+            }
+            else{
+                $b_fields = array(
+                    'consumed' => $budget->consumed+1,
+                    'remaining' => $budget->remaining-1
+                );
+                $update = Budget::where('id',$budget->id)->update($b_fields);
+            }
         }
         else{
-            $b_fields = array(
-                'consumed' => $budget->consumed+1,
-                'remaining' => $budget->remaining-1
-            );
-            $update = Budget::where('id',$budget->id)->update($b_fields);
-        }
+            return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
+        }    
         
         $fields = $request->all();
         $create = Inventory::create($fields);
@@ -127,6 +132,21 @@ class InventoryController extends Controller
         $arr['good_condition'] = $request->good_condition;
         $arr['verification'] = $request->verification;
         $arr['purpose'] = $request->purpose;
+        $arr['po_number'] = $request->po_number;
+        $arr['warrenty_period'] = $request->warrenty_period;
+        $arr['insurance'] = $request->insurance;
+        $arr['licence_key'] = $request->licence_key;
+        $arr['sla'] = $request->sla;
+        $arr['warrenty_check'] = $request->warrenty_check;
+        $arr['operating_system'] = $request->operating_system;
+        $arr['SAP_tag'] = $request->SAP_tag;
+        $arr['capacity'] = $request->capacity;
+        $arr['hard_drive'] = $request->hard_drive;
+        $arr['processor'] = $request->processor;
+        $arr['process_generation'] = $request->process_generation;
+        $arr['display_type'] = $request->display_type;
+        $arr['DVD_rom'] = $request->DVD_rom;
+        $arr['RAM'] = $request->RAM;
 
         $update = Inventory::where('id', $id)->update($arr);
         if($update){
