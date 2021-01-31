@@ -8,6 +8,10 @@ use App\Grn;
 use App\Gin;
 use App\Inventory;
 use App\Employee;
+use App\Category;
+use App\Type;
+use App\Year;
+use App\Budgetitem as Budget;
 class PDFController extends Controller
 {
     public function generatePDF()
@@ -56,5 +60,41 @@ class PDFController extends Controller
         $pdf = PDF::loadView('ginreport', $data);
   
         return $pdf->download($gin->gin_no.'.pdf');
+    }
+    public function budgetexport($data) 
+    {
+        $budget = Budget::where('year_id', $data)->first();
+        
+        if(!empty($budget)){
+            
+            $types = Type::all();
+            foreach($types as $type){
+            $category = Category::where('status',1)->get();
+            foreach($category as $cat){                
+                $cat['unit_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('unit_price_dollar');
+                $cat['unit_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('unit_price_pkr');
+                $cat['total_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('total_price_dollar');
+                $cat['total_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('total_price_pkr');
+                $cat['consumed'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('consumed');
+                $cat['remaining'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('remaining');
+                }
+            $type->categories = $category;    
+            }
+        }
+        $year = Year::find($data);
+        $pdf = PDF::loadView('summaryreport', ['types'=>$types, 'year'=>$year->year]);
+        return $pdf->download('Summaryreport_'.$year->year.'.pdf');
+    }
+    public function itemexport($data) 
+    {
+        $filters = json_decode($data);
+        $types = Type::all();
+        foreach($types as $type){
+        $type->budgets = Budget::where('year_id', $filters->yearid)->where('category_id',$filters->catid)->where('type_id',$type->id)->get();
+        }
+        $year = Year::find($filters->yearid);
+        $category = Category::find($filters->catid);
+        $pdf = PDF::loadView('itemsreport', ['types'=>$types, 'year'=>$year->year, 'category'=>$category->category_name]);
+        return $pdf->download($category->category_name.'_report_'.$year->year.'.pdf');
     }
 }

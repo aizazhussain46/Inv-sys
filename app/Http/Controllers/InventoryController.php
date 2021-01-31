@@ -18,6 +18,7 @@ use App\User;
 use App\Makee;
 use App\Vendor;
 use App\Employee;
+use App\Budgetitem as Budget;
 class InventoryController extends Controller
 {
     public function __construct()
@@ -43,12 +44,24 @@ class InventoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|not_in:0',
             'subcategory_id' => 'required|not_in:0',
-            'product_sn' => 'required',
+            'product_sn' => 'required|unique:inventories',
             'item_price' => 'required'   
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
+        $budget = Budget::where('subcategory_id', $request->subcategory_id)->first();
+        if($budget->consumed >= $budget->qty){
+            return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
+        }
+        else{
+            $b_fields = array(
+                'consumed' => $budget->consumed+1,
+                'remaining' => $budget->remaining-1
+            );
+            $update = Budget::where('id',$budget->id)->update($b_fields);
+        }
+        
         $fields = $request->all();
         $create = Inventory::create($fields);
         if($create){
@@ -83,7 +96,7 @@ class InventoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|not_in:0',
             'subcategory_id' => 'required|not_in:0',
-            'product_sn' => 'required',
+            'product_sn' => 'required|unique:inventories',
             'item_price' => 'required'   
         ]);
         if ($validator->fails()) {

@@ -20,6 +20,7 @@ class CreateBudgetitemsTable extends Migration
             $table->integer('subcategory_id')->nullable();
             $table->integer('type_id')->nullable();
             $table->integer('dept_id')->nullable();
+            $table->string('dept_branch_type')->nullable();
             $table->string('department')->nullable();
             $table->integer('year_id')->nullable();
             $table->text('description')->nullable();

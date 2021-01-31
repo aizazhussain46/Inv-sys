@@ -12,8 +12,9 @@
                         </div>
                     @endif
         
-                    <div class="row justify-content-center"> 
-                    
+                    <div class="row"> 
+                    <div class="col-md-3 col-lg-3">
+                    </div>
                     <div class="col-md-6 col-lg-6">
                        
                             <div class="card mt-3">
@@ -48,14 +49,54 @@
                                           
                                 </div>
                             </div>
-                        </div>   
-                    </div>   
+                        </div> 
+                        <div class="col-md-3 col-lg-3">
+                            @if(empty($types))
+                            @else
+                            <a class="btn btn-danger mt-3 mb-1 float-right" href="{{ url('budgetexport/'.$filter) }}">Print <i class="fa fa-download" aria-hidden="true"></i></a>
+                            @endif
+                    </div>  
+                    </div>
+                    @if(empty($types))
+                    <div class="card mb-4 mt-3">
+                            <div class="card-body">                            
+                            <span class="text-danger">{{ $errors->first('inv_id') }}</span>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No</th>
+                                                <th>Category</th>
+                                                <th>Price Unit $</th>
+                                                <th>Price Unit PKR</th>
+                                                <th>Price Total $</th>
+                                                <th>Price Total PKR</th>
+                                                <th>Consumed</th>
+                                                <th>Remaining</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+                    </div>                    
+                    @else
+                    @foreach($types as $type)   
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
-                            @if(empty($categories))
-                            @else
-                            <a class="btn btn-danger mb-1 float-right" href="{{ url('budgetexport/'.$filter) }}">Export <i class="fa fa-download" aria-hidden="true"></i></a>
-                            @endif
+                            <h3><u>{{ $type->type }}</u></h3>
+                            
                             <span class="text-danger">{{ $errors->first('inv_id') }}</span>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" width="100%" cellspacing="0">
@@ -80,7 +121,7 @@
                                         $total_b_d = 0;
                                         $total_b_p = 0;
                                         ?>
-                                        @foreach ($categories as $budget)
+                                        @foreach ($type->categories as $budget)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $budget->category_name }}</td>
@@ -114,6 +155,8 @@
                                 </div>
                             </div>
                         </div> 
+                    @endforeach 
+                    @endif   
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

@@ -25,7 +25,7 @@
                                         @method('PUT') 
                                         @csrf
                                         <div class="form-row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="category">Category</label>
                                                 <select class="custom-select category" id="category" name="category_id">
@@ -41,7 +41,7 @@
                                                 <span class="small text-danger">{{ $errors->first('category_id') }}</span>
                                             </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="subcategory">Sub Category</label>
                                                 <select class="custom-select subcategory" id="subcategory" name="sub_cat_id">
@@ -54,7 +54,17 @@
                                                 <span class="small text-danger">{{ $errors->first('sub_cat_id') }}</span>
                                             </div>
                                             </div>                                             
-                                            
+                                            <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="dept_type">Dept/Branch type</label>
+                                                <select class="custom-select" id="dept_type" name="dept_branch_type">
+                                                    <option value=0>Select type here</option>
+                                                    <option value="department">Department</option>
+                                                    <option value="branch">Branch</option>
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('dept_branch_type') }}</span>
+                                            </div>
+                                            </div> 
                                         </div>
 
                                         <div class="form-row">
