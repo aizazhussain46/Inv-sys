@@ -197,6 +197,121 @@
                                         <div class="form-row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
+                                                    <label class="small mb-1" for="po">PO Number</label>
+                                                    <input class="form-control py-2" id="po" name="po_number" type="text" placeholder="Enter PO Number here" />
+                                                    <span class="small text-danger">{{ $errors->first('po_number') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Warrenty">Warrenty Period</label>
+                                                    <input class="form-control py-2" id="Warrenty" name="warrenty_period" type="text" placeholder="Enter Warrenty Period here" />
+                                                    <span class="small text-danger">{{ $errors->first('warrenty_period') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Insurance">Insurance</label>
+                                                    <input class="form-control py-2" id="Insurance" name="insurance" type="text" placeholder="Enter Insurance here" />
+                                                    <span class="small text-danger">{{ $errors->first('insurance') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="licence">Licence Key</label>
+                                                    <input class="form-control py-2" id="licence" name="licence_key" type="text" placeholder="Enter Licence Key here" />
+                                                    <span class="small text-danger">{{ $errors->first('licence_key') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="SLA">SLA</label>
+                                                    <input class="form-control py-2" id="SLA" name="sla" type="text" placeholder="Enter SLA here" />
+                                                    <span class="small text-danger">{{ $errors->first('sla') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="warrentycheck">Warrenty Check</label>
+                                                    <input class="form-control py-2" id="warrentycheck" name="warrenty_check" type="text" placeholder="Enter Warrenty Check here" />
+                                                    <span class="small text-danger">{{ $errors->first('warrenty_check') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="operating_system">Operating System</label>
+                                                    <input class="form-control py-2" id="operating_system" name="operating_system" type="text" placeholder="Enter Operating System here" />
+                                                    <span class="small text-danger">{{ $errors->first('operating_system') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="SAP_tag">SAP Tag</label>
+                                                    <input class="form-control py-2" id="SAP_tag" name="SAP_tag" type="text" placeholder="Enter SAP Tag here" />
+                                                    <span class="small text-danger">{{ $errors->first('SAP_tag') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Capacity">Capacity</label>
+                                                    <input class="form-control py-2" id="Capacity" name="capacity" type="text" placeholder="Enter Capacity here" />
+                                                    <span class="small text-danger">{{ $errors->first('capacity') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="hard_drive">Hard Drive</label>
+                                                    <input class="form-control py-2" id="hard_drive" name="hard_drive" type="text" placeholder="Enter Hard Drive here" />
+                                                    <span class="small text-danger">{{ $errors->first('hard_drive') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Processor">Processor</label>
+                                                    <input class="form-control py-2" id="Processor" name="processor" type="text" placeholder="Enter Processor here" />
+                                                    <span class="small text-danger">{{ $errors->first('processor') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="process_generation">Process Generation</label>
+                                                    <input class="form-control py-2" id="process_generation" name="process_generation" type="text" placeholder="Enter Process Generation here" />
+                                                    <span class="small text-danger">{{ $errors->first('process_generation') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="display_type">Display Type</label>
+                                                    <input class="form-control py-2" id="display_type" name="display_type" type="text" placeholder="Enter Display Type here" />
+                                                    <span class="small text-danger">{{ $errors->first('display_type') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="DVD_rom">DVD Rom</label>
+                                                    <input class="form-control py-2" id="DVD_rom" name="DVD_rom" type="text" placeholder="Enter DVD Rom here" />
+                                                    <span class="small text-danger">{{ $errors->first('DVD_rom') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="RAM">RAM</label>
+                                                    <input class="form-control py-2" id="RAM" name="RAM" type="text" placeholder="Enter RAM here" />
+                                                    <span class="small text-danger">{{ $errors->first('RAM') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
                                                     <label class="small mb-1" for="invoice">Invoice Number</label>
                                                     <input class="form-control py-2" id="invoice" name="invoice_number" type="text" placeholder="Enter Invoice Number here" />
                                                     <span class="small text-danger">{{ $errors->first('invoice_number') }}</span>

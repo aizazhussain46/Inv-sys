@@ -42,6 +42,22 @@ class CreateInventoriesTable extends Migration
             $table->integer('issued_to')->nullable();
             $table->integer('issued_by')->nullable();
             $table->string('status')->nullable();
+            $table->string('po_number')->nullable();
+            $table->string('warrenty_period')->nullable();
+            $table->string('insurance')->nullable();
+            $table->string('licence_key')->nullable();
+            $table->string('sla')->nullable();
+            $table->string('warrenty_check')->nullable();
+            $table->string('operating_system')->nullable();
+            $table->string('SAP_tag')->nullable();
+            $table->string('capacity')->nullable();
+            $table->string('hard_drive')->nullable();
+            $table->string('processor')->nullable();
+            $table->string('process_generation')->nullable();
+            $table->string('display_type')->nullable();
+            $table->string('DVD_rom')->nullable();
+            $table->string('RAM')->nullable();
+
             $table->timestamps();
         });
     }

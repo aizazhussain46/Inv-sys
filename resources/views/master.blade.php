@@ -303,6 +303,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
+                    
                         {{ Auth::user()->name }}
                     </div>
                 </nav>
@@ -323,6 +324,14 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+
+    let link = '<?php echo \DB::table('links')->get()[0]->url;?>';
+
+    // "url": "https://devinv.efulife.com/branchdataall.php?uid=1",
+    // "url": "https://cloud.efulife.com:8080/devinv/empdata.php?uid="+emp_code,
+    // "url": "https://devinv.efulife.com/deptdataall.php?uid=1",
+
+    
     $("#show").click(function(){
         $("#form").attr({method:'GET', action:'{{ url("filter_inventory") }}'})
         $("#form").submit();
@@ -349,15 +358,14 @@ $(document).ready(function(){
             var emp_code = $('#emp_code').val();
             
             var settings = {
-            //"url": "https://cloud.efulife.com:8080/devinv/empdata.php?uid="+emp_code,
-            "url": "https://devinv.efulife.com/empdata.php?uid="+emp_code,
+                
+            "url": link + "empdata.php?uid="+emp_code,
             "method": "GET",
             "timeout": 0,
             };
             $.ajax(settings).done(function (response) {
                 if(response.Login != null){
                     var res = response.Login[0];
-                    console.log(response);
                     $('#name').val(res.EMPLOYEE_NAME);
                     $('#designation').val(res.DESIGNATION);
                     $('#department').val(res.DEPARTMENT);
@@ -386,7 +394,6 @@ $(document).ready(function(){
             "timeout": 0,
             };
             $.ajax(settings).done(function (response) {
-                //console.log(response);
                 if(response != 0){
                     var res = response;
                     $('#name').val(res.name);
@@ -406,8 +413,7 @@ $(document).ready(function(){
     });    
 
     var settings = {
-            //"url": "https://cloud.efulife.com:8080/devinv/branchdataall.php?uid=1",
-            "url": "https://devinv.efulife.com/branchdataall.php?uid=1",
+            "url": link + "branchdataall.php?uid=1",
             "method": "GET",
             "timeout": 0,
             };
@@ -458,8 +464,7 @@ $(document).ready(function(){
 
 
     var settings = {
-            //"url": "https://cloud.efulife.com:8080/devinv/deptdataall.php?uid=1",
-            "url": "https://devinv.efulife.com/deptdataall.php?uid=1",
+            "url": link + "deptdataall.php?uid=1",
             "method": "GET",
             "timeout": 0,
             };
