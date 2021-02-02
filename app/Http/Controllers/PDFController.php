@@ -97,4 +97,11 @@ class PDFController extends Controller
         $pdf = PDF::loadView('itemsreport', ['types'=>$types, 'year'=>$year->year, 'category'=>$category->category_name]);
         return $pdf->download($category->category_name.'_report_'.$year->year.'.pdf');
     }
+    public function inventoryexport($data) 
+    {
+            $fields = (array)json_decode($data);
+            $inventories = Inventory::where([[$fields]])->orderBy('id', 'desc')->get();
+            $pdf = PDF::loadView('inventoryreport', ['inventories'=>$inventories]);
+            return $pdf->download('inventoryreport.pdf');
+    }
 }

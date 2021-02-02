@@ -25,7 +25,7 @@ class CreateInventoriesTable extends Migration
             $table->integer('make_id')->nullable();
             $table->integer('vendor_id')->nullable();
             $table->string('device_type_id')->nullable();
-            $table->string('inventory_type_id')->nullable();
+            $table->string('inventorytype_id')->nullable();
             $table->string('product_sn')->nullable();
             $table->string('purchase_date')->nullable();
             $table->string('item_nature_id')->nullable();
