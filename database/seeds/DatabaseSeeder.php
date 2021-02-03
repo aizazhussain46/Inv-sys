@@ -16,6 +16,12 @@ class DatabaseSeeder extends Seeder
             'role' => 'Admin'
         ]);
 
+         \DB::table('links')->insert([
+            'url' => 'https://devinv.efulife.com/'
+        ]);
+
+        
+
         \DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
