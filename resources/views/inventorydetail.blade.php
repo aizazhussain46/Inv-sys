@@ -6,7 +6,11 @@
     height: 30px; 
     padding: 0px 10px;
 }
-</style>
+.secondary-table tr th, .secondary-table tr td{
+    border: 1px solid aquamarine;
+    }
+
+    </style>
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
@@ -22,7 +26,7 @@
                                 <table class="table table-borderless">
                                     <tr>
                                         <td>
-                                        <table class="table table-bordered">
+                                        <table class="table secondary-table">
                                         <tbody>                                   
                                             <tr>
                                                 <td>
@@ -105,7 +109,7 @@
                                                 <td>
                                                     Purchase Date
                                                 </td>                  
-                                                <td>{{ date('Y-m-d', $inventory->purchase_date) }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($inventory->purchase_date)) }}</td>
                                             </tr>
                                             <tr>  
                                                 <td>
@@ -164,7 +168,7 @@
                                 </table>
                                         </td>                    
                                         <td>
-                                        <table class="table table-bordered">
+                                        <table class="table secondary-table">
                                         <tbody>                                   
                                             <tr>
                                                 <td>
@@ -185,7 +189,7 @@
                                                 <td>
                                                     Delivery Challan Date
                                                 </td>                  
-                                                <td>{{ date('Y-m-d',$inventory->delivery_challan_date) }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($inventory->delivery_challan_date)) }}</td>
                                                 
                                             </tr>
                                             <tr>  
@@ -199,7 +203,7 @@
                                                 <td>
                                                     Invoice Date
                                                 </td>                  
-                                                <td>{{ date('Y-m-d',$inventory->invoice_date) }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($inventory->invoice_date)) }}</td>
                                                 
                                             </tr>
                                             <tr>  

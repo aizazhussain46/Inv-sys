@@ -27,6 +27,15 @@
                 </td>
             </tr>
         </table>
+        <?php
+ $grand_u_d = 0; 
+ $grand_u_p = 0; 
+ $grand_t_d = 0; 
+ $grand_t_p = 0; 
+ $grand_c = 0; 
+ $grand_r = 0;
+ $grand_qty = 0;
+ ?> 
 @foreach($types as $type)   
 <div class="card mb-4 mt-3">
                             <div class="card-body">
@@ -104,6 +113,37 @@
                                 </div>
                             </div>
                         </div> 
+<?php
+$grand_u_d += $unit_b_d; 
+$grand_u_p += $unit_b_p; 
+$grand_t_d += $total_b_d; 
+$grand_t_p += $total_b_p; 
+$grand_c += $t_consume; 
+$grand_r += $t_rem;
+$grand_qty = $qty;
+ ?>  
                     @endforeach
+                    <table class="secondary-table" style="margin-top:30px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Grand Total</th>
+                                                <th>Price Unit</th>
+                                                <th>Qty</th>
+                                                <th>Price Total</th>
+                                                <th>Consumed</th>
+                                                <th>Rem</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                                <tr>
+                                                <th class="text-center">Grand Total</th>
+                                                <td>{{ $grand_u_d }}$/<br>Rs{{ $grand_u_p }}</td>
+                                                <td>{{ $grand_qty }}</td>
+                                                <td>{{ $grand_t_d }}$/<br>Rs{{ $grand_t_p }}</td>
+                                                <td>{{ $grand_c }}</td>
+                                                <td>{{ $grand_r }}</td> 
+                                                </tr>
+                                        </tbody>   
+                    </table>            
 </body>
 </html>

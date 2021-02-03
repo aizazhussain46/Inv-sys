@@ -148,7 +148,7 @@ class FormController extends Controller
         return view('add_vendor');
     }
     public function issue_inventory(){
-        $inventory = Inventory::where('issued_to', NULL)->where('status', 1)->orderBy('id', 'desc')->get();
+        $inventory = Inventory::where('issued_to', NULL)->whereIn('status', [1,2])->orderBy('id', 'desc')->get();
         return view('issue_inventory', ['inventories' => $inventory]);
     }
     public function submitt_issue(Request $request){
@@ -173,7 +173,7 @@ class FormController extends Controller
         return redirect()->back()->with('msg','Inventory issued to '.$employee->name);
     }
     public function issue_with_gin(){
-        $inventory = Inventory::where('issued_to', NULL)->where('status', 2)->orderBy('id', 'desc')->get();
+        $inventory = Inventory::where('issued_to', NULL)->whereIn('status', [1,2])->orderBy('id', 'desc')->get();
         return view('issuewithgin', ['inventories' => $inventory]);
     }
     public function submit_gin(Request $request){
