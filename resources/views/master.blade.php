@@ -71,6 +71,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ url('get_grns') }}">GRN</a>
                                     <a class="nav-link" href="{{ url('get_gins') }}">GIN</a>
+                                    <a class="nav-link" href="{{ url('show_inventory_list') }}">Inventory report</a>
                                 </nav>
                             </div>
 

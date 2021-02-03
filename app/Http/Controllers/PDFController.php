@@ -97,4 +97,44 @@ class PDFController extends Controller
         $pdf = PDF::loadView('itemsreport', ['types'=>$types, 'year'=>$year->year, 'category'=>$category->category_name]);
         return $pdf->download($category->category_name.'_report_'.$year->year.'.pdf');
     }
+    public function inventoryexport($data) 
+    {
+            $fields = (array)json_decode($data);
+            $key = $fields['inout'][0]; 
+            $op = $fields['inout'][1]; 
+            $val = $fields['inout'][2];
+            unset($fields['inout']); 
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->where($key, $op, $val)
+                                        ->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $inventories = Inventory::where([[$fields]])->where($key, $op, $val)
+                                        ->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->where($key, $op, $val)
+                                        ->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->where($key, $op, $val)->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            //$inventories = Inventory::where([[$fields]])->orderBy('id', 'desc')->get();
+            $pdf = PDF::loadView('inventoryreport', ['inventories'=>$inventories]);
+            return $pdf->download('inventoryreport.pdf');
+    }
 }

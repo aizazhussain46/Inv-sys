@@ -8,7 +8,7 @@ class Inventory extends Model
 {
     protected $fillable = [
         'category_id',
-        'sub_cat_id',
+        'subcategory_id',
         'location_id',
         'department_id',
         'branch_id',
@@ -17,7 +17,7 @@ class Inventory extends Model
         'make_id',
         'vendor_id',
         'device_type_id',
-        'inventory_type_id',
+        'inventorytype_id',
         'product_sn',
         'purchase_date',
         'item_nature_id',
@@ -60,6 +60,7 @@ class Inventory extends Model
         'store:id,store_name',
         'model:id,model_name',
         'make:id,make_name',
+        'inventorytype:id,inventorytype_name',
         'vendor:id,vendor_name,contact_person'
     ];
 
@@ -98,5 +99,9 @@ class Inventory extends Model
     public function vendor()
     {
         return $this->belongsTo('App\Vendor');
+    }
+    public function inventorytype()
+    {
+        return $this->belongsTo('App\Inventorytype');
     }
 }

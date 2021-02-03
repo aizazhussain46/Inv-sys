@@ -95,10 +95,10 @@
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="invtype">Inventory Type</label>
-                                                <select class="custom-select" id="invtype" name="inventory_type_id">
+                                                <select class="custom-select" id="invtype" name="inventorytype_id">
                                                     <option value=0>Select Inventory type here</option>
                                                     @foreach ($inventorytypes as $inventorytype)
-                                                    @if($inventorytype->id == $inventory->inventory_type_id)
+                                                    @if($inventorytype->id == $inventory->inventorytype_id)
                                                     <option value="{{ $inventorytype->id }}" selected>{{ $inventorytype->inventorytype_name }}</option>
                                                     @else
                                                     <option value="{{ $inventorytype->id }}">{{ $inventorytype->inventorytype_name }}</option>
@@ -106,7 +106,7 @@
                                                     @endforeach
 
                                                 </select>
-                                                <span class="small text-danger">{{ $errors->first('inventory_type_id') }}</span>
+                                                <span class="small text-danger">{{ $errors->first('inventorytype_id') }}</span>
                                             </div>
                                             </div>
                                         </div>

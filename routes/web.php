@@ -118,3 +118,6 @@ Route::get('generate-pdf','PDFController@generatePDF');
 
 Route::get('budgetexport/{data}','PDFController@budgetexport');
 Route::get('itemexport/{data}','PDFController@itemexport');
+
+Route::get('/show_inventory_list', 'ReportController@show_inventory');
+Route::get('inventoryexport/{data}','PDFController@inventoryexport');

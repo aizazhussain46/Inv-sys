@@ -50,24 +50,25 @@ class InventoryController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-        $budget = Budget::where('subcategory_id', $request->subcategory_id)->first();
-        if($budget){
-            if($budget->consumed >= $budget->qty){
-                return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
-            }
-            else{
-                $b_fields = array(
-                    'consumed' => $budget->consumed+1,
-                    'remaining' => $budget->remaining-1
-                );
-                $update = Budget::where('id',$budget->id)->update($b_fields);
-            }
-        }
-        else{
-            return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
-        }    
+        // $budget = Budget::where('subcategory_id', $request->subcategory_id)->first();
+        // if($budget){
+        //     if($budget->consumed >= $budget->qty){
+        //         return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
+        //     }
+        //     else{
+        //         $b_fields = array(
+        //             'consumed' => $budget->consumed+1,
+        //             'remaining' => $budget->remaining-1
+        //         );
+        //         $update = Budget::where('id',$budget->id)->update($b_fields);
+        //      }
+        // }
+        // else{
+        //     return redirect()->back()->with('msg', 'Selected item is out of stock in budget!');
+        // }    
         
         $fields = $request->all();
+        
         $create = Inventory::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Inventory Added Successfully!');
@@ -119,7 +120,7 @@ class InventoryController extends Controller
         $arr['make_id'] = $request->make_id;
         $arr['vendor_id'] = $request->vendor_id;
         $arr['device_type_id'] = $request->device_type_id;
-        $arr['inventory_type_id'] = $request->inventory_type_id;
+        $arr['inventorytype_id'] = $request->inventorytype_id;
         $arr['item_nature_id'] = $request->item_nature_id;
         $arr['purchase_date'] = $request->purchase_date;
         $arr['remarks'] = $request->remarks;
