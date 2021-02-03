@@ -88,6 +88,157 @@
                                                     <span class="small text-danger">{{ $errors->first('to_date') }}</span>
                                                 </td>
                                             </tr>
+                                            <tr>  
+                                                <td>
+                                                    Product SN
+                                                </td>                  
+                                                <td>
+                                                     <select class="custom-select field_size" name="product_sn">
+                                                    <option value="">All</option>
+                                                    @foreach ($productsns as $productsn)
+                                                    <option value="{{ $productsn->product_sn }}">{{ $productsn->product_sn }}</option>
+                                                    @endforeach
+                                                    </select>
+                                                    <span class="small text-danger">{{ $errors->first('product_sn') }}</span>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Make
+                                                </td>                  
+                                                <td>
+                                                    <select class="custom-select make field_size" id="make" name="make_id">
+                                                        <option value="">All</option>
+                                                        @foreach ($makes as $make)
+                                                        <option value="{{ $make->id }}">{{ $make->make_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <span class="small text-danger">{{ $errors->first('make_id') }}</span>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Model
+                                                </td>                  
+                                                <td>
+                                                    <select class="custom-select model field_size" id="model" name="model_id">
+                                                        <option value="">All</option>
+                                                        
+                                                    </select>
+                                                    <span class="small text-danger">{{ $errors->first('model_id') }}</span>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Store
+                                                </td>                  
+                                                <td>
+                                                <select class="custom-select field_size" id="store" name="store_id">
+                                                    <option value="">All</option>
+                                                    @foreach ($stores as $store)
+                                                    <option value="{{ $store->id }}">{{ $store->store_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('store_id') }}</span>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Item Nature
+                                                </td>                  
+                                                <td>
+                                                <select class="custom-select field_size" id="nature" name="item_nature_id">
+                                                    <option value="">All</option>
+                                                    @foreach ($itemnatures as $itemnature)
+                                                    <option value="{{ $itemnature->id }}">{{ $itemnature->itemnature_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('item_nature') }}</span>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Vendor
+                                                </td>                  
+                                                <td>
+                                                <select class="custom-select field_size" id="vendor" name="vendor_id">
+                                                    <option value="">All</option>
+                                                    @foreach ($vendors as $vendor)
+                                                    <option value="{{ $vendor->id }}">{{ $vendor->vendor_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('vendor_id') }}</span>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Purchase Date
+                                                </td>                  
+                                                <td>
+                                                <input class="form-control field_size" id="p_date" name="purchase_date" type="date" placeholder="Enter purchase date here" />
+                                                    <span class="small text-danger">{{ $errors->first('purchase_date') }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Warranty Check
+                                                </td>                  
+                                                <td>
+                                                <input class="form-control field_size" id="warrentycheck" name="warrenty_check" type="text" placeholder="Enter Warrenty Check here" />
+                                                    <span class="small text-danger">{{ $errors->first('warrenty_check') }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    Users
+                                                </td>                  
+                                                <td>
+                                                <select class="custom-select field_size" id="emp" name="issued_to">
+                                                    <option value="">All</option>
+                                                    @foreach ($employees as $employee)
+                                                    <option value="{{ $employee->emp_code }}">{{ $employee->emp_code.' - '.$employee->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('issued_to') }}</span>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>  
+                                                <td>
+                                                    From Issuance
+                                                </td>                  
+                                                <td>
+                                                    <input class="form-control field_size" name="from_issuance" type="date" placeholder="Enter date here" />
+                                                    <span class="small text-danger">{{ $errors->first('from_issuance') }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                    To Issuance
+                                                </td>                  
+                                                <td>
+                                                    <input class="form-control field_size" name="to_issuance" type="date" placeholder="Enter date here" />
+                                                    <span class="small text-danger">{{ $errors->first('to_issuance') }}</span>
+                                                </td>
+                                            </tr> -->
+                                            <tr>  
+                                                <td>
+                                                    In / Out
+                                                </td>                  
+                                                <td>
+                                                <select class="custom-select field_size" id="inout" name="inout">
+                                                    <option value="">All</option>
+                                                    <option value="in">Inventory IN</option>
+                                                    <option value="out">Inventory OUT</option>
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('issued_to') }}</span>
+                                                </td>
+                                            </tr>
                                             <tr>                    
                                                 <td colspan="2" class="text-right"><button type="submit" class="btn btn-primary">Show</button></td>
                                             </tr>    
@@ -99,14 +250,15 @@
                             </div>
                         </div> 
                         <div class="col-md-3 col-lg-3">
-                            @if(empty($inventories))
-                            @else
-                            <a class="btn btn-danger mt-3 mb-1 float-right" href="{{ url('inventoryexport/'.json_encode($filters)) }}">Print <i class="fa fa-download" aria-hidden="true"></i></a>
-                            @endif
+                            
                     </div>  
                     </div>
                         <div class="card mb-4 mt-5">
                             <div class="card-body">
+                            @if(empty($inventories))
+                            @else
+                            <a class="btn btn-danger mb-2 float-right" href="{{ url('inventoryexport/'.json_encode($filters)) }}">Print <i class="fa fa-download" aria-hidden="true"></i></a>
+                            @endif
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
