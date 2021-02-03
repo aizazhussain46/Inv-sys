@@ -15,7 +15,7 @@
                        
                             <div class="card mt-3">
                             <div class="card-header bg-primary text-white">
-                            Inventories
+                            Inventory Item Detail
                             </div>
                                 <div class="card-body">
                                 
@@ -28,9 +28,14 @@
                                                 <td>
                                                     Item Category
                                                 </td>                    
+                                                <td>{{ empty($inventory->category)?'':$inventory->category->category_name }}</td>
+                                                
+                                            </tr>
+                                            <tr>
                                                 <td>
-                                                    
-                                                </td>
+                                                    Sub Category
+                                                </td>                    
+                                                <td>{{ empty($inventory->subcategory)?'':$inventory->subcategory->sub_cat_name }}</td>
                                                 
                                             </tr>
 
@@ -38,98 +43,123 @@
                                                 <td>
                                                     Location
                                                 </td>                   
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ empty($inventory->subcategory)?'':$inventory->location->location }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Inventory Type
                                                 </td>                  
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ empty($inventory->subcategory)?'':$inventory->inventorytype->inventorytype_name }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Product SN
                                                 </td>                  
-                                                <td>
-                                                     
-                                                </td>
+                                                <td>{{ $inventory->product_sn }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Make
                                                 </td>                  
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ empty($inventory->make)?'':$inventory->make->make_name }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Model
                                                 </td>                  
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ empty($inventory->model)?'':$inventory->model->model_name }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Store
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ empty($inventory->store)?'':$inventory->store->store_name }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Item Nature
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ empty($inventory->itemnature)?'':$inventory->itemnature->itemnature_name }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Vendor
                                                 </td>                  
+                                                <td>{{ empty($inventory->vendor)?'':$inventory->vendor->vendor_name }}</td>
+                                                
+                                            </tr>
+                                            <tr>  
                                                 <td>
-                                                
-                                                </td>
-                                                
+                                                    Device Type
+                                                </td>                  
+                                                <td>{{ empty($inventory->devicetype)?'':$inventory->devicetype->devicetype_name }}</td>
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Purchase Date
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ date('Y-m-d', $inventory->purchase_date) }}</td>
                                             </tr>
                                             <tr>  
                                                 <td>
                                                     Warranty Check
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ $inventory->warrenty_check }}</td>
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Users
+                                                    Price
                                                 </td>                  
+                                                <td>{{ $inventory->item_price }}</td>
+                                            </tr> 
+
+
+                                            <tr>  
                                                 <td>
+                                                Insurance
+                                                </td>                  
+                                                <td>{{ $inventory->insurance }}</td>
                                                 
-                                                </td>
-                                            </tr>   
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                Licence Key
+                                                </td>                  
+                                                <td>{{ $inventory->licence_key }}</td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                SLA
+                                                </td>                  
+                                                <td>{{ $inventory->sla }}</td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                Operating System
+                                                </td>                  
+                                                <td>{{ $inventory->operating_system }}</td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                SAP Tag
+                                                </td>                  
+                                                <td>{{ $inventory->SAP_tag }}</td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                Capacity
+                                                </td>                  
+                                                <td>{{ $inventory->capacity }}</td>
+                                            </tr>  
                                         </tbody>
                                 </table>
                                         </td>                    
@@ -138,109 +168,127 @@
                                         <tbody>                                   
                                             <tr>
                                                 <td>
-                                                    Item Category
+                                                    Remarks
                                                 </td>                    
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ $inventory->remarks }}</td>
                                                 
                                             </tr>
 
                                             <tr>  
                                                 <td>
-                                                    Location
+                                                    Delivery Challan
                                                 </td>                   
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ $inventory->delivery_challan }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Inventory Type
+                                                    Delivery Challan Date
                                                 </td>                  
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ date('Y-m-d',$inventory->delivery_challan_date) }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Product SN
+                                                    Invoice Number
                                                 </td>                  
-                                                <td>
-                                                     
-                                                </td>
+                                                <td>{{ $inventory->invoice_number }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Make
+                                                    Invoice Date
                                                 </td>                  
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ date('Y-m-d',$inventory->invoice_date) }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Model
+                                                    Other Accessories
                                                 </td>                  
-                                                <td>
-                                                    
-                                                </td>
+                                                <td>{{ $inventory->other_accessories }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Store
+                                                    Purpose
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ $inventory->purpose }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Item Nature
+                                                    Good Condition
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ $inventory->good_condition }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Vendor
+                                                    Verification
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ $inventory->verification }}</td>
                                                 
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Purchase Date
+                                                    Issued To
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ empty($inventory->user)?'':$inventory->user->name }}</td>
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Warranty Check
+                                                    Po Number
                                                 </td>                  
-                                                <td>
-                                                
-                                                </td>
+                                                <td>{{ $inventory->po_number }}</td>
                                             </tr>
                                             <tr>  
                                                 <td>
-                                                    Users
+                                                    Warrenty Period
                                                 </td>                  
+                                                <td>{{ $inventory->warrenty_period }}</td>
+                                            </tr>
+
+
+
+                                            <tr>  
                                                 <td>
+                                                Hard Drive
+                                                </td>                  
+                                                <td>{{ $inventory->hard_drive }}</td>
                                                 
-                                                </td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                Processor
+                                                </td>                  
+                                                <td>{{ $inventory->processor }}</td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                Process Generation
+                                                </td>                  
+                                                <td>{{ $inventory->process_generation }}</td>
+                                                
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                Display Type
+                                                </td>                  
+                                                <td>{{ $inventory->display_type }}</td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                DVD Rom
+                                                </td>                  
+                                                <td>{{ $inventory->DVD_rom }}</td>
+                                            </tr>
+                                            <tr>  
+                                                <td>
+                                                RAM
+                                                </td>                  
+                                                <td>{{ $inventory->RAM }}</td>
                                             </tr>   
                                         </tbody>
                                 </table>        
