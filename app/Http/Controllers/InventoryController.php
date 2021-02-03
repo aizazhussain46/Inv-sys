@@ -167,8 +167,12 @@ class InventoryController extends Controller
 
     public function item_detail($id)
     {
-        $data['inventory'] = Inventory::find($id);
+        $inventory = Inventory::find($id);
+        $user = Employee::where('emp_code', $inventory->issued_to)->first();
+            if($user){
+                $inv['user'] = $user;
+            }
         //return $data;
-        return view('inventorydetail', $data);
+        return view('inventorydetail', ['inventory' => $inventory]);
     }
 }
