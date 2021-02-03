@@ -170,10 +170,10 @@ class BudgetController extends Controller
                 // $cat['unit_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('unit_price_dollar');
                                     // Grn::where('grn_no', $grn_no)->first()
                                     // Grn::whereRaw('to_char(grn_no) = '.$grn_no)->first()
-                $cat['unit_price_dollar'] = Budget::whereRaw('to_char(category_id) = '.$cat->id)
-                ->whereRaw('to_char(year_id) = '.$request->year_id)
-                ->whereRaw('to_char(type_id) = '.$type->type_id)
-                ->sum('unit_price_dollar');
+                // $cat['unit_price_dollar'] = Budget::whereRaw('to_char(category_id) = '.$cat->id)
+                // ->whereRaw('to_char(year_id) = '.$request->year_id)
+                // ->whereRaw('to_char(type_id) = '.$type->type_id)
+                // ->sum('unit_price_dollar');
 
                 $cat['unit_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('unit_price_pkr');
                 $cat['total_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('total_price_dollar');
