@@ -94,6 +94,20 @@ class ReportController extends Controller
         }
         //return $data;
         return view('show_inventorylist', $data);
-        
+    }
+    public function balance_report(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['locations'] = Location::all();
+        $data['stores'] = Store::all();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $data['inventories'] = array();
+        }
+        else{
+
+        }
+        return view('balancereport', $data);
     }
 }
