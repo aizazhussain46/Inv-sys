@@ -21,7 +21,7 @@ class GrnController extends Controller
         }
         
         $grn_no = date('dm').'001';
-        while(Grn::where('grn_no', $grn_no)->first()){
+        while(Grn::whereRaw('to_char(grn_no) = '.$grn_no)->first()){
             $grn_no++;
         }
         
