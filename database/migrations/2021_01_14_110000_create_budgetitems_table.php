@@ -25,13 +25,13 @@ class CreateBudgetitemsTable extends Migration
             $table->integer('year_id')->nullable();
             $table->text('description')->nullable();
             $table->text('remarks')->nullable();
-            $table->text('unit_price_dollar')->nullable();
-            $table->text('unit_price_pkr')->nullable();
-            $table->text('qty')->nullable();
-            $table->text('consumed')->nullable();
-            $table->text('remaining')->nullable();
-            $table->text('total_price_dollar')->nullable();
-            $table->text('total_price_pkr')->nullable();
+            $table->integer('unit_price_dollar')->nullable();
+            $table->integer('unit_price_pkr')->nullable();
+            $table->integer('qty')->nullable();
+            $table->integer('consumed')->nullable();
+            $table->integer('remaining')->nullable();
+            $table->integer('total_price_dollar')->nullable();
+            $table->integer('total_price_pkr')->nullable();
             $table->timestamps();
         });
     }
