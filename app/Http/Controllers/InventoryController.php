@@ -164,4 +164,11 @@ class InventoryController extends Controller
         return $find->delete() ? redirect()->back()->with('msg', 'Inventory Deleted Successfully!') : redirect()->back()->with('msg', 'Could not delete inventory, Try Again!');
 
     }
+
+    public function item_detail($id)
+    {
+        $data['inventory'] = Inventory::find($id);
+        //return $data;
+        return view('inventorydetail', $data);
+    }
 }

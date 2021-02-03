@@ -138,23 +138,23 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="type">Device Type</label>
-                                                <select class="custom-select" id="type" name="device_type_id">
+                                                <select class="custom-select" id="type" name="devicetype_id">
                                                     <option value=0>Select Device Type here</option>
                                                     @foreach ($devicetypes as $devicetype)
                                                     <option value="{{ $devicetype->id }}">{{ $devicetype->devicetype_name }}</option>
                                                     @endforeach
                                                 </select>
-                                                <span class="small text-danger">{{ $errors->first('device_type') }}</span>
+                                                <span class="small text-danger">{{ $errors->first('devicetype_id') }}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="nature">Item Nature</label>
-                                                <select class="custom-select" id="nature" name="item_nature_id">
+                                                <select class="custom-select" id="nature" name="itemnature_id">
                                                     <option value=0>Select Item Nature here</option>
                                                     @foreach ($itemnatures as $itemnature)
                                                     <option value="{{ $itemnature->id }}">{{ $itemnature->itemnature_name }}</option>
                                                     @endforeach
                                                 </select>
-                                                <span class="small text-danger">{{ $errors->first('item_nature') }}</span>
+                                                <span class="small text-danger">{{ $errors->first('itemnature_id') }}</span>
                                             </div>
                                             <div class="form-group">
                                                     <label class="small mb-1" for="p_date">Purchase Date</label>

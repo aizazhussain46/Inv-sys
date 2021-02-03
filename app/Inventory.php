@@ -16,11 +16,11 @@ class Inventory extends Model
         'model_id',
         'make_id',
         'vendor_id',
-        'device_type_id',
+        'devicetype_id',
         'inventorytype_id',
         'product_sn',
         'purchase_date',
-        'item_nature_id',
+        'itemnature_id',
         'item_price',
         'remarks',
         'delivery_challan',
@@ -61,7 +61,9 @@ class Inventory extends Model
         'model:id,model_name',
         'make:id,make_name',
         'inventorytype:id,inventorytype_name',
-        'vendor:id,vendor_name,contact_person'
+        'vendor:id,vendor_name,contact_person',
+        'itemnature:id,itemnature_name',
+        'devicetype:id,devicetype_name'
     ];
 
     public function category()
@@ -103,5 +105,13 @@ class Inventory extends Model
     public function inventorytype()
     {
         return $this->belongsTo('App\Inventorytype');
+    }
+    public function itemnature()
+    {
+        return $this->belongsTo('App\Itemnature');
+    }
+    public function devicetype()
+    {
+        return $this->belongsTo('App\Devicetype');
     }
 }

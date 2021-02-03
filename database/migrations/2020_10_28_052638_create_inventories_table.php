@@ -16,7 +16,7 @@ class CreateInventoriesTable extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->integer('category_id')->nullable();
-            $table->integer('sub_cat_id')->nullable();
+            $table->integer('subcategory_id')->nullable();
             $table->integer('location_id')->nullable();
             $table->integer('department_id')->nullable();
             $table->integer('branch_id')->nullable();
@@ -24,11 +24,11 @@ class CreateInventoriesTable extends Migration
             $table->integer('model_id')->nullable();
             $table->integer('make_id')->nullable();
             $table->integer('vendor_id')->nullable();
-            $table->string('device_type_id')->nullable();
+            $table->string('devicetype_id')->nullable();
             $table->string('inventorytype_id')->nullable();
             $table->string('product_sn')->nullable();
             $table->string('purchase_date')->nullable();
-            $table->string('item_nature_id')->nullable();
+            $table->string('itemnature_id')->nullable();
             $table->string('item_price')->nullable();
             $table->string('remarks')->nullable();
             $table->string('delivery_challan')->nullable();
