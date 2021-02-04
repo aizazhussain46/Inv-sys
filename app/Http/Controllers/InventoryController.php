@@ -45,7 +45,8 @@ class InventoryController extends Controller
             'category_id' => 'required|not_in:0',
             'subcategory_id' => 'required|not_in:0',
             'product_sn' => 'required|unique:inventories',
-            'item_price' => 'required'   
+            'item_price' => 'required',
+            'dollar_rate' => 'required'  
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
@@ -103,7 +104,8 @@ class InventoryController extends Controller
             'category_id' => 'required|not_in:0',
             'subcategory_id' => 'required|not_in:0',
             'product_sn' => 'required',
-            'item_price' => 'required'   
+            'item_price' => 'required',
+            'dollar_rate' => 'required'   
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
@@ -125,6 +127,7 @@ class InventoryController extends Controller
         $arr['purchase_date'] = $request->purchase_date;
         $arr['remarks'] = $request->remarks;
         $arr['item_price'] = $request->item_price;
+        $arr['dollar_rate'] = $request->dollar_rate;
         $arr['delivery_challan'] = $request->delivery_challan;
         $arr['delivery_challan_date'] = $request->delivery_challan_date;
         $arr['invoice_number'] = $request->invoice_number;

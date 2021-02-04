@@ -113,6 +113,7 @@
                                                 <th>Category</th>
                                                 <th>Sub Category</th>
                                                 <th>Price</th>
+                                                <th>Dollar Rate</th>
                                                 <th>Created at</th>
                                             </tr>
                                         </thead>
@@ -133,7 +134,8 @@
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
                                                 <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
                                                 <td>{{ $inventory->subcategory_id?$inventory->subcategory->sub_cat_name:'' }}</td>
-                                                <td class='text-align-right'>{{ $inventory->item_price }}</td>
+                                                <td class='text-align-right'>{{ number_format($inventory->item_price,2) }}</td>
+                                                <td class='text-align-right'>{{ number_format($inventory->dollar_rate,2) }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
                                             </tr>
                                         @endforeach    

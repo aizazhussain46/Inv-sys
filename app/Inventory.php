@@ -22,6 +22,7 @@ class Inventory extends Model
         'purchase_date',
         'itemnature_id',
         'item_price',
+        'dollar_rate',
         'remarks',
         'delivery_challan',
         'delivery_challan_date',

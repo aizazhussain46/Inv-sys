@@ -121,9 +121,14 @@
                                                 <td>
                                                     Price
                                                 </td>                  
-                                                <td>{{ $inventory->item_price }}</td>
+                                                <td>{{ number_format($inventory->item_price,2) }}</td>
                                             </tr> 
-
+                                            <tr>  
+                                                <td>
+                                                    Dollar Rate
+                                                </td>                  
+                                                <td>{{ number_format($inventory->dollar_rate,2) }}</td>
+                                            </tr>
 
                                             <tr>  
                                                 <td>

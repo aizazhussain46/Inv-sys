@@ -243,6 +243,13 @@
                                         <div class="form-row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
+                                                    <label class="small mb-1" for="rate">Dollar Rate</label>
+                                                    <input class="form-control py-2" id="rate" name="dollar_rate" type="number" value="{{ $inventory->dollar_rate }}" placeholder="Enter dollar rate here" />
+                                                    <span class="small text-danger">{{ $errors->first('dollar_rate') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
                                                     <label class="small mb-1" for="po">PO Number</label>
                                                     <input class="form-control py-2" id="po" name="po_number" type="text" value="{{ $inventory->po_number }}" placeholder="Enter PO Number here" />
                                                     <span class="small text-danger">{{ $errors->first('po_number') }}</span>
@@ -253,13 +260,6 @@
                                                     <label class="small mb-1" for="Warrenty">Warrenty Period</label>
                                                     <input class="form-control py-2" id="Warrenty" name="warrenty_period" type="text" value="{{ $inventory->warrenty_period }}" placeholder="Enter Warrenty Period here" />
                                                     <span class="small text-danger">{{ $errors->first('warrenty_period') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="small mb-1" for="Insurance">Insurance</label>
-                                                    <input class="form-control py-2" id="Insurance" name="insurance" type="text" value="{{ $inventory->insurance }}" placeholder="Enter Insurance here" />
-                                                    <span class="small text-danger">{{ $errors->first('insurance') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -370,6 +370,13 @@
                                                     <label class="small mb-1" for="invoice_date">Invoice Date</label>
                                                     <input class="form-control py-2" id="invoice_date" name="invoice_date" type="date" value="{{ $inventory->invoice_date }}" placeholder="Enter Invoice Date here" />
                                                     <span class="small text-danger">{{ $errors->first('invoice_date') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="Insurance">Insurance</label>
+                                                    <input class="form-control py-2" id="Insurance" name="insurance" type="text" value="{{ $inventory->insurance }}" placeholder="Enter Insurance here" />
+                                                    <span class="small text-danger">{{ $errors->first('insurance') }}</span>
                                                 </div>
                                             </div>
                                         </div>

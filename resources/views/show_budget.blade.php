@@ -118,9 +118,9 @@
                                                 <td>{{ $budget->type_id?$budget->type->type:'' }}</td>
                                                 <td>{{ $budget->department }}</td>
                                                 <td>{{ $budget->remarks }}</td>
-                                                <td>{{ $budget->unit_price_dollar }}$/<br>Rs{{ $budget->unit_price_pkr }}</td>
+                                                <td>{{ number_format($budget->unit_price_dollar,2) }}$/<br>Rs{{ number_format($budget->unit_price_pkr,2) }}</td>
                                                 <td class='text-align-right'>{{ $budget->qty }}</td>
-                                                <td>{{ $budget->unit_price_dollar*$budget->qty }}$/<br>Rs{{ $budget->unit_price_pkr*$budget->qty }}</td>
+                                                <td>{{ number_format($budget->unit_price_dollar*$budget->qty,2) }}$/<br>Rs{{ number_format($budget->unit_price_pkr*$budget->qty,2) }}</td>
                                                 
                                                 <td class='text-align-right'>{{ $budget->consumed }}</td>
                                                 <td class='text-align-right'>{{ $budget->remaining }}</td>
@@ -158,9 +158,9 @@
                                         <tfoot>
                                             <tr>
                                                 <th colspan='7' style="text-align:right;">Total</th>
-                                                <td>{{ $unit_b_d }}$/<br>Rs{{ $unit_b_p }}</td>
+                                                <td>{{ number_format($unit_b_d,2) }}$/<br>Rs{{ number_format($unit_b_p,2) }}</td>
                                                 <td>{{ $qty }}</td>
-                                                <td>{{ $total_b_d }}$/<br>Rs{{ $total_b_p }}</td>
+                                                <td>{{ number_format($total_b_d,2) }}$/<br>Rs{{ number_format($total_b_p,2) }}</td>
                                                 <td>{{ $t_consume }}</td>
                                                 <td>{{ $t_rem }}</td>
                                                 <td></td>

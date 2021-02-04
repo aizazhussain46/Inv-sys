@@ -70,10 +70,10 @@
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $budget->category_name }}</td>
-                                                <td>{{ $budget->unit_price_dollar }}$</td>
-                                                <td>Rs{{ $budget->unit_price_pkr }}</td>
-                                                <td>{{ $budget->total_price_dollar }}$</td>
-                                                <td>Rs{{ $budget->total_price_pkr }}</td>
+                                                <td>{{ number_format($budget->unit_price_dollar,2) }}$</td>
+                                                <td>Rs{{ number_format($budget->unit_price_pkr,2) }}</td>
+                                                <td>{{ number_format($budget->total_price_dollar,2) }}$</td>
+                                                <td>Rs{{ number_format($budget->total_price_pkr,2) }}</td>
                                                 <td>{{ $budget->consumed }}</td>
                                                 <td>{{ $budget->remaining }}</td>
                                             </tr>
@@ -90,10 +90,10 @@
                                         <tfoot>
                                             <tr>
                                                 <th colspan='2' style="text-align:right;">Total</th>
-                                                <td>{{ $unit_b_d }}$</td>
-                                                <td>Rs{{ $unit_b_p }}</td>
-                                                <td>{{ $total_b_d }}$</td>
-                                                <td>Rs{{ $total_b_p }}</td>
+                                                <td>{{ number_format($unit_b_d,2) }}$</td>
+                                                <td>Rs{{ number_format($unit_b_p,2) }}</td>
+                                                <td>{{ number_format($total_b_d,2) }}$</td>
+                                                <td>Rs{{ number_format($total_b_p,2) }}</td>
                                                 <td>{{ $total_c }}</td>
                                                 <td>{{ $total_r }}</td>
                                             </tr>
@@ -129,10 +129,10 @@ $grand_r += $total_r;
                 <th class="text-center">
                     Grand Total
                 </th>
-                <td>{{ $grand_u_d }}$</td>
-                <td>Rs{{ $grand_u_p }}</td>
-                <td>{{ $grand_t_d }}$</td>
-                <td>Rs{{ $grand_t_p }}</td>
+                <td>{{ number_format($grand_u_d,2) }}$</td>
+                <td>Rs{{ number_format($grand_u_p,2) }}</td>
+                <td>{{ number_format($grand_t_d,2) }}$</td>
+                <td>Rs{{ number_format($grand_t_p,2) }}</td>
                 <td>{{ $grand_c }}</td>
                 <td>{{ $grand_r }}</td>
             </tr>

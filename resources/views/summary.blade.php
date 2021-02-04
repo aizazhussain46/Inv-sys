@@ -125,10 +125,10 @@
                                             <tr>
                                                 <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $budget->category_name }}</td>
-                                                <td class='text-align-right'>{{ $budget->unit_price_dollar }}$</td>
-                                                <td class='text-align-right'>Rs{{ $budget->unit_price_pkr }}</td>
-                                                <td class='text-align-right'>{{ $budget->total_price_dollar }}$</td>
-                                                <td class='text-align-right'>Rs{{ $budget->total_price_pkr }}</td>
+                                                <td class='text-align-right'>{{ number_format($budget->unit_price_dollar,2) }}$</td>
+                                                <td class='text-align-right'>Rs{{ number_format($budget->unit_price_pkr,2) }}</td>
+                                                <td class='text-align-right'>{{ number_format($budget->total_price_dollar,2) }}$</td>
+                                                <td class='text-align-right'>Rs{{ number_format($budget->total_price_pkr,2) }}</td>
                                                 <td class='text-align-right'>{{ $budget->consumed }}</td>
                                                 <td class='text-align-right'>{{ $budget->remaining }}</td>
                                             </tr>
@@ -143,10 +143,10 @@
                                         <tfoot>
                                             <tr>
                                                 <th colspan='2' style="text-align:right;">Grand Total</th>
-                                                <td>{{ $unit_b_d }}$</td>
-                                                <td>Rs{{ $unit_b_p }}</td>
-                                                <td>{{ $total_b_d }}$</td>
-                                                <td>Rs{{ $total_b_p }}</td>
+                                                <td>{{ number_format($unit_b_d,2) }}$</td>
+                                                <td>Rs{{ number_format($unit_b_p,2) }}</td>
+                                                <td>{{ number_format($total_b_d,2) }}$</td>
+                                                <td>Rs{{ number_format($total_b_p,2) }}</td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
