@@ -102,7 +102,7 @@ class InventoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|not_in:0',
             'subcategory_id' => 'required|not_in:0',
-            'product_sn' => 'required|unique:inventories',
+            'product_sn' => 'required',
             'item_price' => 'required'   
         ]);
         if ($validator->fails()) {
