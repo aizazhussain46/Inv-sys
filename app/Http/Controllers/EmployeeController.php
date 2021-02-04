@@ -34,8 +34,12 @@ class EmployeeController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
+        
         $fields = $request->all();
+        if($fields['branch_id'] != 0){
+            $fields['dept_id'] = $fields['branch_id'];
+            $fields['department'] = $fields['branch'];
+        }
         $create = Employee::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Employee Added Successfully!');
