@@ -67,8 +67,8 @@
                                         <?php $i = 1; ?>
                                         @foreach ($gins as $gin)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
-                                                <td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
+                                                <td class='text-align-right'>
                                                 @if(isset($range))
                                                 <a href="{{ url('generate-gin/'.$gin->id.'/'.$range['from'].'/'.$range['to']) }}">{{ $gin->gin_no }}</a>
                                                 @else

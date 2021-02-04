@@ -38,7 +38,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($itemnatures as $itemnature)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $itemnature->itemnature_name }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($itemnature->created_at)) }}</td>
                                                 <td>{{ $itemnature->status == 1?'Active':'Inactive' }}</td>

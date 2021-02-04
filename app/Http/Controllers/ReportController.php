@@ -106,8 +106,9 @@ class ReportController extends Controller
             $data['inventories'] = array();
         }
         else{
-
+            $data['inventories'] = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
         }
-        return view('balancereport', $data);
+
+        //return view('balancereport', $data);
     }
 }

@@ -40,7 +40,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($subcategories as $subcategory)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $subcategory->sub_cat_name }}</td>
                                                 <td>{{ $subcategory->threshold }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($subcategory->created_at)) }}</td>

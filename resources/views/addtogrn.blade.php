@@ -51,7 +51,7 @@
                                                 <td>{{ $inventory->model_id?$inventory->model->model_name:'' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
                                                 <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
-                                                <td>{{ $inventory->item_price }}</td>
+                                                <td class='text-align-right'>{{ $inventory->item_price }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
                                             </tr>
                                         @endforeach    

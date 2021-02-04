@@ -37,7 +37,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($types as $type)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $type->type }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($type->created_at)) }}</td>
                                                 <td class="text-center">

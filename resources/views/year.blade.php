@@ -37,7 +37,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($years as $year)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $year->year }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($year->created_at)) }}</td>
                                                 <td class="text-center">

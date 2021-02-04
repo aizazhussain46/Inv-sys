@@ -42,7 +42,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($vendors as $vendor)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $vendor->vendor_name }}</td>
                                                 <td>{{ $vendor->address }}</td>
                                                 <td>{{ $vendor->contact_person }}</td>

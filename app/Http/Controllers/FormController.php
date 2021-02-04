@@ -149,36 +149,35 @@ class FormController extends Controller
     }
     public function issue_inventory(){
         $inventory = Inventory::where('issued_to', NULL)->whereIn('status', [1,2])->orderBy('id', 'desc')->get();
-        return view('issue_inventory', ['inventories' => $inventory]);
+        $year = Year::where('locked', null)->get();
+        return view('issue_inventory', ['years'=> $year,'inventories' => $inventory]);
     }
     public function submitt_issue(Request $request){
         
         $validator = Validator::make($request->all(), [
             'inv_id' => 'required',
-            'employee_code' => 'required'  
+            'employee_code' => 'required',
+            'year_id' => 'required'  
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
+        
         $employee = Employee::where('emp_code',$request->employee_code)->first();
         $dept_id = $employee->dept_id;
-        $year = Year::where('year', date('Y'))->first();
-        if($year){
-            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->get(); 
+        
+            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->get(); 
             if(empty($budget)){
                 return redirect()->back()->with('msg','Budget not available in this employee`s department');
             }
-        }
-        else{
-            return redirect()->back()->with('msg','Budget not available in '.date('Y'));
-        }
+        
         $itemnames = null;
         $itemsin = null;
         $available = false;
         $loggedin_user = Auth::id();
         foreach($request->inv_id as $id){
             $inventory = Inventory::find($id);
-            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->where('subcategory_id', $inventory->subcategory_id)->first();
+            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->where('subcategory_id', $inventory->subcategory_id)->first();
                 
                 if(empty($budget)){
                     $itemnames .= $inventory->subcategory->sub_cat_name.', ';
@@ -210,7 +209,8 @@ class FormController extends Controller
     }
     public function issue_with_gin(){
         $inventory = Inventory::where('issued_to', NULL)->whereIn('status', [1,2])->orderBy('id', 'desc')->get();
-        return view('issuewithgin', ['inventories' => $inventory]);
+        $year = Year::where('locked', null)->get();
+        return view('issuewithgin', ['years'=> $year,'inventories' => $inventory]);
     }
     public function submit_gin(Request $request){
         
@@ -223,24 +223,19 @@ class FormController extends Controller
         }
         $employee = Employee::where('emp_code',$request->employee_code)->first();
         $dept_id = $employee->dept_id;
-        $year = Year::where('year', date('Y'))->first();
-        $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->get(); 
-        if($year){
-            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->get(); 
+        
+            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->get(); 
             if(empty($budget)){
                 return redirect()->back()->with('msg','Budget not available in this employee`s department');
             }
-        }
-        else{
-            return redirect()->back()->with('msg','Budget not available in '.date('Y'));
-        }
+        
         $itemnames = null;
         $itemsin = null;
         $available = false;
         $loggedin_user = Auth::id();
         foreach($request->inv_id as $id){
             $inventory = Inventory::find($id);
-            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->where('subcategory_id', $inventory->subcategory_id)->first();
+            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->where('subcategory_id', $inventory->subcategory_id)->first();
             if(empty($budget)){
                 $itemnames .= $inventory->subcategory->sub_cat_name.', ';
             }

@@ -123,14 +123,14 @@
                                         ?>
                                         @foreach ($type->categories as $budget)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $budget->category_name }}</td>
-                                                <td>{{ $budget->unit_price_dollar }}$</td>
-                                                <td>Rs{{ $budget->unit_price_pkr }}</td>
-                                                <td>{{ $budget->total_price_dollar }}$</td>
-                                                <td>Rs{{ $budget->total_price_pkr }}</td>
-                                                <td>{{ $budget->consumed }}</td>
-                                                <td>{{ $budget->remaining }}</td>
+                                                <td class='text-align-right'>{{ $budget->unit_price_dollar }}$</td>
+                                                <td class='text-align-right'>Rs{{ $budget->unit_price_pkr }}</td>
+                                                <td class='text-align-right'>{{ $budget->total_price_dollar }}$</td>
+                                                <td class='text-align-right'>Rs{{ $budget->total_price_pkr }}</td>
+                                                <td class='text-align-right'>{{ $budget->consumed }}</td>
+                                                <td class='text-align-right'>{{ $budget->remaining }}</td>
                                             </tr>
                                             <?php
                                             $unit_b_d += $budget->unit_price_dollar;

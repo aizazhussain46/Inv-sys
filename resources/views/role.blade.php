@@ -36,7 +36,7 @@
                                         <tbody>
                                         @foreach ($roles as $role)
                                             <tr>
-                                                <td>{{ $role->id }}</td>
+                                                <td class='text-align-right'>{{ $role->id }}</td>
                                                 <td>{{ $role->role }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($role->created_at)) }}</td>
                                                 <td class="text-center">

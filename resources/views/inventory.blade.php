@@ -44,13 +44,13 @@
                                         <?php $i = 1; ?>
                                         @foreach ($inventories as $inventory)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $inventory->product_sn }}</td>
                                                 <td>{{ $inventory->make_id?$inventory->make->make_name:'' }}</td>
                                                 <td>{{ $inventory->model_id?$inventory->model->model_name:'' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
                                                 <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
-                                                <td>{{ $inventory->item_price }}</td>
+                                                <td class='text-align-right'>{{ $inventory->item_price }}</td>
                                                 <td>{{ $inventory->issued_to?$inventory->user->name:'' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
                                                 <td class="text-center">

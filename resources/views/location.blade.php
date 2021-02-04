@@ -36,7 +36,7 @@
                                         <tbody>
                                         @foreach ($locations as $location)
                                             <tr>
-                                                <td>{{ $location->id }}</td>
+                                                <td class='text-align-right'>{{ $location->id }}</td>
                                                 <td>{{ $location->location }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($location->created_at)) }}</td>
                                                 <td class="text-center">

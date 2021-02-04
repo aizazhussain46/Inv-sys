@@ -111,7 +111,7 @@
                                         ?>
                                         @foreach ($budgets as $budget)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($budget->created_at)) }}</td>
                                                 <td>{{ $budget->category_id?$budget->category->category_name:'' }}</td>
                                                 <td>{{ $budget->subcategory_id?$budget->subcategory->sub_cat_name:'' }}</td>
@@ -119,11 +119,11 @@
                                                 <td>{{ $budget->department }}</td>
                                                 <td>{{ $budget->remarks }}</td>
                                                 <td>{{ $budget->unit_price_dollar }}$/<br>Rs{{ $budget->unit_price_pkr }}</td>
-                                                <td>{{ $budget->qty }}</td>
+                                                <td class='text-align-right'>{{ $budget->qty }}</td>
                                                 <td>{{ $budget->unit_price_dollar*$budget->qty }}$/<br>Rs{{ $budget->unit_price_pkr*$budget->qty }}</td>
                                                 
-                                                <td>{{ $budget->consumed }}</td>
-                                                <td>{{ $budget->remaining }}</td>
+                                                <td class='text-align-right'>{{ $budget->consumed }}</td>
+                                                <td class='text-align-right'>{{ $budget->remaining }}</td>
                                                 <td class="text-center">
                                                 @if(isset($filter) && $filter->locked != 1)
                                                 <a href="{{ url('budget/'.$budget->id) }}" class="btn btn-sm btn-success">

@@ -39,7 +39,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($stores as $store)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $store->store_name }}</td>
                                                 <td>{{ $store->location != null?$store->location->location:'' }}</td>
                                                 <td>{{ $store->user }}</td>

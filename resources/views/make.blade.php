@@ -38,7 +38,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($makes as $make)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $make->make_name }}</td>
                                                 <td>{{ $make->status==1?'Active':'Inactive' }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($make->created_at)) }}</td>

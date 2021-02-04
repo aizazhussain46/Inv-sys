@@ -41,7 +41,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $user->role->role }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>

@@ -36,7 +36,7 @@
                                         <tbody>
                                         @foreach ($links as $link)
                                             <tr>
-                                                <td>{{ $link->id }}</td>
+                                                <td class='text-align-right'>{{ $link->id }}</td>
                                                 <td>{{ $link->url }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($link->created_at)) }}</td>
                                                 <td class="text-center">

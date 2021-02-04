@@ -39,7 +39,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($models as $model)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $model->model_name }}</td>
                                                 <td>{{ $model->make->make_name }}</td>
                                                 <td>{{ $model->status==1?'Active':'Inactive' }}</td>

@@ -67,8 +67,8 @@
                                         <?php $i = 1; ?>
                                         @foreach ($grns as $grn)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
-                                                <td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
+                                                <td class='text-align-right'>
                                                 @if(isset($range))
                                                 <a href="{{ url('generate-grn/'.$grn->id.'/'.$range['from'].'/'.$range['to']) }}">{{ $grn->grn_no }}</a>
                                                 @else

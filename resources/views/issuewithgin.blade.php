@@ -133,7 +133,7 @@
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
                                                 <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
                                                 <td>{{ $inventory->subcategory_id?$inventory->subcategory->sub_cat_name:'' }}</td>
-                                                <td>{{ $inventory->item_price }}</td>
+                                                <td class='text-align-right'>{{ $inventory->item_price }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
                                             </tr>
                                         @endforeach    
@@ -147,6 +147,18 @@
                         <textarea class="form-control" id="remarks" name="remarks" rows="4" placeholder="Enter Remarks here"></textarea>
                         <span class="small text-danger">{{ $errors->first('remarks') }}</span>
                         </div>    
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <!-- <label class="small mb-1" for="year">Year</label> -->
+                        <select class="custom-select" id="year" name="year_id" required>
+                        <option value="">Select Year here</option>
+                        @foreach ($years as $year)
+                        <option value="{{ $year->id }}">{{ $year->year }}</option>
+                        @endforeach
+                        </select>
+                        <span class="small text-danger">{{ $errors->first('year_id') }}</span>
+                    </div>
                     </div>
                     <div class="form-group mt-4 mb-0">
                         <input type="submit" name="issue_inventory" value="Issue with GIN" class="btn btn-primary btn-block">

@@ -38,7 +38,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($inventorytypes as $inventorytype)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                                <td class='text-align-right'>{{ $i++ }}</td>
                                                 <td>{{ $inventorytype->inventorytype_name }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventorytype->created_at)) }}</td>
                                                 <td>{{ $inventorytype->status == 1?'Active':'Inactive' }}</td>
