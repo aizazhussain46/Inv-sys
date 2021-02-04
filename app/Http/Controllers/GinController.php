@@ -20,7 +20,7 @@ class GinController extends Controller
         }
         
         $gin_no = date('dm').'001';
-        while(Gin::where('gin_no', $gin_no)->first()){
+        while(Gin::whereRaw('to_char(gin_no) = '.$gin_no)->first()){
             $gin_no++;
         }
         
