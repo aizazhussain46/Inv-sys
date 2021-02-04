@@ -183,15 +183,24 @@ class FormController extends Controller
                     $itemnames .= $inventory->subcategory->sub_cat_name.', ';
                 }
                 else{
-                    $available = true;
+                    if($budget->consumed >= $budget->qty){
+                        $itemnames .= $inventory->subcategory->sub_cat_name.', ';
+                    }
+                    else{
+                        $b_fields = array(
+                                    'consumed' => $budget->consumed+1,
+                                    'remaining' => $budget->remaining-1
+                        );
+                        $available = true;
                     $itemsin .= $inventory->subcategory->sub_cat_name.', ';
                     $b_fields = array(
                                'consumed' => $budget->consumed+1,
                                'remaining' => $budget->remaining-1
                                 );
-                $b_update = Budget::where('id',$budget->id)->update($b_fields);
-                $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user]);
-                $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
+                    $b_update = Budget::where('id',$budget->id)->update($b_fields);
+                    $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user]);
+                    $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
+                    }
                 }
         }
         $itemnames = rtrim($itemnames, ", ");
@@ -240,15 +249,24 @@ class FormController extends Controller
                 $itemnames .= $inventory->subcategory->sub_cat_name.', ';
             }
             else{
-                $available = true;
-                $itemsin .= $inventory->subcategory->sub_cat_name.', ';
+                if($budget->consumed >= $budget->qty){
+                    $itemnames .= $inventory->subcategory->sub_cat_name.', ';
+                }
+                else{
                     $b_fields = array(
-                               'consumed' => $budget->consumed+1,
-                               'remaining' => $budget->remaining-1
-                                );
+                                'consumed' => $budget->consumed+1,
+                                'remaining' => $budget->remaining-1
+                    );
+                    $available = true;
+                $itemsin .= $inventory->subcategory->sub_cat_name.', ';
+                $b_fields = array(
+                           'consumed' => $budget->consumed+1,
+                           'remaining' => $budget->remaining-1
+                            );
                 $b_update = Budget::where('id',$budget->id)->update($b_fields);
                 $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user, 'status'=>3]);
                 $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
+                }
             }
         }
         $itemnames = rtrim($itemnames, ", ");

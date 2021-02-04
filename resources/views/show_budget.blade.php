@@ -159,10 +159,10 @@
                                             <tr>
                                                 <th colspan='7' style="text-align:right;">Total</th>
                                                 <td>{{ number_format($unit_b_d,2) }}$/<br>Rs{{ number_format($unit_b_p,2) }}</td>
-                                                <td>{{ $qty }}</td>
+                                                <td class='text-align-right'>{{ $qty }}</td>
                                                 <td>{{ number_format($total_b_d,2) }}$/<br>Rs{{ number_format($total_b_p,2) }}</td>
-                                                <td>{{ $t_consume }}</td>
-                                                <td>{{ $t_rem }}</td>
+                                                <td class='text-align-right'>{{ $t_consume }}</td>
+                                                <td class='text-align-right'>{{ $t_rem }}</td>
                                                 <td></td>
                                             </tr>
                                         </tfoot>
