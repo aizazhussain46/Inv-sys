@@ -92,8 +92,8 @@
                                             <div class="col-md-12">
                                             <div class="form-group">
                                                         <label class="small mb-1" for="pro">Product S/N</label>
-                                                        <input class="form-control py-2" id="pro" name="product_sn" type="text" placeholder="Enter product s/n here" />
-                                                        <span class="small text-danger">{{ $errors->first('product_sn') }}</span>
+                                                        <input class="form-control py-2 pro" id="pro" name="product_sn" type="text" placeholder="Enter product s/n here" />
+                                                        <span class="small text-danger pro_msg">{{ $errors->first('product_sn') }}</span>
                                                     </div>
                                             </div>
                                         </div>

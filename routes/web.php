@@ -123,3 +123,4 @@ Route::get('/show_inventory_list', 'ReportController@show_inventory');
 Route::get('inventoryexport/{data}','PDFController@inventoryexport');
 Route::get('/item_detail/{id}', 'InventoryController@item_detail');
 Route::get('/balance_report', 'ReportController@balance_report');
+Route::get('/check_product/{pro}', 'InventoryController@check_product');

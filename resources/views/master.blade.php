@@ -514,5 +514,23 @@ $(document).ready(function(){
           $('#t_pkr').val(total_pkr);
     }); 
 
+    $('.pro').keydown(function(e) {
+        var code = e.keyCode || e.which;
+        if (code === 9 || code === 13) {  
+            e.preventDefault();
+
+            var product = $(this).val();
+            $.get("{{ url('check_product') }}/"+product, function(data){
+                if(data == 1){
+                    $(".pro_msg").text('Already exists!');
+                }
+                else{
+                    $(".pro_msg").text('');
+                }
+                //console.log(data);
+            });    
+        }
+    });        
+
 });
 </script> 

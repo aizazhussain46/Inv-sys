@@ -178,4 +178,15 @@ class InventoryController extends Controller
         //return $data;
         return view('inventorydetail', ['inventory' => $inventory]);
     }
+    public function check_product($pro)
+    {
+        $inventory = Inventory::where('product_sn', $pro)->first();
+        if($inventory){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        return view('inventorydetail', ['inventory' => $inventory]);
+    }
 }
