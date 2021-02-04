@@ -27,7 +27,7 @@ class InventoryController extends Controller
     }
     public function index()
     {
-        $inventory = Inventory::orderBy('id', 'desc')->get();
+        $inventory = Inventory::whereNotIn('status', [0])->orderBy('id', 'desc')->get();
        
         foreach($inventory as $inv){
             $user = Employee::where('emp_code', $inv->issued_to)->first();
@@ -112,7 +112,7 @@ class InventoryController extends Controller
         }
         $arr = array();
         $arr['category_id'] = $request->category_id;
-        $arr['subcategory_id'] = $request->sub_cat_id;
+        $arr['subcategory_id'] = $request->subcategory_id;
         $arr['location_id'] = $request->location_id;
         $arr['department_id'] = $request->department_id;
         $arr['branch_id'] = $request->branch_id;
@@ -121,9 +121,9 @@ class InventoryController extends Controller
         $arr['model_id'] = $request->model_id;
         $arr['make_id'] = $request->make_id;
         $arr['vendor_id'] = $request->vendor_id;
-        $arr['device_type_id'] = $request->device_type_id;
+        $arr['devicetype_id'] = $request->devicetype_id;
         $arr['inventorytype_id'] = $request->inventorytype_id;
-        $arr['item_nature_id'] = $request->item_nature_id;
+        $arr['itemnature_id'] = $request->itemnature_id;
         $arr['purchase_date'] = $request->purchase_date;
         $arr['remarks'] = $request->remarks;
         $arr['item_price'] = $request->item_price;
@@ -151,7 +151,7 @@ class InventoryController extends Controller
         $arr['display_type'] = $request->display_type;
         $arr['DVD_rom'] = $request->DVD_rom;
         $arr['RAM'] = $request->RAM;
-
+        
         $update = Inventory::where('id', $id)->update($arr);
         if($update){
             return redirect()->back()->with('msg', 'Inventory Updated Successfully!');

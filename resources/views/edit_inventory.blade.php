@@ -50,12 +50,12 @@
                                                 <select class="custom-select subcategory" id="subcategory" name="subcategory_id">
                                                 <option value=0>Select Sub Category here</option>
                                                     @foreach ($subcategories as $subcategory)
-                                                    @if($subcategory->id == $inventory->sub_cat_id)
+                                                    @if($subcategory->id == $inventory->subcategory_id)
                                                         <option value="{{ $subcategory->id }}" selected>{{ $subcategory->sub_cat_name }}</option>
                                                     @endif
                                                     @endforeach
                                                 </select>
-                                                <span class="small text-danger">{{ $errors->first('sub_cat_id') }}</span>
+                                                <span class="small text-danger">{{ $errors->first('subcategory_id') }}</span>
                                             </div>
                                             </div> 
                                         </div>
@@ -177,7 +177,7 @@
                                                 <select class="custom-select" id="type" name="devicetype_id">
                                                     <option value=0>Select Device Type here</option>
                                                     @foreach ($devicetypes as $devicetype)
-                                                    @if($devicetype->id == $inventory->device_type_id)
+                                                    @if($devicetype->id == $inventory->devicetype_id)
                                                     <option value="{{ $devicetype->id }}" selected>{{ $devicetype->devicetype_name }}</option>
                                                     @else
                                                     <option value="{{ $devicetype->id }}">{{ $devicetype->devicetype_name }}</option>
@@ -191,7 +191,7 @@
                                                 <select class="custom-select" id="nature" name="itemnature_id">
                                                     <option value=0>Select Item Nature here</option>
                                                     @foreach ($itemnatures as $itemnature)
-                                                    @if($itemnature->id == $inventory->item_nature_id)
+                                                    @if($itemnature->id == $inventory->itemnature_id)
                                                     <option value="{{ $itemnature->id }}" selected>{{ $itemnature->itemnature_name }}</option>
                                                     @else
                                                     <option value="{{ $itemnature->id }}">{{ $itemnature->itemnature_name }}</option>
