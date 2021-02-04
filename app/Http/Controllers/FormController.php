@@ -163,17 +163,29 @@ class FormController extends Controller
         $employee = Employee::where('emp_code',$request->employee_code)->first();
         $dept_id = $employee->dept_id;
         $year = Year::where('year', date('Y'))->first();
-        $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->get(); 
-        if(empty($budget)){
-            return redirect()->back()->with('msg','Budget not available in this employee`s department');
+        if($year){
+            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->get(); 
+            if(empty($budget)){
+                return redirect()->back()->with('msg','Budget not available in this employee`s department');
+            }
         }
+        else{
+            return redirect()->back()->with('msg','Budget not available in '.date('Y'));
+        }
+        $itemnames = null;
+        $itemsin = null;
+        $available = false;
         $loggedin_user = Auth::id();
         foreach($request->inv_id as $id){
             $inventory = Inventory::find($id);
             $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->where('subcategory_id', $inventory->subcategory_id)->first();
+                
                 if(empty($budget)){
+                    $itemnames .= $inventory->subcategory->sub_cat_name.', ';
                 }
                 else{
+                    $available = true;
+                    $itemsin .= $inventory->subcategory->sub_cat_name.', ';
                     $b_fields = array(
                                'consumed' => $budget->consumed+1,
                                'remaining' => $budget->remaining-1
@@ -183,7 +195,18 @@ class FormController extends Controller
                 $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
                 }
         }
-        return redirect()->back()->with('msg','Inventory issued to '.$employee->name);
+        $itemnames = rtrim($itemnames, ", ");
+        $itemsin = rtrim($itemsin, ", ");
+        
+        if($available == true && $itemnames == null){
+            return redirect()->back()->with('msg','Selected inventory issued to '.$employee->name);
+        }
+        else if($available == true && $itemnames != null){
+            return redirect()->back()->with('msg', $itemsin.' issued to '.$employee->name.', '.$itemnames.' not available in budget!');
+        }
+        else{
+            return redirect()->back()->with('msg','Budget not available for selected inventory');
+        }
     }
     public function issue_with_gin(){
         $inventory = Inventory::where('issued_to', NULL)->whereIn('status', [1,2])->orderBy('id', 'desc')->get();
@@ -202,16 +225,28 @@ class FormController extends Controller
         $dept_id = $employee->dept_id;
         $year = Year::where('year', date('Y'))->first();
         $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->get(); 
-        if(empty($budget)){
-            return redirect()->back()->with('msg','Budget not available in this employee`s department');
+        if($year){
+            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->get(); 
+            if(empty($budget)){
+                return redirect()->back()->with('msg','Budget not available in this employee`s department');
+            }
         }
+        else{
+            return redirect()->back()->with('msg','Budget not available in '.date('Y'));
+        }
+        $itemnames = null;
+        $itemsin = null;
+        $available = false;
         $loggedin_user = Auth::id();
         foreach($request->inv_id as $id){
             $inventory = Inventory::find($id);
             $budget = Budget::where('dept_id', $dept_id)->where('year_id', $year->id)->where('subcategory_id', $inventory->subcategory_id)->first();
-                if(empty($budget)){
-                }
-                else{
+            if(empty($budget)){
+                $itemnames .= $inventory->subcategory->sub_cat_name.', ';
+            }
+            else{
+                $available = true;
+                $itemsin .= $inventory->subcategory->sub_cat_name.', ';
                     $b_fields = array(
                                'consumed' => $budget->consumed+1,
                                'remaining' => $budget->remaining-1
@@ -219,9 +254,20 @@ class FormController extends Controller
                 $b_update = Budget::where('id',$budget->id)->update($b_fields);
                 $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user, 'status'=>3]);
                 $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
-                }
+            }
         }
-        return redirect()->back()->with('msg','Inventory issued to '.$employee->name);
+        $itemnames = rtrim($itemnames, ", ");
+        $itemsin = rtrim($itemsin, ", ");
+        
+        if($available == true && $itemnames == null){
+            return redirect()->back()->with('msg','Selected inventory issued to '.$employee->name);
+        }
+        else if($available == true && $itemnames != null){
+            return redirect()->back()->with('msg', $itemsin.' issued to '.$employee->name.', '.$itemnames.' not available in budget!');
+        }
+        else{
+            return redirect()->back()->with('msg','Budget not available for selected inventory');
+        }
     }
     public function transfer_inventory(){
         $inventory = Inventory::whereNotNull('issued_to')->orderBy('id', 'desc')->get();
