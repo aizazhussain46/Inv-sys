@@ -25,8 +25,8 @@
                                         <div class="form-row">
                                                 <div class="col-md-6">
                                                 <label class="small mb-1" for="item">Item List</label>
-                                                <select class="custom-select" id="item" name="item_id">
-                                                    <option value=0>Select Item here</option>
+                                                <select class="custom-select repair_item" id="item" name="item_id">
+                                                    <option value="">Select Item here</option>
                                                     @foreach ($inventories as $inventory)
                                                     <option value="{{ $inventory->id }}">{{ $inventory->product_sn }}</option>
                                                     @endforeach
@@ -45,14 +45,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="a_price">Actual Price Value</label>
-                                                        <input class="form-control py-2" id="a_price" name="actual_price_value" type="text" placeholder="Enter Actual Price Value here" />
+                                                        <input class="form-control py-2 a_price" id="a_price" name="actual_price_value" type="text" placeholder="Enter Actual Price Value here" readonly />
                                                         <span class="small text-danger">{{ $errors->first('actual_price_value') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                    <label class="small mb-1" for="price">Price Value</label>
-                                                        <input class="form-control py-2" id="price" name="price_value" type="text" placeholder="Enter Price Value here" />
+                                                    <label class="small mb-1" for="price">Repairing Cost</label>
+                                                        <input class="form-control py-2" id="price" name="price_value" type="number" placeholder="Enter Repairing Cost here" />
                                                         <span class="small text-danger">{{ $errors->first('price_value') }}</span>
                                                     </div>
                                                 </div>

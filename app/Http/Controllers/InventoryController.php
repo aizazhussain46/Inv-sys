@@ -189,4 +189,9 @@ class InventoryController extends Controller
         }
         return view('inventorydetail', ['inventory' => $inventory]);
     }
+    public function get_price($id)
+    {
+        $inventory = Inventory::find($id);
+        return $inventory->item_price;
+    }
 }

@@ -530,7 +530,14 @@ $(document).ready(function(){
                 //console.log(data);
             });    
         }
-    });        
+    });  
+
+    $(".repair_item").on("change",function(){
+        var id = $(this).val();
+        $.get("{{ url('get_price') }}/"+id, function(data){
+            $('.a_price').val(data);
+        });    
+    });      
 
 });
 </script> 
