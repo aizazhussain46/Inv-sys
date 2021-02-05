@@ -153,7 +153,7 @@ class FormController extends Controller
         return view('issue_inventory', ['years'=> $year,'inventories' => $inventory]);
     }
     public function submitt_issue(Request $request){
-        
+       
         $validator = Validator::make($request->all(), [
             'inv_id' => 'required',
             'employee_code' => 'required',
@@ -198,7 +198,7 @@ class FormController extends Controller
                                'remaining' => $budget->remaining-1
                                 );
                     $b_update = Budget::where('id',$budget->id)->update($b_fields);
-                    $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user]);
+                    $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$loggedin_user]);
                     $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
                     }
                 }
@@ -264,7 +264,7 @@ class FormController extends Controller
                            'remaining' => $budget->remaining-1
                             );
                 $b_update = Budget::where('id',$budget->id)->update($b_fields);
-                $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$request->$loggedin_user, 'status'=>3]);
+                $update = Inventory::where('id',$id)->update(['issued_to'=>$request->employee_code, 'issued_by'=>$loggedin_user, 'status'=>3]);
                 $insert = Issue::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
                 }
             }

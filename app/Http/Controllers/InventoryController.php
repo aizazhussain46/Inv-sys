@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Inventory;
 use App\Category;
 use App\Subcategory;
@@ -69,7 +70,8 @@ class InventoryController extends Controller
         // }    
         
         $fields = $request->all();
-        
+        $loggedin_user = Auth::id();
+        $fields['added_by'] = $loggedin_user;
         $create = Inventory::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Inventory Added Successfully!');

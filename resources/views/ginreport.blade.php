@@ -17,6 +17,7 @@
             }
             .secondary-table{
                 width:100%;
+                min-width:100%;
                 border-spacing: 0px;
             }
             .secondary-table tr th, .secondary-table tr td{
@@ -57,7 +58,7 @@
                 </td>
             </tr>
         </table>
-        <table cellpadding="0" cellspacing="0" style="margin-top:50px;">    
+        <table cellpadding="0" cellspacing="0" style="margin-top:50px; width:100%;">    
             <tr style="height:60px;">
             <td></td>
             </tr>
@@ -77,11 +78,11 @@
                     <table class="secondary-table">
                     <tr>
                         <th>S#</th>
-                        <th>Equipment</th>
+                        <th>Sub Category</th>
                         <th>Product S#</th>
                         <th>Other Accessories</th>
-                        <th>Good Condition</th>
-                        <th>Purpose</th>
+                        <!-- <th>Good Condition</th>
+                        <th>Purpose</th> -->
                         <th>Remarks</th>
                     </tr>
                     <?php $i = 1; ?>
@@ -91,8 +92,8 @@
                         <td>{{ $inv->category_id?$inv->category->category_name:'' }}</td>
                         <td>{{ $inv->product_sn }}</td>
                         <td>{{ $inv->other_accessories }}</td>
-                        <td>{{ $inv->good_condition }}</td>
-                        <td>{{ $inv->purpose }}</td>
+                        <!-- <td>{{ $inv->good_condition }}</td>
+                        <td>{{ $inv->purpose }}</td> -->
                         <td>{{ $inv->remarks }}</td>
                     </tr>
                     <?php $vendor = $inv->vendor_id?$inv->vendor->vendor_name:''; ?>
@@ -102,10 +103,10 @@
             </tr>
             <tr>
                 <td style="width:60%;">
-                    <p class="font-12"><b>Handed Over By:</b></p>
+                    <!-- <p class="font-12"><b>Handed Over By:</b></p>
                     <p class="font-12"><b>Name:</b><u> {{ $vendor }}</u></p>
                     <p class="font-12 pd-20"><b>Department/Company:</b> ----------------------------</p>
-                    <p class="font-12 pd-20"><b>Signature with Date:</b> ----------------------------</p>
+                    <p class="font-12 pd-20"><b>Signature with Date:</b> ----------------------------</p> -->
                 </td>
                 <td style="width:40%;">
                     <table>

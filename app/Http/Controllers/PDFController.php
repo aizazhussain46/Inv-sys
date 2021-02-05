@@ -11,6 +11,7 @@ use App\Employee;
 use App\Category;
 use App\Type;
 use App\Year;
+use App\User;
 use App\Budgetitem as Budget;
 class PDFController extends Controller
 {
@@ -27,17 +28,18 @@ class PDFController extends Controller
         $grn = GRN::where('id',$id)->first();
         $inv = json_decode($grn->inv_id);
         $inventories = array();
-        $employee = '';
+        $user = '';
         
         foreach($inv as $inv_id){
             $inventory = Inventory::find($inv_id);
-            $employee = Employee::where('emp_code', $inventory->issued_to)->first();
-            $inventory->employee = $employee;
+            $user = User::find($inventory->added_by);
+            //$inventory->user = $user;
             $inventories[] = $inventory;
         }
-        $data = array('inventories'=>$inventories, 'employee'=>$employee, 'grn_date'=>$grn->created_at, 'range'=>$range);
+        
+        $data = array('inventories'=>$inventories, 'user'=>$user, 'grn_date'=>$grn->created_at, 'range'=>$range);
         //return view('grnreport', $data);
-        $pdf = PDF::loadView('grnreport', $data);
+        $pdf = PDF::loadView('grnreport', $data)->setPaper('a4', 'landscape');
   
         return $pdf->download($grn->grn_no.'.pdf');
     }
