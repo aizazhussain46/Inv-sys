@@ -368,7 +368,7 @@ class FormController extends Controller
         }
 
         foreach($request->inv_id as $id){
-            $update = Inventory::where('id',$id)->update(['issued_to'=>null]);
+            $update = Inventory::where('id',$id)->update(['issued_to'=>null, 'status'=>'0']);
             $insert = Rturn::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
         }
         return redirect('return_inventory')->with('msg','Inventory Returned!');
