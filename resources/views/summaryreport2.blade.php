@@ -173,8 +173,8 @@
                                                 <td>
                                                     <table class="inner-table">
                                                         <tr>
-                                                        <td class="text-right">{{ number_format($total_b_d,2) }}$</td>
-                                                        <td class="text-right">Rs{{ number_format($total_b_p,2) }}</td>
+                                                        <td class="text-right">{{ number_format($total_b_d,2) }}</td>
+                                                        <td class="text-right">{{ number_format($total_b_p,2) }}</td>
                                                         <td class="text-right">{{ $total_qty }}</td>
                                                         </tr>
                                                     </table>
@@ -182,8 +182,8 @@
                                                 <td>
                                                     <table class="inner-table">
                                                         <tr>
-                                                        <td class="text-right">{{ number_format($c_b_d,2) }}$</td>
-                                                        <td class="text-right">Rs{{ number_format($c_b_p,2) }}</td>
+                                                        <td class="text-right">{{ number_format($c_b_d,2) }}</td>
+                                                        <td class="text-right">{{ number_format($c_b_p,2) }}</td>
                                                         <td class="text-right">{{ $c_qty }}</td>
                                                         </tr>
                                                     </table>
@@ -191,8 +191,8 @@
                                                 <td>
                                                     <table class="inner-table">
                                                         <tr>
-                                                        <td class="text-right">{{ number_format($r_b_d,2) }}$</td>
-                                                        <td class="text-right">Rs{{ number_format($r_b_p,2) }}</td>
+                                                        <td class="text-right">{{ number_format($r_b_d,2) }}</td>
+                                                        <td class="text-right">{{ number_format($r_b_p,2) }}</td>
                                                         <td class="text-right">{{ $r_qty }}</td>
                                                         </tr>
                                                     </table>
