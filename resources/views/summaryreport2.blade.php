@@ -20,9 +20,7 @@
         border: none;
     }
     .inner-table tr th, .inner-table tr td{
-        /* border-right: 1px solid; */
         width:33%;
-        padding: 6px;
     }
     .text-center{
                 text-align: center;
@@ -54,15 +52,9 @@
 @foreach($types as $type)   
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
-                            <table class="table table-bordered" style="border-spacing: 0px; border-top:1px solid; border-right:1px solid; border-left:1px solid; width:100%; margin-top:30px;">
-                                <tr class="text-center">
-                                <td class="text-center">
-                                <h2>{{ $type->type }}</h2>
-                                </td>
-                                </tr>
-                                </table>
-                            <!-- <h3><u>{{ $type->type }}</u></h3> -->
-                            
+                            <div class="text-center">
+                            <h2>{{ $type->type }}</h2>
+                            </div>
                             <span class="text-danger">{{ $errors->first('inv_id') }}</span>
                                 <div class="table-responsive">
                                     <table class="secondary-table">
