@@ -77,6 +77,7 @@ class PDFController extends Controller
                 $cat['unit_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('unit_price_pkr');
                 $cat['total_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('total_price_dollar');
                 $cat['total_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('total_price_pkr');
+                $cat['qty'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('qty');
                 $cat['consumed'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('consumed');
                 $cat['remaining'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('remaining');
                 }
@@ -84,7 +85,7 @@ class PDFController extends Controller
             }
         }
         $year = Year::find($data);
-        $pdf = PDF::loadView('summaryreport', ['types'=>$types, 'year'=>$year->year]);
+        $pdf = PDF::loadView('summaryreport2', ['types'=>$types, 'year'=>$year->year])->setPaper('a4', 'landscape');
         return $pdf->download('Summaryreport_'.$year->year.'.pdf');
     }
     public function itemexport($data) 
@@ -96,7 +97,7 @@ class PDFController extends Controller
         }
         $year = Year::find($filters->yearid);
         $category = Category::find($filters->catid);
-        $pdf = PDF::loadView('itemsreport', ['types'=>$types, 'year'=>$year->year, 'category'=>$category->category_name]);
+        $pdf = PDF::loadView('itemsreport', ['types'=>$types, 'year'=>$year->year, 'category'=>$category->category_name])->setPaper('a4', 'landscape');
         return $pdf->download($category->category_name.'_report_'.$year->year.'.pdf');
     }
     public function inventoryexport($data) 
