@@ -25,7 +25,6 @@ class GrnController extends Controller
         while(Grn::whereRaw('to_char(grn_no) = '.$grn_no)->first()){
             $grn_no++;
         }
-        
         $inv = $request->inventory_check;
         $fields = array('grn_no'=>$grn_no, 'inv_id'=>json_encode($inv));
         $create = Grn::create($fields);

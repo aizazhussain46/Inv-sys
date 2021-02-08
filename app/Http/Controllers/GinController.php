@@ -20,10 +20,10 @@ class GinController extends Controller
         }
         
         $gin_no = date('dm').'001';
-        while(Gin::whereRaw('to_char(gin_no) = '.$gin_no)->first()){
-            $gin_no++;
-        }
-        
+        // while(Gin::where('gin_no',$gin_no)->first()){
+            while(Gin::whereRaw('to_char(gin_no) = '.$gin_no)->first()){
+                $gin_no++;
+            }
         $inv = $request->inventory_check;
         $fields = array('gin_no'=>$gin_no, 'inv_id'=>json_encode($inv));
         $create = Gin::create($fields);
