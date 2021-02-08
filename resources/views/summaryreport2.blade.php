@@ -52,7 +52,7 @@
 @foreach($types as $type)   
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
-                            <div class="text-center">
+                            <div class="text-center" style="border:1px solid; margin-top:10px;">
                             <h2>{{ $type->type }}</h2>
                             </div>
                             <span class="text-danger">{{ $errors->first('inv_id') }}</span>
