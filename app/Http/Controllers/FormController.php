@@ -177,12 +177,21 @@ class FormController extends Controller
         $loggedin_user = Auth::id();
         foreach($request->inv_id as $id){
             $inventory = Inventory::find($id);
-            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->where('subcategory_id', $inventory->subcategory_id)->first();
+            $budgets = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->where('subcategory_id', $inventory->subcategory_id)->get();
                 
-                if(empty($budget)){
+                if(empty($budgets)){
                     $itemnames .= $inventory->subcategory->sub_cat_name.', ';
                 }
                 else{
+                    foreach($budgets as $b){
+                        if($b->consumed < $b->qty){
+                            $budget = $b;
+                            break;
+                        }
+                        else{
+                            $budget = $b;
+                        }
+                    }
                     if($budget->consumed >= $budget->qty){
                         $itemnames .= $inventory->subcategory->sub_cat_name.', ';
                     }
@@ -244,11 +253,20 @@ class FormController extends Controller
         $loggedin_user = Auth::id();
         foreach($request->inv_id as $id){
             $inventory = Inventory::find($id);
-            $budget = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->where('subcategory_id', $inventory->subcategory_id)->first();
-            if(empty($budget)){
+            $budgets = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->where('subcategory_id', $inventory->subcategory_id)->get();
+            if(empty($budgets)){
                 $itemnames .= $inventory->subcategory->sub_cat_name.', ';
             }
             else{
+                foreach($budgets as $b){
+                    if($b->consumed < $b->qty){
+                        $budget = $b;
+                        break;
+                    }
+                    else{
+                        $budget = $b;
+                    }
+                }
                 if($budget->consumed >= $budget->qty){
                     $itemnames .= $inventory->subcategory->sub_cat_name.', ';
                 }
@@ -368,7 +386,7 @@ class FormController extends Controller
         }
 
         foreach($request->inv_id as $id){
-            $update = Inventory::where('id',$id)->update(['issued_to'=>null, 'status'=>'0']);
+            $update = Inventory::where('id',$id)->update(['issued_to'=>null, 'status'=>'2']);
             $insert = Rturn::create(['employee_id'=>$request->employee_code, 'inventory_id'=>$id, 'remarks'=>$request->remarks]);
         }
         return redirect('return_inventory')->with('msg','Inventory Returned!');
