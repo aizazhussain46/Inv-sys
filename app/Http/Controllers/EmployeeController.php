@@ -34,8 +34,12 @@ class EmployeeController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
+        
         $fields = $request->all();
+        if($fields['branch_id'] != 0){
+            $fields['dept_id'] = $fields['branch_id'];
+            $fields['department'] = $fields['branch'];
+        }
         $create = Employee::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Employee Added Successfully!');
@@ -81,5 +85,9 @@ class EmployeeController extends Controller
     {
         $find = Employee::find($id);
         return $find->delete() ? redirect()->back()->with('msg', 'Employee Deleted Successfully!') : redirect()->back()->with('msg', 'Could not delete employee, Try Again!');
+    }
+    public function get_employee($id){
+        $find = Employee::where('emp_code', $id)->first();
+        return $find??0;
     }
 }

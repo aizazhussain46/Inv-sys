@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BudgetExport;
+use App\Exports\ItemsExport;
 use App\Category;
 use App\Subcategory;
 use App\User;
@@ -28,6 +31,7 @@ class BudgetController extends Controller
             'category_id' => 'required|not_in:0',
             'sub_cat_id' => 'required|not_in:0',
             'dept_id' => 'required|not_in:0',
+            'dept_branch_type' => 'required|not_in:0',
             'type_id' => 'required|not_in:0',
             'year_id' => 'required|not_in:0',
             'unit_dollar' => 'required',
@@ -48,6 +52,7 @@ class BudgetController extends Controller
             'category_id' => $request->category_id,
             'subcategory_id' => $request->sub_cat_id,
             'dept_id' => $request->dept_id,
+            'dept_branch_type' => $request->dept_branch_type,
             'department' => $request->department,
             'type_id' => $request->type_id,
             'year_id' => $request->year_id,
@@ -55,6 +60,7 @@ class BudgetController extends Controller
             'unit_price_dollar' => $request->unit_dollar,
             'unit_price_pkr' => $request->unit_dollar*$request->unit_pkr,
             'qty' => $request->qty,
+            'remaining' => $request->qty,
             'total_price_dollar' => $request->total_dollar,
             'total_price_pkr' => $request->total_pkr,
             'remarks' => $request->remarks
@@ -89,6 +95,7 @@ class BudgetController extends Controller
             'category_id' => 'required|not_in:0',
             'sub_cat_id' => 'required|not_in:0',
             'dept_id' => 'required|not_in:0',
+            'dept_branch_type' => 'required|not_in:0',
             'type_id' => 'required|not_in:0',
             'year_id' => 'required|not_in:0',
             'unit_dollar' => 'required',
@@ -105,6 +112,7 @@ class BudgetController extends Controller
             'category_id' => $request->category_id,
             'subcategory_id' => $request->sub_cat_id,
             'dept_id' => $request->dept_id,
+            'dept_branch_type' => $request->dept_branch_type,
             'department' => $request->department,
             'type_id' => $request->type_id,
             'year_id' => $request->year_id,
@@ -112,6 +120,7 @@ class BudgetController extends Controller
             'unit_price_dollar' => $request->unit_dollar,
             'unit_price_pkr' => $request->unit_dollar*$request->unit_pkr,
             'qty' => $request->qty,
+            'remaining' => $request->qty,
             'total_price_dollar' => $request->total_dollar,
             'total_price_pkr' => $request->total_pkr,
             'remarks' => $request->remarks
@@ -144,6 +153,7 @@ class BudgetController extends Controller
         $data['categories'] = Category::where('status',1)->get();
         $data['budgets'] = Budget::where('year_id', $request->year_id)->where('category_id',$request->category_id)->get();
         $data['filter'] = Year::find($request->year_id);
+        $data['filters'] = (object)array('catid'=>$request->category_id, 'yearid'=>$request->year_id);
         return view('show_budget', $data);
     }
     public function summary_by_year(Request $request)
@@ -151,20 +161,26 @@ class BudgetController extends Controller
         $budget = Budget::where('year_id', $request->year_id)->first();
         
         if(!empty($budget)){
+            $types = Type::all();
+            foreach($types as $type){
             $category = Category::where('status',1)->get();
-            foreach($category as $cat){
-                $cat['unit_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('unit_price_dollar');
-                $cat['unit_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('unit_price_pkr');
-                $cat['total_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('total_price_dollar');
-                $cat['total_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('total_price_pkr');
-                $cat['consumed'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('consumed');
-                $cat['remaining'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->sum('remaining');
+            foreach($category as $cat){  
+                
+
+                $cat['unit_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('unit_price_dollar');
+                $cat['unit_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('unit_price_pkr');
+                $cat['total_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('total_price_dollar');
+                $cat['total_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('total_price_pkr');
+                $cat['consumed'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('consumed');
+                $cat['remaining'] = Budget::where('category_id', $cat->id)->where('year_id', $request->year_id)->where('type_id', $type->id)->sum('remaining');
+                }
+            $type->categories = $category;    
             }
         }
         else{
-            $category = array();
+            $types = array();
         }
-        return view('summary', ['categories'=>$category, 'years'=>Year::all()]);
+        return view('summary', ['filter'=>$request->year_id,'types'=>$types, 'years'=>Year::all()]);
     }
     public function lock_budget($id)
     {
@@ -183,4 +199,19 @@ class BudgetController extends Controller
             return redirect()->back()->with('msg', 'No any budget found in selected year, Kindly add budget and try again!');
         }    
     }
+
+
+    // public function budgetexport($data) 
+    // {
+    //     $year = Year::find($data);
+    //     return Excel::download(new BudgetExport($data), 'budgetsummary_'.$year->year.'.xlsx'); 
+    // }
+    // public function itemexport($data) 
+    // {
+    //     $filters = json_decode($data);
+    //     $year = Year::find($filters->yearid);
+    //     $category = Category::find($filters->catid);
+    //     return Excel::download(new ItemsExport($data), 'Itemsexport_'.$category->category_name.'_'.$year->year.'.xlsx'); 
+    // }
+    
 }
