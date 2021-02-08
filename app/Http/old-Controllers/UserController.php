@@ -23,7 +23,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'emp_no' => 'required',
             'name' => 'required',
-            'branch_id' => 'required|not_in:null',
             'location' => 'required|not_in:null',
             'department' => 'required|not_in:null',
             'designation' => 'required|not_in:null',
