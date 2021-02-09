@@ -9,7 +9,6 @@
     }
     .secondary-table tr th, .secondary-table tr td{
         border: 1px solid;
-        padding: 6px;
         font-size: 14px;
     }
     .text-center{
