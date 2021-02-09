@@ -122,7 +122,7 @@
                                                     <table class="inner-table">
                                                         <tr>
                                                         <td class="text-right">{{ number_format($budget->total_price_dollar,2) }}</td>
-                                                        <td class="text-right">{{ number_format($budget->total_price_pkr,2) }}</td>
+                                                        <td class="text-right">{{ number_format($budget->total_price_pkr,2)}}</td>
                                                         <td class="text-right">{{ $budget->qty }}</td>
                                                         </tr>
                                                     </table>
@@ -130,8 +130,8 @@
                                                 <td>
                                                     <table class="inner-table">
                                                         <tr>
-                                                        <td class="text-right">{{ number_format(($budget->unit_price_dollar*$budget->consumed),2) }}</td>
-                                                        <td class="text-right">{{ number_format(($budget->unit_price_pkr*$budget->consumed),2) }}</td>
+                                                        <td class="text-right">{{ number_format(($budget->consumed_price_dollar),2) }}</td>
+                                                        <td class="text-right">{{ number_format(($budget->consumed_price_pkr),2) }}</td>
                                                         <td class="text-right">{{ $budget->consumed }}</td>
                                                         </tr>
                                                     </table>
@@ -139,8 +139,8 @@
                                                 <td>
                                                     <table class="inner-table">
                                                         <tr>
-                                                        <td class="text-right">{{ number_format(($budget->unit_price_dollar*$budget->remaining),2) }}</td>
-                                                        <td class="text-right">{{ number_format(($budget->unit_price_pkr*$budget->remaining),2) }}</td>
+                                                        <td class="text-right">{{ number_format(($budget->remaining_price_dollar),2) }}</td>
+                                                        <td class="text-right">{{ number_format(($budget->remaining_price_pkr),2) }}</td>
                                                         <td class="text-right">{{ $budget->remaining }}</td>
                                                         </tr>
                                                     </table>
@@ -150,11 +150,11 @@
                                             $total_b_d += $budget->total_price_dollar;
                                             $total_b_p += $budget->total_price_pkr;
                                             $total_qty += $budget->qty;
-                                            $c_b_d += $budget->unit_price_dollar*$budget->consumed;
-                                            $c_b_p += $budget->unit_price_pkr*$budget->consumed;
+                                            $c_b_d += $budget->consumed_price_dollar;
+                                            $c_b_p += $budget->consumed_price_pkr;
                                             $c_qty += $budget->consumed;
-                                            $r_b_d += $budget->unit_price_dollar*$budget->remaining;
-                                            $r_b_p += $budget->unit_price_pkr*$budget->remaining;
+                                            $r_b_d += $budget->remaining_price_dollar;
+                                            $r_b_p += $budget->remaining_price_pkr;
                                             $r_qty += $budget->remaining;
                                             ?>
                                         @endforeach 

@@ -72,18 +72,34 @@ class PDFController extends Controller
             $types = Type::all();
             foreach($types as $type){
             $category = Category::where('status',1)->get();
-            foreach($category as $cat){                
+            foreach($category as $cat){
+                $consumed_price_dollar = 0;
+                $consumed_price_pkr = 0;
+                $remaining_price_dollar = 0;
+                $remaining_price_pkr = 0; 
+                $fetch = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->get();               
+                foreach($fetch as $get){
+                    $consumed_price_dollar += $get->unit_price_dollar*$get->consumed;
+                    $consumed_price_pkr += $get->unit_price_pkr*$get->consumed;
+                    $remaining_price_dollar += $get->unit_price_dollar*$get->remaining;
+                    $remaining_price_pkr += $get->unit_price_pkr*$get->remaining; 
+                }
                 $cat['unit_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('unit_price_dollar');
                 $cat['unit_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('unit_price_pkr');
                 $cat['total_price_dollar'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('total_price_dollar');
                 $cat['total_price_pkr'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('total_price_pkr');
                 $cat['qty'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('qty');
                 $cat['consumed'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('consumed');
+                $cat['consumed_price_dollar'] = $consumed_price_dollar;
+                $cat['consumed_price_pkr'] = $consumed_price_pkr;
+                $cat['remaining_price_dollar'] = $remaining_price_dollar;
+                $cat['remaining_price_pkr'] = $remaining_price_pkr;
                 $cat['remaining'] = Budget::where('category_id', $cat->id)->where('year_id', $data)->where('type_id', $type->id)->sum('remaining');
                 }
             $type->categories = $category;    
             }
         }
+        
         $year = Year::find($data);
         $pdf = PDF::loadView('summaryreport2', ['types'=>$types, 'year'=>$year->year])->setPaper('a4', 'landscape');
         return $pdf->download('Summaryreport_'.$year->year.'.pdf');
