@@ -22,7 +22,7 @@
                                 <div class="card-body">
                                 <table class="table table-borderless">
                                         <tbody>  
-                                        <form method="GET" action="{{ url('show_inventory_list') }}">
+                                        <form method="GET" action="{{ url('balance_report') }}">
                                             @csrf                                   
                                             <tr>  
                                                 <td>
@@ -71,37 +71,31 @@
                     </div>
                         <div class="card mb-4 mt-5">
                             <div class="card-body">
-                            @if(empty($inventories))
+                            @if(empty($subcategories))
                             @else
-                            <a class="btn btn-danger mb-2 float-right" href="{{ url('inventoryexport/'.json_encode($filters)) }}">Print <i class="fa fa-download" aria-hidden="true"></i></a>
+                            <a class="btn btn-danger mb-2 float-right" href="{{ url('balanceexport/'.json_encode($filters)) }}">Print <i class="fa fa-download" aria-hidden="true"></i></a>
                             @endif
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>Product S#</th>
-                                                <th>Make</th>
-                                                <th>Model</th>
-                                                <th>Category</th>
-                                                <th>Item</th>
-                                                <th>Price</th>
-                                                <th>Created at</th>
+                                                <th>Item Category</th>
+                                                <th>IN</th>
+                                                <th>OUT</th>
+                                                <th>BALANCE</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
                                         <?php $i = 1; ?>
-                                        @foreach ($inventories as $inventory)
+                                        @foreach ($subcategories as $subcat)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td><a href="{{ url('item_detail/'.$inventory->id) }}">{{ $inventory->product_sn }}</a></td>
-                                                <td>{{ $inventory->make_id?$inventory->make->make_name:'' }}</td>
-                                                <td>{{ $inventory->model_id?$inventory->model->model_name:'' }}</td>
-                                                <td>{{ $inventory->category_id?$inventory->category->category_name:'' }}</td>
-                                                <td>{{ $inventory->subcategory_id?$inventory->subcategory->sub_cat_name:'' }}</td>
-                                                <td>{{ $inventory->item_price }}</td>
-                                                <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
+                                                <td>{{ $subcat->sub_cat_name }}</td>
+                                                <td>{{ ($subcat->rem+$subcat->out) }}</td>
+                                                <td>{{ $subcat->out }}</td>
+                                                <td>{{ $subcat->rem }}</td>
                                             </tr>
                                         @endforeach    
                                         </tbody>

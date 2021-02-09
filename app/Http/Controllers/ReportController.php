@@ -97,18 +97,23 @@ class ReportController extends Controller
     }
     public function balance_report(Request $request)
     {
-        date_default_timezone_set('Asia/karachi');
         $data = array();
         $data['locations'] = Location::all();
         $data['stores'] = Store::all();
-        $data['filters'] = array();
+        $fields = array_filter($request->all());
+        unset($fields['_token']);
+        $data['filters'] = $fields;
         if(empty($request->all())){
-            $data['inventories'] = array();
+            $subcategories = array();
         }
         else{
-            $data['inventories'] = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            $subcategories = Subcategory::where('status',1)->get();
+            foreach($subcategories as $subcat){
+                $subcat->rem = Inventory::where([[$fields]])->where('subcategory_id', $subcat->id)->where('issued_to', NULL)->count();
+                $subcat->out = Inventory::where([[$fields]])->where('subcategory_id', $subcat->id)->whereNotNull('issued_to')->count();
+            }
         }
-
-        //return view('balancereport', $data);
+        $data['subcategories'] = $subcategories;
+        return view('balancereport', $data);
     }
 }

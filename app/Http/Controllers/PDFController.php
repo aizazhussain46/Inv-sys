@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
+use App\Subcategory;
 use App\Grn;
 use App\Gin;
 use App\Inventory;
@@ -155,5 +156,17 @@ class PDFController extends Controller
             //$inventories = Inventory::where([[$fields]])->orderBy('id', 'desc')->get();
             $pdf = PDF::loadView('inventoryreport', ['inventories'=>$inventories]);
             return $pdf->download('inventoryreport.pdf');
+    }
+    public function balanceexport($data) 
+    {
+        $fields = (array)json_decode($data);
+        $subcategories = Subcategory::where('status',1)->get();
+            foreach($subcategories as $subcat){
+                $subcat->rem = Inventory::where([[$fields]])->where('subcategory_id', $subcat->id)->where('issued_to', NULL)->count();
+                $subcat->out = Inventory::where([[$fields]])->where('subcategory_id', $subcat->id)->whereNotNull('issued_to')->count();
+            }
+        //return $subcategories;    
+        $pdf = PDF::loadView('balanceexport', ['subcategories'=>$subcategories]);
+        return $pdf->download('balancereport.pdf');    
     }
 }
