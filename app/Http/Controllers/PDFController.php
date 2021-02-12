@@ -14,6 +14,7 @@ use App\Type;
 use App\Year;
 use App\User;
 use App\Budgetitem as Budget;
+use App\Issue;
 class PDFController extends Controller
 {
     public function generatePDF()
@@ -154,7 +155,7 @@ class PDFController extends Controller
                 $inventories = Inventory::where([[$fields]])->where($key, $op, $val)->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
             }
             //$inventories = Inventory::where([[$fields]])->orderBy('id', 'desc')->get();
-            $pdf = PDF::loadView('inventoryreport', ['inventories'=>$inventories]);
+            $pdf = PDF::loadView('inventoryreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
             return $pdf->download('inventoryreport.pdf');
     }
     public function balanceexport($data) 
@@ -168,5 +169,127 @@ class PDFController extends Controller
         //return $subcategories;    
         $pdf = PDF::loadView('balanceexport', ['subcategories'=>$subcategories]);
         return $pdf->download('balancereport.pdf');    
+    }
+    public function editlogsexport($data) 
+    {
+        date_default_timezone_set('Asia/karachi');
+        $fields = (array)json_decode($data);
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            $pdf = PDF::loadView('inventorylogsreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
+            return $pdf->download('inventory_editlogs_report.pdf');
+    }
+    public function inventoryinexport($data) 
+    {
+        date_default_timezone_set('Asia/karachi');
+        
+            $fields = (array)json_decode($data);
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            foreach($inventories as $inv){
+                $inv->added_by = User::find($inv->added_by);
+            }
+            
+            $pdf = PDF::loadView('inventoryinreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
+            return $pdf->download('inventory_in_report.pdf');
+    }
+    public function inventoryoutexport($data) 
+    {
+        date_default_timezone_set('Asia/karachi');
+            $fields = (array)json_decode($data);
+            $key = $fields['inout'][0]; 
+            $op = $fields['inout'][1]; 
+            $val = $fields['inout'][2];
+            unset($fields['inout']); 
+            if(isset($fields['from_issuance']) || isset($fields['to_issuance'])){
+
+                if(isset($fields['from_issuance']) && isset($fields['to_issuance'])){
+                    $from = $fields['from_issuance'];
+                    $to = strtotime($fields['to_issuance'].'+1 day');
+                    unset($fields['from_issuance']);
+                    unset($fields['to_issuance']);
+                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                            ->select('inventory_id')
+                                            ->orderBy('id', 'desc')->get();
+                }
+                else if(isset($fields['from_issuance']) && !isset($fields['to_issuance'])){
+                    $from = $fields['from_issuance'];
+                    unset($fields['from_issuance']);
+                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                            ->select('inventory_id')
+                                            ->orderBy('id', 'desc')->get();
+                }
+                else if(!isset($fields['from_issuance']) && isset($fields['to_issuance'])){
+                    $to = strtotime($fields['to_issuance'].'+1 day');
+                    unset($fields['to_issuance']);
+                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                            ->select('inventory_id')
+                                            ->orderBy('id', 'desc')->get();
+                }
+
+                $ids = array();
+                foreach($issue as $iss){
+                    $ids[] = $iss->inventory_id;
+                }
+                $inventories = Inventory::where([[$fields]])->where($key, $op, $val)->whereIn('id', $ids)->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->where($key, $op, $val)->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            foreach($inventories as $inv){
+                $inv->added_by = User::find($inv->added_by);
+                $inv->issued_by = User::find($inv->issued_by);
+                $inv->issue_date = Issue::where('inventory_id', $inv->id)->select('created_at')->orderBy('id', 'desc')->first();
+            }
+            $pdf = PDF::loadView('inventoryoutreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
+            return $pdf->download('inventory_out_report.pdf');
     }
 }

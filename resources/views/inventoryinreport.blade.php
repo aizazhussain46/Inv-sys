@@ -30,14 +30,19 @@
                                     <table class="secondary-table">
                                     <thead>
                                             <tr>
-                                            <th>S.No</th>
+                                                <th>S.No</th>
+                                                <th>Item Category</th>
                                                 <th>Product S#</th>
+                                                <th>PO Number</th>
                                                 <th>Make</th>
                                                 <th>Model</th>
-                                                <th>Item</th>
+                                                <th>Store</th>
+                                                <th>Price</th>
                                                 <th>Purchase Date</th>
-                                                <th>Location</th>
-                                                <th>Date</th>
+                                                <th>Enter By</th>
+                                                <th>Warrenty Period</th>
+                                                <th>Vendor</th>
+                                                <th>Remarks</th>
                                             </tr>
                                         </thead>
                                         
@@ -45,14 +50,19 @@
                                         <?php $i = 1; ?>
                                         @foreach ($inventories as $inventory)
                                             <tr>
-                                                <td>{{ $i++ }}</td>
+                                            <td>{{ $i++ }}</td>
+                                                <td>{{ $inventory->subcategory_id?$inventory->subcategory->sub_cat_name:'' }}</td>
                                                 <td>{{ $inventory->product_sn }}</td>
+                                                <td>{{ $inventory->po_number }}</td>
                                                 <td>{{ $inventory->make_id?$inventory->make->make_name:'' }}</td>
                                                 <td>{{ $inventory->model_id?$inventory->model->model_name:'' }}</td>
-                                                <td>{{ $inventory->subcategory_id?$inventory->subcategory->sub_cat_name:'' }}</td>
+                                                <td>{{ empty($inventory->store)?'':$inventory->store->store_name }}</td>
+                                                <td class='text-align-right'>{{ number_format($inventory->item_price,2) }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($inventory->purchase_date)) }}</td>
-                                                <td>{{ empty($inventory->location)?'':$inventory->location->location }}</td>
-                                                <td>{{ date('Y-m-d' ,strtotime($inventory->created_at)) }}</td>
+                                                <td>{{ empty($inventory->added_by)?'':$inventory->added_by->name }}</td>
+                                                <td>{{ $inventory->warrenty_period }}</td>
+                                                <td>{{ empty($inventory->vendor)?'':$inventory->vendor->vendor_name }}</td>
+                                                <td>{{ $inventory->remarks }}</td>
                                             </tr>
                                         @endforeach 
                                         </tbody>

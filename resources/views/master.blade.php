@@ -77,6 +77,9 @@
                                     <a class="nav-link" href="{{ url('get_grns') }}">GRN</a>
                                     <a class="nav-link" href="{{ url('get_gins') }}">GIN</a>
                                     <a class="nav-link" href="{{ url('show_inventory_list') }}">Inventory report</a>
+                                    <a class="nav-link" href="{{ url('edit_logs') }}">Inventory Edit Logs</a>
+                                    <a class="nav-link" href="{{ url('inventory_in') }}">Inventory In</a>
+                                    <a class="nav-link" href="{{ url('inventory_out') }}">Inventory Out</a>
                                     <a class="nav-link" href="{{ url('balance_report') }}">Balance report</a>
                                 </nav>
                             </div>

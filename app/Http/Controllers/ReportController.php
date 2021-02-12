@@ -19,6 +19,7 @@ use App\Makee;
 use App\Vendor;
 use App\Employee;
 use App\Budgetitem as Budget;
+use App\Issue;
 class ReportController extends Controller
 {
     public function __construct()
@@ -29,15 +30,8 @@ class ReportController extends Controller
     {
         date_default_timezone_set('Asia/karachi');
         $data = array();
-        $data['categories'] = Category::where('status',1)->get();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
         $data['locations'] = Location::all();
-        $data['productsns'] = Inventory::whereNotIn('status', [0])->get();
-        $data['invtypes'] = Inventorytype::where('status', 1)->get();
-        $data['makes'] = Makee::where('status',1)->get();
-        $data['stores'] = Store::all();
-        $data['employees'] = Employee::all();
-        $data['itemnatures'] = Itemnature::where('status',1)->get();
-        $data['vendors'] = Vendor::all();
         $data['filters'] = array();
         if(empty($request->all())){
             $data['inventories'] = array();
@@ -115,5 +109,176 @@ class ReportController extends Controller
         }
         $data['subcategories'] = $subcategories;
         return view('balancereport', $data);
+    }
+
+    public function edit_logs(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['productsns'] = Inventory::whereNotIn('status', [0])->get();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $data['inventories'] = array();
+        }
+        else{
+            $fields = array_filter($request->all());
+            unset($fields['_token']);
+            $data['filters'] = $fields;
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $data['inventories'] = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $data['inventories'] = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $data['inventories'] = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $data['inventories'] = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+        }
+        return view('show_editlogs', $data);
+    }
+    public function inventory_in(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['locations'] = Location::all();
+        $data['invtypes'] = Inventorytype::where('status', 1)->get();
+        $data['makes'] = Makee::where('status',1)->get();
+        $data['stores'] = Store::all();
+        $data['itemnatures'] = Itemnature::where('status',1)->get();
+        $data['vendors'] = Vendor::all();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $data['inventories'] = array();
+        }
+        else{
+            $fields = array_filter($request->all());
+            unset($fields['_token']);
+            $fields['issued_to'] = null;
+            $data['filters'] = $fields;
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $data['inventories'] = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $data['inventories'] = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $invs = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $invs = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            foreach($invs as $inv){
+                $inv->added_by = User::find($inv->added_by);
+            }
+            $data['inventories'] = $invs;
+        }
+        return view('show_inventoryin', $data);
+    }
+    public function inventory_out(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['locations'] = Location::all();
+        $data['invtypes'] = Inventorytype::where('status', 1)->get();
+        $data['makes'] = Makee::where('status',1)->get();
+        $data['stores'] = Store::all();
+        $data['employees'] = Employee::all();
+        $data['itemnatures'] = Itemnature::where('status',1)->get();
+        $data['vendors'] = Vendor::all();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $data['inventories'] = array();
+        }
+        else{
+            $fields = array_filter($request->all());
+            $key = null; 
+            $op = null; 
+            $val = null; 
+            unset($fields['_token']);
+            if(!isset($fields['issued_to'])){
+                $key = 'issued_to'; 
+                $op = '>'; 
+                $val = 0; 
+            }
+            
+            $fields['inout'] = array($key,$op,$val);
+            $data['filters'] = $fields;
+            unset($fields['inout']);
+            if(isset($fields['from_issuance']) || isset($fields['to_issuance'])){
+
+                if(isset($fields['from_issuance']) && isset($fields['to_issuance'])){
+                    $from = $fields['from_issuance'];
+                    $to = strtotime($fields['to_issuance'].'+1 day');
+                    unset($fields['from_issuance']);
+                    unset($fields['to_issuance']);
+                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                            ->select('inventory_id')
+                                            ->orderBy('id', 'desc')->get();
+                }
+                else if(isset($fields['from_issuance']) && !isset($fields['to_issuance'])){
+                    $from = $fields['from_issuance'];
+                    unset($fields['from_issuance']);
+                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                            ->select('inventory_id')
+                                            ->orderBy('id', 'desc')->get();
+                }
+                else if(!isset($fields['from_issuance']) && isset($fields['to_issuance'])){
+                    $to = strtotime($fields['to_issuance'].'+1 day');
+                    unset($fields['to_issuance']);
+                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                            ->select('inventory_id')
+                                            ->orderBy('id', 'desc')->get();
+                }
+
+                $ids = array();
+                foreach($issue as $iss){
+                    $ids[] = $iss->inventory_id;
+                }
+                $invs = Inventory::where([[$fields]])->where($key, $op, $val)->whereIn('id', $ids)->orderBy('id', 'desc')->get();
+            }
+            else{
+                $invs = Inventory::where([[$fields]])->where($key, $op, $val)->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            foreach($invs as $inv){
+                $inv->added_by = User::find($inv->added_by);
+                $inv->issued_by = User::find($inv->issued_by);
+                $inv->issue_date = Issue::where('inventory_id', $inv->id)->select('created_at')->orderBy('id', 'desc')->first();
+            }
+            $data['inventories'] = $invs;
+        }
+        return view('show_inventoryout', $data);
     }
 }

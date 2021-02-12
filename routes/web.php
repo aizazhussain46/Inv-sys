@@ -126,3 +126,10 @@ Route::get('/balance_report', 'ReportController@balance_report');
 Route::get('/balanceexport/{data}','PDFController@balanceexport');
 Route::get('/check_product/{pro}', 'InventoryController@check_product');
 Route::get('/get_price/{id}', 'InventoryController@get_price');
+
+Route::get('/edit_logs', 'ReportController@edit_logs');
+Route::get('/editlogsexport/{data}','PDFController@editlogsexport');
+Route::get('/inventory_in', 'ReportController@inventory_in');
+Route::get('/inventoryinexport/{data}','PDFController@inventoryinexport');
+Route::get('/inventory_out', 'ReportController@inventory_out');
+Route::get('/inventoryoutexport/{data}','PDFController@inventoryoutexport');
