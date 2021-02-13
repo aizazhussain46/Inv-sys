@@ -83,17 +83,18 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>Date</th>
-                                                <th>Category</th>
-                                                <th>Item</th>
                                                 <th>Type</th>
+                                                <th>Item</th>
                                                 <th>Dept</th>
-                                                <th>Remarks</th>
-                                                <th>Price Unit</th>
+                                                <th>Desc</th>
                                                 <th>Qty</th>
-                                                <th>Price Total</th>
+                                                <th>Price Unit $</th>
+                                                <th>Price Unit Rs</th>
+                                                <th>Price Total $</th>
+                                                <th>Price Total Rs</th>
                                                 <th>Consumed</th>
                                                 <th>Rem</th>
+                                                <th>Remarks</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -112,18 +113,19 @@
                                         @foreach ($budgets as $budget)
                                             <tr>
                                                 <td class='text-align-right'>{{ $i++ }}</td>
-                                                <td>{{ date('Y-m-d' ,strtotime($budget->created_at)) }}</td>
-                                                <td>{{ $budget->category_id?$budget->category->category_name:'' }}</td>
-                                                <td>{{ $budget->subcategory_id?$budget->subcategory->sub_cat_name:'' }}</td>
                                                 <td>{{ $budget->type_id?$budget->type->type:'' }}</td>
+                                                <td>{{ $budget->subcategory_id?$budget->subcategory->sub_cat_name:'' }}</td>
                                                 <td>{{ $budget->department }}</td>
-                                                <td>{{ $budget->remarks }}</td>
-                                                <td>{{ number_format($budget->unit_price_dollar,2) }}$/<br>Rs{{ number_format($budget->unit_price_pkr,2) }}</td>
+                                                <td>{{ $budget->description }}</td>
                                                 <td class='text-align-right'>{{ $budget->qty }}</td>
-                                                <td>{{ number_format($budget->unit_price_dollar*$budget->qty,2) }}$/<br>Rs{{ number_format($budget->unit_price_pkr*$budget->qty,2) }}</td>
+                                                <td>{{ number_format($budget->unit_price_dollar,2) }}</td>
+                                                <td>{{ number_format($budget->unit_price_pkr,2) }}</td>
+                                                <td>{{ number_format($budget->unit_price_dollar*$budget->qty,2) }}</td>
+                                                <td>{{ number_format($budget->unit_price_pkr*$budget->qty,2) }}</td>
                                                 
                                                 <td class='text-align-right'>{{ $budget->consumed }}</td>
                                                 <td class='text-align-right'>{{ $budget->remaining }}</td>
+                                                <td>{{ $budget->remarks }}</td>
                                                 <td class="text-center">
                                                 @if(isset($filter) && $filter->locked != 1)
                                                 <a href="{{ url('budget/'.$budget->id) }}" class="btn btn-sm btn-success">
@@ -157,12 +159,15 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan='7' style="text-align:right;">Total</th>
-                                                <td>{{ number_format($unit_b_d,2) }}$/<br>Rs{{ number_format($unit_b_p,2) }}</td>
+                                                <th colspan='5' style="text-align:right;">Total</th>
                                                 <td class='text-align-right'>{{ $qty }}</td>
-                                                <td>{{ number_format($total_b_d,2) }}$/<br>Rs{{ number_format($total_b_p,2) }}</td>
+                                                <td>{{ number_format($unit_b_d,2) }}</td>
+                                                <td>{{ number_format($unit_b_p,2) }}</td>
+                                                <td>{{ number_format($total_b_d,2) }}</td>
+                                                <td>{{ number_format($total_b_p,2) }}</td>
                                                 <td class='text-align-right'>{{ $t_consume }}</td>
                                                 <td class='text-align-right'>{{ $t_rem }}</td>
+                                                <td></td>
                                                 <td></td>
                                             </tr>
                                         </tfoot>
