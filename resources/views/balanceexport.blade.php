@@ -14,18 +14,19 @@
     .text-center{
                 text-align: center;
             }
+    .font-14{
+        font-size: 14px;
+    } 
     </style>
 </head>
 <body>
 <table cellpadding="0" cellspacing="0" style="width:100%;">
             <tr class="text-center">
                 <td class="text-center">
-                    <h2><u>Balance Report</u></h2>
-                    <p class="font-14"><b>EFU Life Assurance Ltd.</b></p>
-                    
+                    <h2><u>Balance Report</u><span class="font-14"><b> - <u>EFU Life Assurance Ltd.</u></b></span></h2>
                 </td>
             </tr>
-        </table>  
+        </table>  <br> 
                                     <table class="secondary-table">
                                     <thead>
                                             <tr>
