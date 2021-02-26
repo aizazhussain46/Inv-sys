@@ -232,7 +232,7 @@
                                     </a>
                                     <div class="collapse" id="role" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="{{ url('add_role') }}">Add Role</a>
+                                            <!-- <a class="nav-link" href="{{ url('add_role') }}">Add Role</a> -->
                                             <a class="nav-link" href="{{ url('role') }}">List Role</a>
                                         </nav>
                                     </div>

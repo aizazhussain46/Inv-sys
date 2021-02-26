@@ -51,9 +51,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $role = Role::all();
-        $user = User::find($id);
-        return view('edit_user', ['user' => $user, 'roles' => $role]);
+        return view('edit_user', ['user' => User::find($id), 'roles' => Role::all()]);
     }
 
     public function update(Request $request, $id)
@@ -76,30 +74,30 @@ class UserController extends Controller
         //     return redirect()->back()->withErrors($validator);
         // }
 
-        // $fields = array(
-        //     'name'=>$request->name, 
-        //     'email' => $request->email, 
-        //     'role_id' => $request->role_id,
-        //     'emp_no' => $request->emp_no,
-        //     'branch' => $request->branch,
-        //     'location' => $request->location,
-        //     'contact' => $request->contact,
-        //     'department' => $request->department,
-        //     'designation' => $request->designation,
-        //     'hdd' => $request->hdd,
-        //     'status' => $request->status,
-        // );
-        // if($request->password){
-        //     $fields['password'] = bcrypt($request->password);
-        // }
+        $fields = array(
+            // 'name'=>$request->name, 
+            // 'email' => $request->email, 
+            // 'role_id' => $request->role_id,
+            // 'emp_no' => $request->emp_no,
+            // 'branch' => $request->branch,
+            // 'location' => $request->location,
+            // 'contact' => $request->contact,
+            // 'department' => $request->department,
+            // 'designation' => $request->designation,
+            // 'hdd' => $request->hdd,
+            // 'status' => $request->status,
+        );
+        if($request->password){
+            $fields['password'] = bcrypt($request->password);
+        }
         
-        // $update = User::where('id', $id)->update($fields);
-        // if($update){
-        //     return redirect()->back()->with('msg', 'User Updated Successfully!');
-        // }
-        // else{
-        //     return redirect()->back()->with('msg', 'Could not update user, Try Again!');
-        // }
+        $update = User::where('id', $id)->update($fields);
+        if($update){
+            return redirect()->back()->with('msg', 'Password Updated Successfully!');
+        }
+        else{
+            return redirect()->back()->with('msg', 'Could not update Password, Try Again!');
+        }
     }
 
     public function destroy($id)

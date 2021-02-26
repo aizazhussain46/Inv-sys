@@ -26,7 +26,7 @@
                                         <form  method="POST" action="{{ url('user/'.$user->id) }}">
                                         @method('PUT')
                                         @csrf
-                                        <div class="form-row">
+                                        <!-- <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="emp_no">Employee No</label>
@@ -152,25 +152,25 @@
                                                         <span class="small text-danger">{{ $errors->first('status') }}</span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             
                                             <div class="form-row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="password">Password</label>
                                                         <input class="form-control" id="password" type="password" name="password" placeholder="Enter password here" />
                                                         <span class="small text-danger">{{ $errors->first('password') }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <!-- <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="confirmpassword">Confirm Password</label>
                                                         <input class="form-control" id="confirmpassword" type="password" name="confirm_password" placeholder="Confirm password here" />
                                                         <span class="small text-danger">{{ $errors->first('confirm_password') }}</span>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="small mb-1" for="role">Role</label>
                                                 <select class="custom-select" id="role" name="role_id">
                                                     <option value=0>Select Role here</option>
@@ -183,7 +183,7 @@
                                                     @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('role_id') }}</span>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group mt-4 mb-0">
                                             <input type="submit" name="update_user" value="Update User" class="btn btn-primary btn-block">
                                             </div>
