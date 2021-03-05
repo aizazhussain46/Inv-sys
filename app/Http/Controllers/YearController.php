@@ -36,12 +36,26 @@ class YearController extends Controller
 
     public function show($id)
     {
-        //
+       $year = Year::find($id);
+       return view('edit_year', ['year' => $year]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'year' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        $fields = array('year'=>$request->year);
+        $update = Year::where('id', $id)->update($fields);
+        if($update){
+            return redirect()->back()->with('msg', 'Year Updated Successfully!');
+        }
+        else{
+            return redirect()->back()->with('msg', 'Could not update year, Try Again!');
+        }
     }
 
     public function destroy($id)
