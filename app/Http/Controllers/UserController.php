@@ -39,7 +39,7 @@ class UserController extends Controller
 
         $fields = $request->all();
         $fields['password'] = bcrypt($request->password);
-        
+        $fields['isactive'] = 1;
         $create = User::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'User Added Successfully!');
@@ -104,5 +104,23 @@ class UserController extends Controller
     {
         $find = User::find($id);
         return $find->delete() ? redirect()->back()->with('msg', 'User Deleted Successfully!') : redirect()->back()->with('msg', 'Could not delete user, Try Again!');
+    }
+
+
+    public function activeinactive($id, $data)
+    {
+        if($data == 1 || $data == 0){
+            $update = User::where('id', $id)->update(['isactive'=>$data]);
+            if($data == 1){
+                return redirect()->back()->with('msg', 'User Activated Successfully!');
+            }
+            else{
+                return redirect()->back()->with('msg', 'User Deactivated');
+            }
+        }
+        else{
+            return redirect()->back()->with('msg', 'Nothing update. Try again!');
+        }
+        
     }
 }

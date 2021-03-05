@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
+use Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+//use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -19,8 +20,30 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    //use AuthenticatesUsers;
+    public function showLoginForm(){
+        return view('auth.login');
+    }
+    public function login(Request $request)
+    {
+        
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'isactive' => 1])) {
+            // Authentication passed...
+            return redirect()->intended('dashboard');
+        }
+        else{
+            return redirect()->back()->with('msg','Credentials does not exist!');
+        }
+    }
+    public function logout(Request $request){
+        Auth::logout();
 
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect('/');
+    }
     /**
      * Where to redirect users after login.
      *
@@ -35,6 +58,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        
         $this->middleware('guest')->except('logout');
     }
 }

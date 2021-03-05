@@ -133,3 +133,6 @@ Route::get('/inventory_in', 'ReportController@inventory_in');
 Route::get('/inventoryinexport/{data}','PDFController@inventoryinexport');
 Route::get('/inventory_out', 'ReportController@inventory_out');
 Route::get('/inventoryoutexport/{data}','PDFController@inventoryoutexport');
+
+Route::get('/activeinactive/{id}/{data}','UserController@activeinactive');
+
