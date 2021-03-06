@@ -393,15 +393,17 @@ class FormController extends Controller
     }
     public function repair(){
         $inventory = Inventory::orderBy('id', 'desc')->select('id','product_sn')->get();
-        
-        return view('repair_inventory', ['inventories' => $inventory]);
+        $categories = Category::where('status',1)->get();
+        return view('repair_inventory', ['categories'=>$categories, 'inventories' => $inventory]);
     }
     public function repair_inventory(Request $request){
         $validator = Validator::make($request->all(), [
             'item_id' => 'required',
             'date' => 'required',
             'actual_price_value' => 'required',
-            'price_value' => 'required',  
+            'price_value' => 'required',
+            'category_id' => 'required',
+            'subcategory_id' => 'required',  
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);

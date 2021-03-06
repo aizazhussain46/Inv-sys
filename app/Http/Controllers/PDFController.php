@@ -15,6 +15,7 @@ use App\Year;
 use App\User;
 use App\Budgetitem as Budget;
 use App\Issue;
+use App\Repairing;
 class PDFController extends Controller
 {
     public function generatePDF()
@@ -291,5 +292,45 @@ class PDFController extends Controller
             }
             $pdf = PDF::loadView('inventoryoutreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
             return $pdf->download('inventory_out_report.pdf');
+    }
+
+    public function bincardexport($data) 
+    {
+        date_default_timezone_set('Asia/karachi');
+        $fields = (array)json_decode($data);
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            if(!empty($inventories)){
+                foreach($inventories as $inventory){
+                    $inventory->repairing = Repairing::where('item_id',$inventory->id)->first();
+                    $inventory->added_by = User::where('id',$inventory->added_by)->first();
+                }
+            }
+            $pdf = PDF::loadView('bincardreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
+            return $pdf->download('bin_card_report.pdf');
     }
 }

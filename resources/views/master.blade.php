@@ -82,6 +82,7 @@
                                     <a class="nav-link" href="{{ url('inventory_in') }}">Inventory In</a>
                                     <a class="nav-link" href="{{ url('inventory_out') }}">Inventory Out</a>
                                     <a class="nav-link" href="{{ url('balance_report') }}">Balance report</a>
+                                    <a class="nav-link" href="{{ url('bin_card') }}">Bin Card report</a>
                                 </nav>
                             </div>
 
@@ -542,6 +543,21 @@ $(document).ready(function(){
         var id = $(this).val();
         $.get("{{ url('get_price') }}/"+id, function(data){
             $('.a_price').val(data);
+        });    
+    });
+
+    $(".subcategory").on("change",function(){
+        var id = $(this).val();
+        var repair_item = $('.repair_item');
+        repair_item.empty();
+        repair_item.append('<option value=0 class="o1">Select Item here</option>');
+        $.get("{{ url('get_inv_items') }}/"+id, function(data){
+            console.log(data);
+            $.each( data, function(index, value){
+                repair_item.append(
+                    $('<option></option>').val(value.id).html(value.product_sn)
+                );
+            });    
         });    
     });      
 

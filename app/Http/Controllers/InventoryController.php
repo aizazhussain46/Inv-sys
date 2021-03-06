@@ -196,4 +196,9 @@ class InventoryController extends Controller
         $inventory = Inventory::find($id);
         return $inventory->item_price;
     }
+    public function get_inv_items($id)
+    {
+        $inventories = Inventory::where('subcategory_id',$id)->get();
+        return $inventories;
+    }
 }

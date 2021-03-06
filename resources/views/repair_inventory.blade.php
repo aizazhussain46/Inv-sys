@@ -23,6 +23,30 @@
                                         <form  method="POST" action="{{ url('repair_inventory') }}">
                                         @csrf
                                         <div class="form-row">
+                                            <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="category">Category</label>
+                                                <select class="custom-select category" id="category" name="category_id">
+                                                    <option value=0>Select Category here</option>
+                                                    @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('category_id') }}</span>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="subcategory">Sub Category</label>
+                                                <select class="custom-select subcategory" id="subcategory" name="subcategory_id">
+                                                <option value=0>Select Sub Category here</option>
+                                                </select>
+                                                <span class="small text-danger">{{ $errors->first('sub_cat_id') }}</span>
+                                            </div>
+                                            </div>                                             
+                                            
+                                        </div>
+                                        <div class="form-row">
                                                 <div class="col-md-6">
                                                 <label class="small mb-1" for="item">Item List</label>
                                                 <select class="custom-select repair_item" id="item" name="item_id">

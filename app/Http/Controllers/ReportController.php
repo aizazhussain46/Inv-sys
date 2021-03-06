@@ -20,6 +20,7 @@ use App\Vendor;
 use App\Employee;
 use App\Budgetitem as Budget;
 use App\Issue;
+use App\Repairing;
 class ReportController extends Controller
 {
     public function __construct()
@@ -280,5 +281,55 @@ class ReportController extends Controller
             $data['inventories'] = $invs;
         }
         return view('show_inventoryout', $data);
+    }
+
+    public function bin_card(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['productsns'] = Inventory::whereNotIn('status', [0])->get();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $inventories = array();
+        }
+        else{
+            $fields = array_filter($request->all());
+            unset($fields['_token']);
+            $data['filters'] = $fields;
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+        }
+        if(!empty($inventories)){
+            foreach($inventories as $inventory){
+                $inventory->repairing = Repairing::where('item_id',$inventory->id)->first();
+                $inventory->added_by = User::where('id',$inventory->added_by)->first();
+            }
+        }
+        $data['inventories'] = $inventories;
+        return view('show_bincard', $data);
     }
 }
