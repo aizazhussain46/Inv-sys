@@ -65,7 +65,7 @@ Route::get('/add_subcategory', [FormController::class, 'add_subcategory'])->midd
 //Route::get('/add_department', [FormController::class, 'add_department'])->middleware('role:1');
 Route::get('/add_location', [FormController::class, 'add_location'])->middleware('role:1');
 Route::get('/add_model', [FormController::class, 'add_model'])->middleware('role:1');
-Route::get('/add_role', [FormController::class, 'add_role'])->middleware('role:1');
+//Route::get('/add_role', [FormController::class, 'add_role'])->middleware('role:1');
 Route::get('/add_store', [FormController::class, 'add_store'])->middleware('role:1');
 Route::get('/add_user', [FormController::class, 'add_user'])->middleware('role:1');
 Route::get('/add_vendor', [FormController::class, 'add_vendor'])->middleware('role:1');

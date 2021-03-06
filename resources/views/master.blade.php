@@ -43,7 +43,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-
+                            @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                             <!-- Inventories -->
                             <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventories" aria-expanded="false" aria-controls="collapseLayouts">
@@ -65,6 +65,7 @@
                                     <a class="nav-link" href="{{ url('repair') }}">Asset Repairing</a>
                                 </nav>
                             </div>
+                            @endif
                             @if(Auth::user()->role_id == 1)
                             <!-- Reports -->
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports" aria-expanded="false" aria-controls="collapseLayouts">
@@ -261,6 +262,7 @@
                                 </nav>
                             </div>
                             @endif
+                            @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 3)
                             <!-- Budget System -->
                             <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#budget" aria-expanded="false" aria-controls="collapseLayouts">
@@ -309,6 +311,7 @@
                                     </div>
                                 </nav>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

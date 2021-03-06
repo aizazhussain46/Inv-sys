@@ -160,6 +160,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="nature">Budget Nature</label>
+                                                    <select class="custom-select" id="nature" name="budget_nature">
+                                                        <option value=0>Select budget nature here</option>
+                                                        <option value="Original">Original</option>
+                                                        <option value="Adhoc">Adhoc</option>
+                                                    </select>
+                                                    <span class="small text-danger">{{ $errors->first('budget_nature') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                             <div class="form-group mt-4 mb-0">
                                             <input type="submit" name="add_budget" value="Add Budget Item" class="btn btn-primary btn-block">
                                             </div>

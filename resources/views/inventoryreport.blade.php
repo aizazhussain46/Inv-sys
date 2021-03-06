@@ -30,7 +30,8 @@
                                     <table class="secondary-table">
                                     <thead>
                                             <tr>
-                                            <th>S.No</th>
+                                                <th>S.No</th>
+                                                <th>Sub Category</th>
                                                 <th>Product S#</th>
                                                 <th>Make</th>
                                                 <th>Model</th>
@@ -46,6 +47,7 @@
                                         @foreach ($inventories as $inventory)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
+                                                <td>{{ $inventory->subcategory->sub_cat_name }}</td>
                                                 <td>{{ $inventory->product_sn }}</td>
                                                 <td>{{ $inventory->make_id?$inventory->make->make_name:'' }}</td>
                                                 <td>{{ $inventory->model_id?$inventory->model->model_name:'' }}</td>

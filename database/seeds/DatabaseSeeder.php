@@ -12,9 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('roles')->insert([
-            'role' => 'Admin'
-        ]);
+        $roles = array('Admin','Inventory','Budget');
+        foreach($roles as $role){
+            \DB::table('roles')->insert([
+                'role' => $role
+            ]);
+        }
 
          \DB::table('links')->insert([
             'url' => 'https://devinv.efulife.com/'

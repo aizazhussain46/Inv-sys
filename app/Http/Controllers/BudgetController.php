@@ -38,7 +38,8 @@ class BudgetController extends Controller
             'unit_pkr' => 'required',
             'qty' => 'required',
             'total_dollar' => 'required',
-            'total_pkr' => 'required',  
+            'total_pkr' => 'required',
+            'budget_nature' => 'required'  
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
@@ -63,7 +64,8 @@ class BudgetController extends Controller
             'remaining' => $request->qty,
             'total_price_dollar' => $request->total_dollar,
             'total_price_pkr' => $request->total_pkr,
-            'remarks' => $request->remarks
+            'remarks' => $request->remarks,
+            'budget_nature' => $request->budget_nature
         );
         $create = Budget::create($fields);
         if($create){
@@ -102,7 +104,8 @@ class BudgetController extends Controller
             'unit_pkr' => 'required',
             'qty' => 'required',
             'total_dollar' => 'required',
-            'total_pkr' => 'required',  
+            'total_pkr' => 'required', 
+            'budget_nature' => 'required' 
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
@@ -123,7 +126,8 @@ class BudgetController extends Controller
             'remaining' => $request->qty,
             'total_price_dollar' => $request->total_dollar,
             'total_price_pkr' => $request->total_pkr,
-            'remarks' => $request->remarks
+            'remarks' => $request->remarks,
+            'budget_nature' => $request->budget_nature
         );
         $create = Budget::where('id',$id)->update($fields);
         if($create){
