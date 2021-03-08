@@ -111,14 +111,14 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="u_dollar">Unit Price $</label>
-                                                            <input class="form-control py-2" id="u_dollar" name="unit_dollar" type="number" placeholder="Enter unit price in $ here" />
+                                                            <input class="form-control py-2 t_seperator" id="u_dollar" name="unit_dollar" type="text" placeholder="Enter unit price in $ here" />
                                                             <span class="small text-danger">{{ $errors->first('unit_dollar') }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">    
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="pkr">Unit Price PKR</label>
-                                                            <input class="form-control py-2" id="pkr" name="unit_pkr" type="number" placeholder="Enter unit price in pkr here" readonly />
+                                                            <input class="form-control py-2" id="pkr" name="unit_pkr" type="text" placeholder="Enter unit price in pkr here" readonly />
                                                             <span class="small text-danger">{{ $errors->first('unit_pkr') }}</span>
                                                         </div>
                                                     </div>
@@ -136,14 +136,14 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="t_dollar">Total Price $</label>
-                                                            <input class="form-control py-2" id="t_dollar" name="total_dollar" type="number" placeholder="Enter total price in $ here" readonly />
+                                                            <input class="form-control py-2" id="t_dollar" name="total_dollar" type="text" placeholder="Enter total price in $ here" readonly />
                                                             <span class="small text-danger">{{ $errors->first('total_dollar') }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">    
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="t_pkr">Total Price PKR</label>
-                                                            <input class="form-control py-2" id="t_pkr" name="total_pkr" type="number" placeholder="Enter total price in pkr here" readonly />
+                                                            <input class="form-control py-2" id="t_pkr" name="total_pkr" type="text" placeholder="Enter total price in pkr here" readonly />
                                                             <span class="small text-danger">{{ $errors->first('total_pkr') }}</span>
                                                         </div>
                                                     </div>

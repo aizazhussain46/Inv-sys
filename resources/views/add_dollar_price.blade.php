@@ -30,7 +30,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">Dollar Rate</label>
-                                                        <input class="form-control" id="inputFirstName" type="text" name="pkr_val" placeholder="Enter dollar rate here" Required="required" />
+                                                        <input class="form-control t_seperator" id="inputFirstName" type="text" name="pkr_val" placeholder="Enter dollar rate here" Required="required" />
                                                         <span class="small text-danger">{{ $errors->first('pkr_val') }}</span>
                                                     </div>
                                                 </div>

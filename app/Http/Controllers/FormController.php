@@ -408,7 +408,10 @@ class FormController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-        $repair = Repairing::create($request->all());
+        $fields = $request->all();
+        $fields['price_value'] = str_replace(",", "", $fields['price_value']);
+        $fields['actual_price_value'] = str_replace(",", "", $fields['actual_price_value']);
+        $repair = Repairing::create($fields);
         if($repair){
             return redirect()->back()->with('msg', 'Repairing asset Added Successfully!');
         }

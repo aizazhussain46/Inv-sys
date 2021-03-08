@@ -219,7 +219,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="small mb-1" for="price">Item Price</label>
-                                                    <input class="form-control py-2" id="price" name="item_price" type="number" value="{{ $inventory->item_price }}" placeholder="Enter Item Price here" />
+                                                    <input class="form-control py-2 t_seperator" id="price" name="item_price" type="text" value="{{ $inventory->item_price }}" placeholder="Enter Item Price here" />
                                                     <span class="small text-danger">{{ $errors->first('item_price') }}</span>
                                                 </div>
                                             </div>
@@ -244,7 +244,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="small mb-1" for="rate">Dollar Rate</label>
-                                                    <input class="form-control py-2" id="rate" name="dollar_rate" type="number" value="{{ $inventory->dollar_rate }}" placeholder="Enter dollar rate here" />
+                                                    <input class="form-control py-2 t_seperator" id="rate" name="dollar_rate" type="number" value="{{ $inventory->dollar_rate }}" placeholder="Enter dollar rate here" />
                                                     <span class="small text-danger">{{ $errors->first('dollar_rate') }}</span>
                                                 </div>
                                             </div>

@@ -58,12 +58,12 @@ class BudgetController extends Controller
             'type_id' => $request->type_id,
             'year_id' => $request->year_id,
             'description' => $request->description,
-            'unit_price_dollar' => $request->unit_dollar,
-            'unit_price_pkr' => $request->unit_dollar*$request->unit_pkr,
+            'unit_price_dollar' => str_replace(",", "", $request->unit_dollar),
+            'unit_price_pkr' => str_replace(",", "", $request->unit_dollar)*str_replace(",", "", $request->unit_pkr),
             'qty' => $request->qty,
             'remaining' => $request->qty,
-            'total_price_dollar' => $request->total_dollar,
-            'total_price_pkr' => $request->total_pkr,
+            'total_price_dollar' => str_replace(",", "", $request->total_dollar),
+            'total_price_pkr' => str_replace(",", "", $request->total_pkr),
             'remarks' => $request->remarks,
             'budget_nature' => $request->budget_nature
         );
@@ -80,6 +80,10 @@ class BudgetController extends Controller
     {
         $data = array();
         $budget = Budget::find($id);
+        $budget->unit_price_dollar = number_format($budget->unit_price_dollar);
+        $budget->unit_price_pkr = number_format($budget->unit_price_pkr);
+        $budget->total_price_dollar = number_format($budget->total_price_dollar);
+        $budget->total_price_pkr = number_format($budget->total_price_pkr);
         $data['budget'] = $budget;
         $data['categories'] = Category::where('status',1)->get();
         $data['subcategories'] = Subcategory::where('status',1)->get();
@@ -120,12 +124,12 @@ class BudgetController extends Controller
             'type_id' => $request->type_id,
             'year_id' => $request->year_id,
             'description' => $request->description,
-            'unit_price_dollar' => $request->unit_dollar,
-            'unit_price_pkr' => $request->unit_dollar*$request->unit_pkr,
+            'unit_price_dollar' => str_replace(",", "", $request->unit_dollar),
+            'unit_price_pkr' => str_replace(",", "", $request->unit_dollar)*str_replace(",", "", $request->unit_pkr),
             'qty' => $request->qty,
             'remaining' => $request->qty,
-            'total_price_dollar' => $request->total_dollar,
-            'total_price_pkr' => $request->total_pkr,
+            'total_price_dollar' => str_replace(",", "", $request->total_dollar),
+            'total_price_pkr' => str_replace(",", "", $request->total_pkr),
             'remarks' => $request->remarks,
             'budget_nature' => $request->budget_nature
         );

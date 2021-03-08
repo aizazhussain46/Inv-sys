@@ -25,7 +25,7 @@ class DollarController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-        $fields = array('pkr_val'=>$request->pkr_val, 'year_id'=>$request->year_id);
+        $fields = array('pkr_val'=>str_replace(",", "", $request->pkr_val), 'year_id'=>$request->year_id);
         $create = Dollar::create($fields);
         if($create){
             return redirect()->back()->with('msg', 'Dollar Added Successfully!');

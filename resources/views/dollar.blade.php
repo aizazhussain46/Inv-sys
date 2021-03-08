@@ -39,7 +39,7 @@
                                         @foreach ($dollars as $dollar)
                                             <tr>
                                                 <td class='text-align-right'>{{ $i++ }}</td>
-                                                <td class='text-align-right'>{{ $dollar->pkr_val }}</td>
+                                                <td class='text-align-right'>{{ number_format($dollar->pkr_val,2) }}</td>
                                                 <td>{{ $dollar->year->year }}</td>
                                                 <td>{{ date('Y-m-d' ,strtotime($dollar->created_at)) }}</td>
                                                 <td class="text-center">

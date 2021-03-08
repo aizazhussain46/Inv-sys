@@ -70,6 +70,8 @@ class InventoryController extends Controller
         // }    
         
         $fields = $request->all();
+        $fields['item_price'] = str_replace(",", "", $fields['item_price']);
+        $fields['dollar_rate'] = str_replace(",", "", $fields['dollar_rate']);
         $loggedin_user = Auth::id();
         $fields['added_by'] = $loggedin_user;
         $create = Inventory::create($fields);
@@ -96,7 +98,10 @@ class InventoryController extends Controller
         $data['devicetypes'] = Devicetype::where('status',1)->get();
         $data['itemnatures'] = Itemnature::where('status',1)->get();
         $data['inventorytypes'] = Inventorytype::where('status',1)->get();
-        $data['inventory'] = Inventory::find($id);
+        $inventory = Inventory::find($id);
+        $inventory->item_price = number_format($inventory->item_price);
+        $inventory->dollar_rate = number_format($inventory->dollar_rate);
+        $data['inventory'] = $inventory;
         return view('edit_inventory', $data);
     }
 
@@ -128,8 +133,8 @@ class InventoryController extends Controller
         $arr['itemnature_id'] = $request->itemnature_id;
         $arr['purchase_date'] = $request->purchase_date;
         $arr['remarks'] = $request->remarks;
-        $arr['item_price'] = $request->item_price;
-        $arr['dollar_rate'] = $request->dollar_rate;
+         $arr['item_price'] = str_replace(",", "", $request->item_price);
+        $arr['dollar_rate'] = str_replace(",", "", $request->dollar_rate);
         $arr['delivery_challan'] = $request->delivery_challan;
         $arr['delivery_challan_date'] = $request->delivery_challan_date;
         $arr['invoice_number'] = $request->invoice_number;
@@ -194,7 +199,7 @@ class InventoryController extends Controller
     public function get_price($id)
     {
         $inventory = Inventory::find($id);
-        return $inventory->item_price;
+        return number_format($inventory->item_price);
     }
     public function get_inv_items($id)
     {

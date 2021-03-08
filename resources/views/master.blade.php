@@ -501,15 +501,18 @@ $(document).ready(function(){
     $("#year").on("change",function(){
         var id = $(this).val();
         $.get("{{ url('pkr_by_year') }}/"+id, function(data){
-            console.log(data);
-            $('#pkr').val(data.pkr_val);
+            var value = data.pkr_val;
+            $('#pkr').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         });    
     });
 
     $('#qty').keyup(function(){
           var qty = $(this).val();
-          var dollar = $('#u_dollar').val();
-          var pkr = $('#pkr').val();
+          var d = $('#u_dollar').val();
+          var p = $('#pkr').val();
+          var dollar = d.replace(",", "");
+          var pkr = p.replace(",", "");
+
           var total_dollar = dollar*qty;
           var total_pkr = total_dollar*pkr;
         //   console.log(qty);
@@ -517,8 +520,8 @@ $(document).ready(function(){
         //   console.log(pkr);
         //   console.log(total_dollar);
         //   console.log(total_pkr);
-          $('#t_dollar').val(total_dollar);
-          $('#t_pkr').val(total_pkr);
+          $('#t_dollar').val(total_dollar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+          $('#t_pkr').val(total_pkr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }); 
 
     $('.pro').keydown(function(e) {
@@ -559,7 +562,16 @@ $(document).ready(function(){
                 );
             });    
         });    
-    });      
+    });  
+
+    $(".t_seperator").focusout(function(){
+        var value = $(this).val();
+
+        var num_parts = value.toString().split(".");
+        num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $(this).val(num_parts.join("."));
+        //alert(num_parts.join("."));
+    });    
 
 });
 </script> 

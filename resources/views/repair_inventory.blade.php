@@ -76,7 +76,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <label class="small mb-1" for="price">Repairing Cost</label>
-                                                        <input class="form-control py-2" id="price" name="price_value" type="number" placeholder="Enter Repairing Cost here" />
+                                                        <input class="form-control py-2 t_seperator" id="price" name="price_value" type="text" placeholder="Enter Repairing Cost here" />
                                                         <span class="small text-danger">{{ $errors->first('price_value') }}</span>
                                                     </div>
                                                 </div>
