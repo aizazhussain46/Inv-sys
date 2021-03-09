@@ -333,4 +333,12 @@ class PDFController extends Controller
             $pdf = PDF::loadView('bincardreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
             return $pdf->download('bin_card_report.pdf');
     }
+    public function repairingexport($data) 
+    {
+        date_default_timezone_set('Asia/karachi');
+        $fields = (array)json_decode($data);
+        $repairs = Repairing::where([[$fields]])->orderBy('id', 'desc')->get();
+            $pdf = PDF::loadView('repairingreport', ['repairs'=>$repairs])->setPaper('a4', 'landscape');
+            return $pdf->download('asset_repairing_report.pdf');
+    }
 }

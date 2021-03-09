@@ -83,6 +83,7 @@
                                     <a class="nav-link" href="{{ url('inventory_out') }}">Inventory Out</a>
                                     <a class="nav-link" href="{{ url('balance_report') }}">Balance report</a>
                                     <a class="nav-link" href="{{ url('bin_card') }}">Bin Card report</a>
+                                    <a class="nav-link" href="{{ url('asset_repairing') }}">Asset Repairing report</a>
                                 </nav>
                             </div>
 

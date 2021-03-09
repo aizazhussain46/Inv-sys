@@ -134,9 +134,11 @@ Route::get('/inventory_in', 'ReportController@inventory_in');
 Route::get('/inventoryinexport/{data}','PDFController@inventoryinexport');
 Route::get('/inventory_out', 'ReportController@inventory_out');
 Route::get('/inventoryoutexport/{data}','PDFController@inventoryoutexport');
-
 Route::get('/bin_card', 'ReportController@bin_card');
 Route::get('/bincardexport/{data}','PDFController@bincardexport');
+
+Route::get('/asset_repairing', 'ReportController@asset_repairing');
+Route::get('/repairingexport/{data}','PDFController@repairingexport');
 
 Route::get('/activeinactive/{id}/{data}','UserController@activeinactive');
 

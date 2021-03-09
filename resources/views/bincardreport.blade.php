@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>inventory report</title>
+	<title>bin card report</title>
     <style>
     .secondary-table{
         width:100%;
@@ -23,7 +23,7 @@
 <table cellpadding="0" cellspacing="0" style="width:100%;">
             <tr class="text-center">
                 <td class="text-center">
-                    <h2><u>Inventory Edit Logs Report</u><span class="font-14"><b> - <u>EFU Life Assurance Ltd.</u></b></span></h2>
+                    <h2><u>Inventory Bin Card Report</u><span class="font-14"><b> - <u>EFU Life Assurance Ltd.</u></b></span></h2>
                     
                     
                 </td>

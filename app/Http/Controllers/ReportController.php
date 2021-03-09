@@ -332,4 +332,22 @@ class ReportController extends Controller
         $data['inventories'] = $inventories;
         return view('show_bincard', $data);
     }
+    public function asset_repairing(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $repairs = array();
+        }
+        else{
+            $fields = array_filter($request->all());
+            unset($fields['_token']);
+            $data['filters'] = $fields;
+            $repairs = Repairing::where([[$fields]])->orderBy('id', 'desc')->get();
+        }
+        $data['repairs'] = $repairs;
+        return view('show_repairings', $data);
+    }
 }
