@@ -341,4 +341,42 @@ class PDFController extends Controller
             $pdf = PDF::loadView('repairingreport', ['repairs'=>$repairs])->setPaper('a4', 'landscape');
             return $pdf->download('asset_repairing_report.pdf');
     }
+    public function disposalexport($data) 
+    {
+        date_default_timezone_set('Asia/karachi');
+        $fields = (array)json_decode($data);
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_date']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+            if(!empty($inventories)){
+                foreach($inventories as $inventory){
+                    $inventory->added_by = User::where('id',$inventory->added_by)->first();
+                }
+            }
+            $pdf = PDF::loadView('disposalreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
+            return $pdf->download('disposal_report.pdf');
+    }
 }

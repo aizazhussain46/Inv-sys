@@ -350,4 +350,53 @@ class ReportController extends Controller
         $data['repairs'] = $repairs;
         return view('show_repairings', $data);
     }
+    public function disposal(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['invtypes'] = Inventorytype::where('status', 1)->get();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $inventories = array();
+        }
+        else{
+            $fields = array_filter($request->all());
+            unset($fields['_token']);
+            $data['filters'] = $fields;
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else if(!isset($fields['from_d ate']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $inventories = Inventory::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                                        ->whereNotIn('status', [0])
+                                        ->orderBy('id', 'desc')->get();
+            }
+            else{
+                $inventories = Inventory::where([[$fields]])->whereNotIn('status', [0])->orderBy('id', 'desc')->get();
+            }
+        }
+        if(!empty($inventories)){
+            foreach($inventories as $inventory){
+               $inventory->added_by = User::where('id',$inventory->added_by)->first();
+            }
+        }
+        $data['inventories'] = $inventories;
+        return view('show_disposal', $data);
+    }
 }
