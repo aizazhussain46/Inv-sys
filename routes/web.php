@@ -138,9 +138,10 @@ Route::get('/bin_card', 'ReportController@bin_card');
 Route::get('/bincardexport/{data}','PDFController@bincardexport');
 Route::get('/asset_repairing', 'ReportController@asset_repairing');
 Route::get('/repairingexport/{data}','PDFController@repairingexport');
-
 Route::get('/disposal', 'ReportController@disposal');
 Route::get('/disposalexport/{data}','PDFController@disposalexport');
+Route::get('/vendor_buying', 'ReportController@vendor_buying');
+Route::get('/vendor_buyingexport/{data}','PDFController@vendor_buyingexport');
 
 Route::get('/activeinactive/{id}/{data}','UserController@activeinactive');
 

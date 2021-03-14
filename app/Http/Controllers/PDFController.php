@@ -15,6 +15,7 @@ use App\Year;
 use App\User;
 use App\Budgetitem as Budget;
 use App\Issue;
+use App\Vendor;
 use App\Repairing;
 class PDFController extends Controller
 {
@@ -378,5 +379,65 @@ class PDFController extends Controller
             }
             $pdf = PDF::loadView('disposalreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
             return $pdf->download('disposal_report.pdf');
+    }
+    public function vendor_buyingexport($data) 
+    {
+        date_default_timezone_set('Asia/karachi');
+        $fields = (array)json_decode($data);
+        
+            if(empty($fields['subcategory_id'])){
+                $subcat = Subcategory::where('status',1)->get();
+            }
+            else{
+                $subcat = Subcategory::where('id',$fields['subcategory_id'])->get();
+            }
+            
+            $array = array();
+            $i = 0;
+            foreach($subcat as $sub){
+            
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $fields['vendor_id'])->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])->whereNotIn('status', [0])->sum('item_price');
+                
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $fields['vendor_id'])->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])->whereNotIn('status', [0])->sum('item_price');
+                
+            }
+            else if(!isset($fields['from_d ate']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $fields['vendor_id'])->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereBetween('updated_at', ['', date('Y-m-d', $to)])->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereBetween('updated_at', ['', date('Y-m-d', $to)])->whereNotIn('status', [0])->sum('item_price');
+                
+            }
+            else{
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $fields['vendor_id'])->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$fields['vendor_id'])->whereNotIn('status', [0])->sum('item_price');
+            }
+            if($array[$i]['total_items'] == 0){
+                unset($array[$i]);
+            }
+            $i++;
+        }
+        $inventories = $array;
+        $pdf = PDF::loadView('vendorbuyingreport', ['inventories'=>$inventories])->setPaper('a4', 'landscape');
+        return $pdf->download('vendor_buying_report.pdf');
     }
 }

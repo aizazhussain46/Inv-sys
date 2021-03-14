@@ -399,4 +399,80 @@ class ReportController extends Controller
         $data['inventories'] = $inventories;
         return view('show_disposal', $data);
     }
+    public function vendor_buying(Request $request)
+    {
+        date_default_timezone_set('Asia/karachi');
+        $data = array();
+        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['vendors'] = Vendor::all();
+        $data['filters'] = array();
+        if(empty($request->all())){
+            $inventories = array();
+        }
+        else{
+            $validator = Validator::make($request->all(), [
+                'vendor_id' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+            $fields = array_filter($request->all());
+            unset($fields['_token']);
+            $data['filters'] = $fields;
+            if(empty($request->subcategory_id)){
+                $subcat = Subcategory::where('status',1)->get();
+            }
+            else{
+                $subcat = Subcategory::where('id',$request->subcategory_id)->get();
+            }
+            
+            $array = array();
+            $i = 0;
+            foreach($subcat as $sub){
+            
+            if(isset($fields['from_date']) && isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['from_date']);
+                unset($fields['to_date']);
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $request->vendor_id)->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereBetween('updated_at', [$from, date('Y-m-d', $to)])->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereBetween('updated_at', [$from, date('Y-m-d', $to)])->whereNotIn('status', [0])->sum('item_price');
+                
+            }
+            else if(isset($fields['from_date']) && !isset($fields['to_date'])){
+                $from = $fields['from_date'];
+                unset($fields['from_date']);
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $request->vendor_id)->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])->whereNotIn('status', [0])->sum('item_price');
+                
+            }
+            else if(!isset($fields['from_d ate']) && isset($fields['to_date'])){
+                $to = strtotime($fields['to_date'].'+1 day');
+                unset($fields['to_date']);
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $request->vendor_id)->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereBetween('updated_at', ['', date('Y-m-d', $to)])->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereBetween('updated_at', ['', date('Y-m-d', $to)])->whereNotIn('status', [0])->sum('item_price');
+                
+            }
+            else{
+                $array[$i]['subcategory'] = $sub->sub_cat_name;
+                $array[$i]['vendor'] = Vendor::where('id', $request->vendor_id)->select('vendor_name')->first();
+                $array[$i]['total_items'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereNotIn('status', [0])->count();
+                $array[$i]['amount'] = Inventory::where('subcategory_id',$sub->id)->where('vendor_id',$request->vendor_id)->whereNotIn('status', [0])->sum('item_price');
+            }
+            if($array[$i]['total_items'] == 0){
+                unset($array[$i]);
+            }
+            $i++;
+        }
+        }
+        
+        $data['inventories'] = $array;
+        return view('show_vendorbuying', $data);
+    }
 }
