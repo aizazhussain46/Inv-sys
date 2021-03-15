@@ -170,7 +170,7 @@
                                                     </div>
                                                 </div> -->
                                             </div>
-                                            <!-- <div class="form-group">
+                                            <div class="form-group">
                                                 <label class="small mb-1" for="role">Role</label>
                                                 <select class="custom-select" id="role" name="role_id">
                                                     <option value=0>Select Role here</option>
@@ -183,7 +183,7 @@
                                                     @endforeach
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('role_id') }}</span>
-                                            </div> -->
+                                            </div>
                                             <div class="form-group mt-4 mb-0">
                                             <input type="submit" name="update_user" value="Update User" class="btn btn-primary btn-block">
                                             </div>
