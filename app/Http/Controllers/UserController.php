@@ -77,7 +77,7 @@ class UserController extends Controller
         $fields = array(
             // 'name'=>$request->name, 
             // 'email' => $request->email, 
-            // 'role_id' => $request->role_id,
+            'role_id' => $request->role_id,
             // 'emp_no' => $request->emp_no,
             // 'branch' => $request->branch,
             // 'location' => $request->location,
