@@ -33,6 +33,7 @@ class Inventory extends Model
         'good_condition',
         'verification',
         'issued_to',
+        'year_id',
         'added_by',
         'issued_by',
         'status',

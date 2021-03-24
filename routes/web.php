@@ -74,8 +74,8 @@ Route::get('/add_employee', [FormController::class, 'add_employee'])->middleware
 Route::get('/add_devicetype', [FormController::class, 'add_devicetype'])->middleware('role:1');
 Route::get('/add_itemnature', [FormController::class, 'add_itemnature'])->middleware('role:1');
 Route::get('/add_inventorytype', [FormController::class, 'add_inventorytype'])->middleware('role:1');
-Route::get('/model_by_make/{id}', [FormController::class, 'model_by_make'])->middleware('role:1');
-Route::get('/subcat_by_category/{id}', [FormController::class, 'subcat_by_category'])->middleware('role:1');
+Route::get('/model_by_make/{id}', [FormController::class, 'model_by_make']);
+Route::get('/subcat_by_category/{id}', [FormController::class, 'subcat_by_category']);
 Route::get('/get_grns', 'GrnController@get_grns')->middleware('role:1');
 Route::post('/filter_grn', 'GrnController@filter_grn')->middleware('role:1');
 Route::get('/get_gins', 'GinController@get_gins')->middleware('role:1');
