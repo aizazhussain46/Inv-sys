@@ -170,7 +170,7 @@ class FormController extends Controller
             if(empty($budget)){
                 return redirect()->back()->with('msg','Budget not available in this employee`s department');
             }
-        
+        echo "<pre>";
         $itemnames = null;
         $itemsin = null;
         $available = false;
@@ -179,9 +179,9 @@ class FormController extends Controller
             $inventory = Inventory::find($id);
             $budgets = Budget::where('dept_id', $dept_id)->where('year_id', $request->year_id)->where('subcategory_id', $inventory->subcategory_id)->get();
                 
-                if(empty($budgets)){
+                if(count($budgets) == 0){
                     $itemnames .= $inventory->subcategory->sub_cat_name.', ';
-                }
+                }   
                 else{
                     foreach($budgets as $b){
                         if($b->consumed < $b->qty){

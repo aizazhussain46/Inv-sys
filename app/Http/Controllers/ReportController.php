@@ -245,21 +245,21 @@ class ReportController extends Controller
                     $to = strtotime($fields['to_issuance'].'+1 day');
                     unset($fields['from_issuance']);
                     unset($fields['to_issuance']);
-                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', $to)])
+                    $issue = Issue::whereBetween('updated_at', [$from, date('Y-m-d', $to)])
                                             ->select('inventory_id')
                                             ->orderBy('id', 'desc')->get();
                 }
                 else if(isset($fields['from_issuance']) && !isset($fields['to_issuance'])){
                     $from = $fields['from_issuance'];
                     unset($fields['from_issuance']);
-                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
+                    $issue = Issue::whereBetween('updated_at', [$from, date('Y-m-d', strtotime('+1 day'))])
                                             ->select('inventory_id')
                                             ->orderBy('id', 'desc')->get();
                 }
                 else if(!isset($fields['from_issuance']) && isset($fields['to_issuance'])){
                     $to = strtotime($fields['to_issuance'].'+1 day');
                     unset($fields['to_issuance']);
-                    $issue = Issue::where([[$fields]])->whereBetween('updated_at', ['', date('Y-m-d', $to)])
+                    $issue = Issue::whereBetween('updated_at', ['', date('Y-m-d', $to)])
                                             ->select('inventory_id')
                                             ->orderBy('id', 'desc')->get();
                 }
