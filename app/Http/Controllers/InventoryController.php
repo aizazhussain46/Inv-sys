@@ -180,7 +180,7 @@ class InventoryController extends Controller
         $inventory = Inventory::find($id);
         $user = Employee::where('emp_code', $inventory->issued_to)->first();
             if($user){
-                $inv['user'] = $user;
+                $inventory->user = $user;
             }
         //return $data;
         return view('inventorydetail', ['inventory' => $inventory]);
