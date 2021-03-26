@@ -59,8 +59,8 @@
                                                 <label class="small mb-1" for="dept_type">Dept/Branch type</label>
                                                 <select class="custom-select" id="dept_type" name="dept_branch_type">
                                                     <option value=0>Select type here</option>
-                                                    <option value="department">Department</option>
-                                                    <option value="branch">Branch</option>
+                                                    <option value="head_office" <?php echo $budget->dept_branch_type=='head_office'?"selected":""; ?> >Head Office</option>
+                                                    <option value="branch" <?php echo $budget->dept_branch_type=='branch'?"selected":""; ?> >Branch</option>
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('dept_branch_type') }}</span>
                                             </div>

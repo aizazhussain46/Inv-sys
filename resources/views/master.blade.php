@@ -65,8 +65,7 @@
                                     <a class="nav-link" href="{{ url('repair') }}">Asset Repairing</a>
                                 </nav>
                             </div>
-                            @endif
-                            @if(Auth::user()->role_id == 1)
+                            
                             <!-- Reports -->
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -88,7 +87,8 @@
                                     <a class="nav-link" href="{{ url('vendor_buying') }}">Average Vendor Buying</a>
                                 </nav>
                             </div>
-
+                            @endif
+                            @if(Auth::user()->role_id == 1)
                             <!-- User Management -->
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

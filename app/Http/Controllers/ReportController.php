@@ -263,7 +263,7 @@ class ReportController extends Controller
                                             ->select('inventory_id')
                                             ->orderBy('id', 'desc')->get();
                 }
-
+            
                 $ids = array();
                 foreach($issue as $iss){
                     $ids[] = $iss->inventory_id;
