@@ -61,6 +61,7 @@ class BudgetController extends Controller
             'unit_price_dollar' => str_replace(",", "", $request->unit_dollar),
             'unit_price_pkr' => str_replace(",", "", $request->unit_dollar)*str_replace(",", "", $request->unit_pkr),
             'qty' => $request->qty,
+            'consumed' => 0,
             'remaining' => $request->qty,
             'total_price_dollar' => str_replace(",", "", $request->total_dollar),
             'total_price_pkr' => str_replace(",", "", $request->total_pkr),
