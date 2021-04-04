@@ -166,6 +166,8 @@ class ReportController extends Controller
         $data['itemnatures'] = Itemnature::where('status',1)->get();
         $data['vendors'] = Vendor::all();
         $data['filters'] = array();
+
+        $invs = array();
         if(empty($request->all())){
             $data['inventories'] = array();
         }
@@ -220,6 +222,8 @@ class ReportController extends Controller
         $data['itemnatures'] = Itemnature::where('status',1)->get();
         $data['vendors'] = Vendor::all();
         $data['filters'] = array();
+
+        $invs = array();
         if(empty($request->all())){
             $data['inventories'] = array();
         }
