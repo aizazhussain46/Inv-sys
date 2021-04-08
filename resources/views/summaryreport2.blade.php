@@ -191,7 +191,7 @@
                                                 </td>
                                             </tr>
                                         </tfoot>
-                                        <?php
+<?php
 $grand_t_d += $total_b_d; 
 $grand_t_p += $total_b_p; 
 $grand_qty += $total_qty;

@@ -1,7 +1,14 @@
 @extends("master")
 
 @section("content")
-
+<?php
+$grand_u_d = 0;
+$grand_u_p = 0; 
+$grand_t_d = 0; 
+$grand_t_p = 0; 
+$grand_c = 0; 
+$grand_r = 0;
+ ?> 
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
@@ -120,6 +127,8 @@
                                         $unit_b_p = 0;
                                         $total_b_d = 0;
                                         $total_b_p = 0;
+                                        $c = 0;
+                                        $r = 0;
                                         ?>
                                         @foreach ($type->categories as $budget)
                                             <tr>
@@ -137,24 +146,45 @@
                                             $unit_b_p += $budget->unit_price_pkr;
                                             $total_b_d += $budget->total_price_dollar;
                                             $total_b_p += $budget->total_price_pkr;
+                                            $c += $budget->consumed;
+                                            $r += $budget->remaining;
                                             ?>
                                         @endforeach 
+                                        <tr>
+                                                <th colspan='2' style="text-align:right;">Total</th>
+                                                <td class='text-align-right'>{{ number_format($unit_b_d,2) }}$</td>
+                                                <td class='text-align-right'>Rs{{ number_format($unit_b_p,2) }}</td>
+                                                <td class='text-align-right'>{{ number_format($total_b_d,2) }}$</td>
+                                                <td class='text-align-right'>Rs{{ number_format($total_b_p,2) }}</td>
+                                                <td class='text-align-right'>{{ $c }}</td>
+                                                <td class='text-align-right'>{{ $r }}</td>
+                                            </tr>
                                         </tbody>
+<?php
+$grand_u_d += $unit_b_d;
+$grand_u_p += $unit_b_p; 
+$grand_t_d += $total_b_d; 
+$grand_t_p += $total_b_p; 
+$grand_c += $c; 
+$grand_r += $r;
+ ?> 
+                                        @if($type->type  == 'Opex')
                                         <tfoot>
                                             <tr>
                                                 <th colspan='2' style="text-align:right;">Grand Total</th>
-                                                <td>{{ number_format($unit_b_d,2) }}$</td>
-                                                <td>Rs{{ number_format($unit_b_p,2) }}</td>
-                                                <td>{{ number_format($total_b_d,2) }}$</td>
-                                                <td>Rs{{ number_format($total_b_p,2) }}</td>
-                                                <td></td>
-                                                <td></td>
+                                                <td class='text-align-right'>{{ number_format($grand_u_d,2) }}$</td>
+                                                <td class='text-align-right'>Rs{{ number_format($grand_u_p,2) }}</td>
+                                                <td class='text-align-right'>{{ number_format($grand_t_d,2) }}$</td>
+                                                <td class='text-align-right'>Rs{{ number_format($grand_t_p,2) }}</td>
+                                                <td class='text-align-right'>{{ $grand_c }}</td>
+                                                <td class='text-align-right'>{{ $grand_r }}</td>
                                             </tr>
                                         </tfoot>
+                                        @endif
                                     </table>
                                 </div>
                             </div>
-                        </div> 
+                        </div>                        
                     @endforeach 
                     @endif   
                     </div>
