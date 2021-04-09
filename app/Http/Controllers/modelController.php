@@ -38,7 +38,7 @@ class modelController extends Controller
 
     public function show($id)
     {
-        $make = Makee::where('status',1)->get();
+        $make = Makee::where('status',1)->orderBy('make_name', 'asc')->get();
         $model = Modal::find($id);
         return view('edit_model', ['model'=> $model, 'makes' => $make]);
     }

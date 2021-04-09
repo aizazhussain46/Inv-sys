@@ -12,7 +12,7 @@ class BranchController extends Controller
     }
     public function index()
     {
-        $branch = Branch::all();
+        $branch = Branch::orderBy('branch_name', 'asc')->get();
         return view('branch', ['branches' => $branch]);
     }
 

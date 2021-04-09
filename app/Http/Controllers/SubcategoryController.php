@@ -40,7 +40,7 @@ class SubcategoryController extends Controller
     public function show($id)
     {
         $subcategory = Subcategory::find($id);
-        $category = category::all();
+        $category = Category::orderBy('category_name', 'asc')->get();
         return view('edit_subcategory', ['categories'=> $category, 'subcategory'=> $subcategory]);
     }
 

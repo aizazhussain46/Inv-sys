@@ -38,7 +38,7 @@ class FormController extends Controller
         return view('add_category');
     }
     public function add_subcategory(){
-        $category = Category::all();
+        $category = Category::orderBy('category_name', 'asc')->get();
         return view('add_subcategory', ['categories' => $category]);
     }
     public function add_branch(){
@@ -51,7 +51,7 @@ class FormController extends Controller
         return view('add_location');
     }
     public function add_model(){
-        $make = Makee::where('status',1)->get();
+        $make = Makee::where('status',1)->orderBy('make_name', 'asc')->get();
         return view('add_model', ['makes' => $make]);
     }
     public function add_role(){
@@ -67,7 +67,7 @@ class FormController extends Controller
         return view('add_inventorytype');
     }
     public function add_dollar_price(){
-        $year = Year::all();
+        $year = Year::orderBy('year', 'asc')->get();
         return view('add_dollar_price', ['years' => $year]);
     }
     public function add_year(){
@@ -78,32 +78,32 @@ class FormController extends Controller
     }
     public function add_budget(){
         $data = array();
-        $data['categories'] = Category::where('status',1)->get();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
-        $data['types'] = Type::all();
-        $data['years'] = Year::where('locked', null)->get();
+        $data['categories'] = Category::where('status',1)->orderBy('category_name', 'asc')->get();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
+        $data['types'] = Type::orderBy('type', 'asc')->get();
+        $data['years'] = Year::where('locked', null)->orderBy('year', 'asc')->get();
         return view('add_budget', $data);
     }
     public function show_budget(){
         $data = array();
-        $data['years'] = Year::all();
-        $data['categories'] = Category::where('status',1)->get();
+        $data['years'] = Year::orderBy('year', 'asc')->get();
+        $data['categories'] = Category::where('status',1)->orderBy('category_name', 'asc')->get();
         $data['budgets'] = array();
         $data['filters'] = (object)array('catid'=>'', 'yearid'=>'');
         return view('show_budget', $data);
     }
     public function summary(){
         
-        return view('summary', ['filter'=>'', 'types'=>array(), 'years'=>Year::all()]);
+        return view('summary', ['filter'=>'', 'types'=>array(), 'years'=>Year::orderBy('year', 'asc')->get()]);
     }
 
     public function add_store(){
-        $user = User::where('role_id',2)->get();
-        $location = Location::all();
+        $user = User::where('role_id',2)->orderBy('name', 'asc')->get();
+        $location = Location::orderBy('location', 'asc')->get();
         return view('add_store', ['users' => $user, 'locations' => $location]);
     }
     public function add_user(){
-        $role = Role::all();
+        $role = Role::orderBy('role', 'asc')->get();
         return view('add_user', ['roles'=>$role]);
     }
     public function add_employee(){
@@ -111,34 +111,34 @@ class FormController extends Controller
     }
     public function add_inventory(){
         $data = array();
-        $data['categories'] = Category::where('status',1)->get();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['categories'] = Category::where('status',1)->orderBy('category_name', 'asc')->get();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
         // $data['departments'] = Department::where('status',1)->get();
-        $data['locations'] = Location::all();
+        $data['locations'] = Location::orderBy('location', 'asc')->get();
         // $data['branches'] = Branch::where('status',1)->get();
-        $data['stores'] = Store::all();
-        $data['models'] = Modal::where('status',1)->get();
-        $data['makes'] = Makee::where('status',1)->get();
-        $data['vendors'] = Vendor::all();
-        $data['devicetypes'] = Devicetype::where('status',1)->get();
-        $data['itemnatures'] = Itemnature::where('status',1)->get();
-        $data['inventorytypes'] = Inventorytype::where('status',1)->get();
+        $data['stores'] = Store::orderBy('store_name', 'asc')->get();
+        $data['models'] = Modal::where('status',1)->orderBy('model_name', 'asc')->get();
+        $data['makes'] = Makee::where('status',1)->orderBy('make_name', 'asc')->get();
+        $data['vendors'] = Vendor::orderBy('vendor_name', 'asc')->get();
+        $data['devicetypes'] = Devicetype::where('status',1)->orderBy('devicetype_name', 'asc')->get();
+        $data['itemnatures'] = Itemnature::where('status',1)->orderBy('itemnature_name', 'asc')->get();
+        $data['inventorytypes'] = Inventorytype::where('status',1)->orderBy('inventorytype_name', 'asc')->get();
         return view('add_inventory', $data);
     }
     public function add_with_grn(){
         $data = array();
-        $data['categories'] = Category::where('status',1)->get();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['categories'] = Category::where('status',1)->orderBy('category_name', 'asc')->get();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
         // $data['departments'] = Department::where('status',1)->get();
-        $data['locations'] = Location::all();
+        $data['locations'] = Location::orderBy('location', 'asc')->get();
         // $data['branches'] = Branch::where('status',1)->get();
-        $data['stores'] = Store::all();
-        $data['models'] = Modal::where('status',1)->get();
-        $data['makes'] = Makee::where('status',1)->get();
-        $data['vendors'] = Vendor::all();
-        $data['devicetypes'] = Devicetype::where('status',1)->get();
-        $data['itemnatures'] = Itemnature::where('status',1)->get();
-        $data['inventorytypes'] = Inventorytype::where('status',1)->get();
+        $data['stores'] = Store::orderBy('store_name', 'asc')->get();
+        $data['models'] = Modal::where('status',1)->orderBy('model_name', 'asc')->get();
+        $data['makes'] = Makee::where('status',1)->orderBy('make_name', 'asc')->get();
+        $data['vendors'] = Vendor::orderBy('vendor_name', 'asc')->get();
+        $data['devicetypes'] = Devicetype::where('status',1)->orderBy('devicetype_name', 'asc')->get();
+        $data['itemnatures'] = Itemnature::where('status',1)->orderBy('itemnature_name', 'asc')->get();
+        $data['inventorytypes'] = Inventorytype::where('status',1)->orderBy('inventorytype_name', 'asc')->get();
         return view('addwithgrn', $data);
     }
     public function add_make(){
@@ -149,7 +149,7 @@ class FormController extends Controller
     }
     public function issue_inventory(){
         $inventory = Inventory::where('issued_to', NULL)->whereIn('status', [1,2])->orderBy('id', 'desc')->get();
-        $year = Year::where('locked', null)->get();
+        $year = Year::where('locked', null)->orderBy('year', 'asc')->get();
         return view('issue_inventory', ['years'=> $year,'inventories' => $inventory]);
     }
     public function submitt_issue(Request $request){
@@ -230,7 +230,7 @@ class FormController extends Controller
     }
     public function issue_with_gin(){
         $inventory = Inventory::where('issued_to', NULL)->whereIn('status', [1,2])->orderBy('id', 'desc')->get();
-        $year = Year::where('locked', null)->get();
+        $year = Year::where('locked', null)->orderBy('year', 'asc')->get();
         return view('issuewithgin', ['years'=> $year,'inventories' => $inventory]);
     }
     public function submit_gin(Request $request){
@@ -396,7 +396,7 @@ class FormController extends Controller
     }
     public function repair(){
         $inventory = Inventory::orderBy('id', 'desc')->select('id','product_sn')->get();
-        $categories = Category::where('status',1)->get();
+        $categories = Category::where('status',1)->orderBy('category_name', 'asc')->get();
         return view('repair_inventory', ['categories'=>$categories, 'inventories' => $inventory]);
     }
     public function repair_inventory(Request $request){
@@ -434,12 +434,12 @@ class FormController extends Controller
     }
     public function model_by_make($id)
     {
-        $get = Modal::where('make_id', $id)->where('status', 1)->get();
+        $get = Modal::where('make_id', $id)->where('status', 1)->orderBy('model_name', 'asc')->get();
         return $get;
     }
     public function subcat_by_category($id)
     {
-        $get = Subcategory::where('category_id', $id)->where('status', 1)->get();
+        $get = Subcategory::where('category_id', $id)->where('status', 1)->orderBy('sub_cat_name', 'asc')->get();
         return $get;
     }
     public function pkr_by_year($id)

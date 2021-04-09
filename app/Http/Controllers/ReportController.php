@@ -31,8 +31,8 @@ class ReportController extends Controller
     {
         date_default_timezone_set('Asia/karachi');
         $data = array();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
-        $data['locations'] = Location::all();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
+        $data['locations'] = Location::orderBy('location', 'asc')->get();
         $data['filters'] = array();
         if(empty($request->all())){
             $data['inventories'] = array();
@@ -93,8 +93,8 @@ class ReportController extends Controller
     public function balance_report(Request $request)
     {
         $data = array();
-        $data['locations'] = Location::all();
-        $data['stores'] = Store::all();
+        $data['locations'] = Location::orderBy('location', 'asc')->get();
+        $data['stores'] = Store::orderBy('store_name', 'asc')->get();
         $fields = array_filter($request->all());
         unset($fields['_token']);
         $data['filters'] = $fields;
@@ -158,13 +158,13 @@ class ReportController extends Controller
     {
         date_default_timezone_set('Asia/karachi');
         $data = array();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
-        $data['locations'] = Location::all();
-        $data['invtypes'] = Inventorytype::where('status', 1)->get();
-        $data['makes'] = Makee::where('status',1)->get();
-        $data['stores'] = Store::all();
-        $data['itemnatures'] = Itemnature::where('status',1)->get();
-        $data['vendors'] = Vendor::all();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
+        $data['locations'] = Location::orderBy('location', 'asc')->get();
+        $data['invtypes'] = Inventorytype::where('status', 1)->orderBy('inventorytype_name', 'asc')->get();
+        $data['makes'] = Makee::where('status',1)->orderBy('make_name', 'asc')->get();
+        $data['stores'] = Store::orderBy('store_name', 'asc')->get();
+        $data['itemnatures'] = Itemnature::where('status',1)->orderBy('itemnature_name', 'asc')->get();
+        $data['vendors'] = Vendor::orderBy('vendor_name', 'asc')->get();
         $data['filters'] = array();
 
         $invs = array();
@@ -213,14 +213,14 @@ class ReportController extends Controller
     {
         date_default_timezone_set('Asia/karachi');
         $data = array();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
-        $data['locations'] = Location::all();
-        $data['invtypes'] = Inventorytype::where('status', 1)->get();
-        $data['makes'] = Makee::where('status',1)->get();
-        $data['stores'] = Store::all();
-        $data['employees'] = Employee::all();
-        $data['itemnatures'] = Itemnature::where('status',1)->get();
-        $data['vendors'] = Vendor::all();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
+        $data['locations'] = Location::orderBy('location', 'asc')->get();
+        $data['invtypes'] = Inventorytype::where('status', 1)->orderBy('inventorytype_name', 'asc')->get();
+        $data['makes'] = Makee::where('status',1)->orderBy('make_name', 'asc')->get();
+        $data['stores'] = Store::orderBy('store_name', 'asc')->get();
+        $data['employees'] = Employee::orderBy('name', 'asc')->get();
+        $data['itemnatures'] = Itemnature::where('status',1)->orderBy('itemnature_name', 'asc')->get();
+        $data['vendors'] = Vendor::orderBy('vendor_name', 'asc')->get();
         $data['filters'] = array();
 
         $invs = array();
@@ -340,7 +340,7 @@ class ReportController extends Controller
     {
         date_default_timezone_set('Asia/karachi');
         $data = array();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
         $data['filters'] = array();
         if(empty($request->all())){
             $repairs = array();
@@ -358,8 +358,8 @@ class ReportController extends Controller
     {
         date_default_timezone_set('Asia/karachi');
         $data = array();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
-        $data['invtypes'] = Inventorytype::where('status', 1)->get();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
+        $data['invtypes'] = Inventorytype::where('status', 1)->orderBy('inventorytype_name', 'asc')->get();
         $data['filters'] = array();
         if(empty($request->all())){
             $inventories = array();
@@ -407,8 +407,9 @@ class ReportController extends Controller
     {
         date_default_timezone_set('Asia/karachi');
         $data = array();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
-        $data['vendors'] = Vendor::all();
+        $array = array();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
+        $data['vendors'] = Vendor::orderBy('vendor_name', 'asc')->get();
         $data['filters'] = array();
         if(empty($request->all())){
             $inventories = array();
@@ -430,7 +431,6 @@ class ReportController extends Controller
                 $subcat = Subcategory::where('id',$request->subcategory_id)->get();
             }
             
-            $array = array();
             $i = 0;
             foreach($subcat as $sub){
             

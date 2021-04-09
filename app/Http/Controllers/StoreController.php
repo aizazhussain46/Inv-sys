@@ -48,8 +48,8 @@ class StoreController extends Controller
     public function show($id)
     {
         $store = Store::find($id);
-        $location = Location::all();
-        $user = User::where('status',1)->where('role_id',2)->get();
+        $location = Location::orderBy('location', 'asc')->get();
+        $user = User::where('status',1)->where('role_id',2)->orderBy('name', 'asc')->get();
         return view('edit_store', ['store'=> $store, 'users' => $user, 'locations' => $location]);
     }
 

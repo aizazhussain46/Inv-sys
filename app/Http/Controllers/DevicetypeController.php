@@ -13,7 +13,7 @@ class DevicetypeController extends Controller
     }
     public function index()
     {
-        $devicetype = Devicetype::all();
+        $devicetype = Devicetype::orderBy('devicetype_name', 'asc')->get();
         return view('devicetype', ['devicetypes' => $devicetype]);
     }
 

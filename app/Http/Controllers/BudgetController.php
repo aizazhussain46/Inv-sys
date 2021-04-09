@@ -86,10 +86,10 @@ class BudgetController extends Controller
         $budget->total_price_dollar = number_format($budget->total_price_dollar);
         $budget->total_price_pkr = number_format($budget->total_price_pkr);
         $data['budget'] = $budget;
-        $data['categories'] = Category::where('status',1)->get();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
-        $data['types'] = Type::all();
-        $data['years'] = Year::where('locked', null)->get();
+        $data['categories'] = Category::where('status',1)->orderBy('category_name', 'asc')->get();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
+        $data['types'] = Type::orderBy('type', 'asc')->get();
+        $data['years'] = Year::where('locked', null)->orderBy('year', 'asc')->get();
         $data['pkr'] = Dollar::where('year_id', $budget->year_id)->first();
         // echo "<pre>";
         // print_r($data);
@@ -157,8 +157,8 @@ class BudgetController extends Controller
             return redirect()->back()->withErrors($validator);
         }
         $data = array();
-        $data['years'] = Year::all();
-        $data['categories'] = Category::where('status',1)->get();
+        $data['years'] = Year::orderBy('year', 'asc')->get();
+        $data['categories'] = Category::where('status',1)->orderBy('category_name', 'asc')->get();
         $data['budgets'] = Budget::where('year_id', $request->year_id)->where('category_id',$request->category_id)->get();
         $data['filter'] = Year::find($request->year_id);
         $data['filters'] = (object)array('catid'=>$request->category_id, 'yearid'=>$request->year_id);
@@ -169,7 +169,7 @@ class BudgetController extends Controller
         $budget = Budget::where('year_id', $request->year_id)->first();
         
         if(!empty($budget)){
-            $types = Type::all();
+            $types = Type::orderBy('type', 'asc')->get();
             foreach($types as $type){
             $category = Category::where('status',1)->get();
             foreach($category as $cat){  
@@ -188,7 +188,7 @@ class BudgetController extends Controller
         else{
             $types = array();
         }
-        return view('summary', ['filter'=>$request->year_id,'types'=>$types, 'years'=>Year::all()]);
+        return view('summary', ['filter'=>$request->year_id,'types'=>$types, 'years'=>Year::orderBy('year', 'asc')->get()]);
     }
     public function lock_budget($id)
     {

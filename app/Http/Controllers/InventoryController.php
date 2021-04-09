@@ -86,18 +86,18 @@ class InventoryController extends Controller
     public function show($id)
     {
         $data = array();
-        $data['categories'] = Category::where('status',1)->get();
-        $data['subcategories'] = Subcategory::where('status',1)->get();
+        $data['categories'] = Category::where('status',1)->orderBy('category_name', 'asc')->get();
+        $data['subcategories'] = Subcategory::where('status',1)->orderBy('sub_cat_name', 'asc')->get();
         // $data['departments'] = Department::where('status',1)->get();
-        $data['locations'] = Location::all();
+        $data['locations'] = Location::orderBy('location', 'asc')->get();
         // $data['branches'] = Branch::where('status',1)->get();
-        $data['stores'] = Store::all();
-        $data['models'] = Modal::where('status',1)->get();
-        $data['makes'] = Makee::where('status',1)->get();
-        $data['vendors'] = Vendor::all();
-        $data['devicetypes'] = Devicetype::where('status',1)->get();
-        $data['itemnatures'] = Itemnature::where('status',1)->get();
-        $data['inventorytypes'] = Inventorytype::where('status',1)->get();
+        $data['stores'] = Store::orderBy('store_name', 'asc')->get();
+        $data['models'] = Modal::where('status',1)->orderBy('model_name', 'asc')->get();
+        $data['makes'] = Makee::where('status',1)->orderBy('make_name', 'asc')->get();
+        $data['vendors'] = Vendor::orderBy('vendor_name', 'asc')->get();
+        $data['devicetypes'] = Devicetype::where('status',1)->orderBy('devicetype_name', 'asc')->get();
+        $data['itemnatures'] = Itemnature::where('status',1)->orderBy('itemnature_name', 'asc')->get();
+        $data['inventorytypes'] = Inventorytype::where('status',1)->orderBy('inventorytype_name', 'asc')->get();
         $inventory = Inventory::find($id);
         $inventory->item_price = number_format($inventory->item_price);
         $inventory->dollar_rate = number_format($inventory->dollar_rate);

@@ -17,7 +17,7 @@
                        
                             <div class="card mt-3">
                             <div class="card-header bg-primary text-white">
-                            Bin Card
+                            Vendor Buying
                             </div>
                                 <div class="card-body">
                                 <table class="table table-borderless">
