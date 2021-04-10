@@ -99,7 +99,7 @@ $grand_r = 0;
                             </div>    
                     </div>                    
                     @else
-                    @foreach($types as $type)   
+                    @foreach($types as $key=>$type)  
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
                             <h3><u>{{ $type->type }}</u></h3>
@@ -168,7 +168,7 @@ $grand_t_p += $total_b_p;
 $grand_c += $c; 
 $grand_r += $r;
  ?> 
-                                        @if($type->type  == 'Opex')
+                                        @if($key == 1)
                                         <tfoot>
                                             <tr>
                                                 <th colspan='2' style="text-align:right;">Grand Total</th>

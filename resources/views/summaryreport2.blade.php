@@ -49,7 +49,7 @@
                     <p style="padding:0; margin:0;" class="font-14"><b>Proposed IT Budget - {{ $year }}</b></p>
 </div>
 
-@foreach($types as $type)   
+@foreach($types as $key=>$type)   
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
                             <div class="text-center" style="border:1px solid; margin-top:10px;">
@@ -202,7 +202,7 @@ $grand_r_d += $r_b_d;
 $grand_r_p += $r_b_p; 
 $grand_r_qty += $r_qty;
  ?> 
- @if($type->type  == 'Opex')
+ @if($key == 1)
  <tfoot>
  <tr>
                                                 <th colspan='2' class="text-right">Grand Total</th>
