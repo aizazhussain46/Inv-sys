@@ -28,8 +28,7 @@
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="category">Category</label>
-                                                <select class="custom-select category" id="category" name="category_id">
-                                                    <option value=0>Select Category here</option>
+                                                <select class="custom-select category" id="category" name="category_id" <?php echo $budget->consumed>=1?"disabled":""; ?>>
                                                     @foreach ($categories as $category)
                                                     @if($category->id == $budget->category_id)
                                                     <option value="{{ $category->id }}" selected>{{ $category->category_name }}</option>
@@ -44,7 +43,7 @@
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="subcategory">Sub Category</label>
-                                                <select class="custom-select subcategory" id="subcategory" name="sub_cat_id">
+                                                <select class="custom-select subcategory" id="subcategory" name="sub_cat_id" <?php echo $budget->consumed>=1?"disabled":""; ?>>
                                                 @foreach ($subcategories as $subcategory)
                                                     @if($subcategory->id == $budget->subcategory_id)
                                                     <option value="{{ $subcategory->id }}" selected>{{ $subcategory->sub_cat_name }}</option>
@@ -57,7 +56,7 @@
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="dept_type">Dept/Branch type</label>
-                                                <select class="custom-select" id="dept_type" name="dept_branch_type">
+                                                <select class="custom-select" id="dept_type" name="dept_branch_type" <?php echo $budget->consumed>=1?"disabled":""; ?>>
                                                     <option value=0>Select type here</option>
                                                     <option value="head_office" <?php echo $budget->dept_branch_type=='head_office'?"selected":""; ?> >Head Office</option>
                                                     <option value="branch" <?php echo $budget->dept_branch_type=='branch'?"selected":""; ?> >Branch</option>
@@ -71,7 +70,7 @@
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="dept_id">Department</label>
-                                                <select class="custom-select" id="dept_id" name="dept_id">
+                                                <select class="custom-select" id="dept_id" name="dept_id" <?php echo $budget->consumed>=1?"disabled":""; ?>>
                                                     <option value="{{ $budget->dept_id }}">{{ $budget->department }}</option>
                                                 </select>
                                                 <span class="small text-danger">{{ $errors->first('dept_id') }}</span>
@@ -81,7 +80,7 @@
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="type">Budget Type</label>
-                                                <select class="custom-select" id="type" name="type_id">
+                                                <select class="custom-select" id="type" name="type_id" <?php echo $budget->consumed>=1?"disabled":""; ?>>
                                                     <option value=0>Select Budget type here</option>
                                                     @foreach ($types as $type)
                                                     @if($type->id == $budget->type_id)
@@ -97,7 +96,7 @@
                                             <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="year">Year</label>
-                                                <select class="custom-select" id="year" name="year_id">
+                                                <select class="custom-select" id="year" name="year_id" <?php echo $budget->consumed>=1?"disabled":""; ?>>
                                                 <option value=0>Select Year here</option>
                                                 @foreach ($years as $year)
                                                 @if($year->id == $budget->year_id)
@@ -125,7 +124,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="u_dollar">Unit Price $</label>
-                                                            <input class="form-control py-2" id="u_dollar" name="unit_dollar" type="text" value="{{ $budget->unit_price_dollar }}" placeholder="Enter unit price in $ here" />
+                                                            <input class="form-control py-2" id="u_dollar" name="unit_dollar" type="text" value="{{ $budget->unit_price_dollar }}" placeholder="Enter unit price in $ here" <?php echo $budget->consumed>=1?"readonly":""; ?>/>
                                                             <span class="small text-danger">{{ $errors->first('unit_dollar') }}</span>
                                                         </div>
                                                     </div>
@@ -141,7 +140,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="qty">Quantity</label>
-                                                            <input class="form-control py-2" id="qty" name="qty" type="number" value="{{ $budget->qty }}" placeholder="Enter quantity here" />
+                                                            <input class="form-control py-2" id="qty" name="qty" type="number" value="{{ $budget->qty }}" placeholder="Enter quantity here" <?php echo $budget->consumed>=1?"readonly":""; ?> />
                                                             <span class="small text-danger">{{ $errors->first('qty') }}</span>
                                                         </div>
                                                     </div>
@@ -178,7 +177,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="small mb-1" for="nature">Budget Nature</label>
-                                                    <select class="custom-select" id="nature" name="budget_nature">
+                                                    <select class="custom-select" id="nature" name="budget_nature" <?php echo $budget->consumed>=1?"disabled":""; ?>>
                                                         <option value=0>Select budget nature here</option>
                                                         <option value="Original" <?php echo $budget->budget_nature == 'Original'?'selected':'' ?>>Original</option>
                                                         <option value="Adhoc" <?php echo $budget->budget_nature == 'Adhoc'?'selected':'' ?>>Adhoc</option>

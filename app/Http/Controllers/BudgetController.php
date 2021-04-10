@@ -98,6 +98,8 @@ class BudgetController extends Controller
 
     public function update(Request $request, $id)
     {
+        $bd = Budget::find($id);
+        if($bd->consumed == 0){
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|not_in:0',
             'sub_cat_id' => 'required|not_in:0',
@@ -115,6 +117,7 @@ class BudgetController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
+
         $fields = array(
             'user_id' => Auth::id(),
             'category_id' => $request->category_id,
@@ -133,6 +136,14 @@ class BudgetController extends Controller
             'remarks' => $request->remarks,
             'budget_nature' => $request->budget_nature
         );
+        }
+        else{
+            $fields = array(
+                'user_id' => Auth::id(),
+                'description' => $request->description,
+                'remarks' => $request->remarks
+            );
+        }
         $create = Budget::where('id',$id)->update($fields);
         if($create){
             return redirect()->back()->with('msg', 'Budget Item Updated Successfully!');
