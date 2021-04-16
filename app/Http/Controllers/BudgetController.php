@@ -219,18 +219,10 @@ class BudgetController extends Controller
         }    
     }
 
-
-    // public function budgetexport($data) 
-    // {
-    //     $year = Year::find($data);
-    //     return Excel::download(new BudgetExport($data), 'budgetsummary_'.$year->year.'.xlsx'); 
-    // }
-    // public function itemexport($data) 
-    // {
-    //     $filters = json_decode($data);
-    //     $year = Year::find($filters->yearid);
-    //     $category = Category::find($filters->catid);
-    //     return Excel::download(new ItemsExport($data), 'Itemsexport_'.$category->category_name.'_'.$year->year.'.xlsx'); 
-    // }
+    public function get_budget_items($year_id,$category_id){
+        $budgets = Budget::where('year_id', $year_id)->where('category_id',$category_id)->get();
+        return $budgets;
+        //return view('get_budget_items', ['budgets'=>$budgets]);
+    }
     
 }

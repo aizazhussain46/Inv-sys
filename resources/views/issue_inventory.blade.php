@@ -152,8 +152,19 @@
                     </div>
                     <div class="col-md-12 col-lg-12">
                     <div class="form-group">
+                        <select class="custom-select issue_category" name="category_id" required>
+                            <option value="">Select Category here</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                            @endforeach
+                        </select>
+                        <span class="small text-danger">{{ $errors->first('category_id') }}</span>
+                    </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                    <div class="form-group">
                         <!-- <label class="small mb-1" for="year">Year</label> -->
-                        <select class="custom-select" id="year" name="year_id" required>
+                        <select class="custom-select issue_year" id="year" name="year_id" required>
                         <option value="">Select Year here</option>
                         @foreach ($years as $year)
                         <option value="{{ $year->id }}">{{ $year->year }}</option>
@@ -162,6 +173,44 @@
                         <span class="small text-danger">{{ $errors->first('year_id') }}</span>
                     </div>
                     </div>
+
+
+
+                    <div class="card mb-4 mt-3 budget_items">
+                            <div class="card-body">
+                            <span class="text-danger">{{ $errors->first('budget_id') }}</span>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No</th>
+                                                <th>Type</th>
+                                                <th>Item</th>
+                                                <th>Dept</th>
+                                                <th>Desc</th>
+                                                <th>Qty</th>
+                                                <th>Price Unit $</th>
+                                                <th>Price Unit Rs</th>
+                                                <th>Price Total $</th>
+                                                <th>Price Total Rs</th>
+                                                <th>Consumed</th>
+                                                <th>Rem</th>
+                                                <th>Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody class="items_list">
+                                        </tbody>
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                        </div> 
+
+
+
+
+
                     <div class="form-group mt-4 mb-0">
                         <input type="submit" name="issue_inventory" value="Issue Inventory" class="btn btn-primary btn-block">
                         </div>

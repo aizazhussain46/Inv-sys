@@ -127,6 +127,7 @@ Route::get('/balanceexport/{data}','PDFController@balanceexport');
 Route::get('/check_product/{pro}', 'InventoryController@check_product');
 Route::get('/get_price/{id}', 'InventoryController@get_price');
 Route::get('/get_inv_items/{id}', 'InventoryController@get_inv_items');
+Route::get('/get_budget_items/{year_id}/{category_id}', 'BudgetController@get_budget_items');
 
 Route::get('/edit_logs', 'ReportController@edit_logs');
 Route::get('/editlogsexport/{data}','PDFController@editlogsexport');

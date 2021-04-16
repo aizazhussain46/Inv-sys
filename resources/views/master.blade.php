@@ -574,7 +574,40 @@ $(document).ready(function(){
         num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         $(this).val(num_parts.join("."));
         //alert(num_parts.join("."));
-    });    
+    });
+
+$(".budget_items").hide();    
+    $(".issue_year").on("change",function(){
+        var year_id = $(this).val();
+        var category_id = $('.issue_category').val();
+        $.get("{{ url('get_budget_items') }}/"+year_id+"/"+category_id, function(data){
+            $(".items_list").empty();
+            var i = 1;
+            $.each( data, function( key, value ) {
+                $(".items_list").append(`
+                <tr>
+                <td class='text-align-right'>
+                <input type="checkbox" class="form-check-input" id="budget_id" name='budget_id[]' value="`+value.id+`">
+                <label class="form-check-label" for="budget_id">`+i+`</label></td>
+                <td>`+value.type.type+`</td>
+                <td>`+value.subcategory.sub_cat_name+`</td>
+                <td>`+value.department+`</td>
+                <td>`+value.description+`</td>
+                <td class='text-align-right'>`+value.qty+`</td>
+                <td>`+value.unit_price_dollar+`</td>
+                <td>`+value.unit_price_pkr+`</td>
+                <td>`+(value.unit_price_dollar*value.qty)+`</td>
+                <td>`+(value.unit_price_pkr*value.qty)+`</td>
+                <td class='text-align-right'>`+value.consumed+`</td>
+                <td class='text-align-right'>`+value.remaining+`</td>
+                <td>`+value.remarks+`</td>
+                </tr>
+                `); 
+                i++;
+                $(".budget_items").show();
+            });  
+        });    
+    });      
 
 });
 </script> 
