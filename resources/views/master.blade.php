@@ -580,7 +580,8 @@ $(".budget_items").hide();
     $(".issue_year").on("change",function(){
         var year_id = $(this).val();
         var inv_id = $('.invid').val();
-        $.get("{{ url('get_budget_items') }}/"+year_id+"/"+inv_id, function(data){
+        var dept_id = $('#dept_id').val();
+        $.get("{{ url('get_budget_items') }}/"+year_id+"/"+inv_id+"/"+dept_id, function(data){
             $(".items_list").empty();
             if(data == "0"){
                 $(".items_list").append(`
