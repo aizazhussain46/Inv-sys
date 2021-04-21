@@ -154,13 +154,12 @@ class FormController extends Controller
         return view('issue_inventory', ['years'=> $year,'inventories' => $inventory, 'categories' => $categories]);
     }
     public function submitt_issue(Request $request){
-       
+        
         $validator = Validator::make($request->all(), [
             'inv_id' => 'required',
             'employee_code' => 'required',
             'year_id' => 'required',
-            'budget_id' => 'required',
-            'category_id' => 'required'  
+            'budget_id' => 'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
@@ -243,8 +242,7 @@ class FormController extends Controller
             'inv_id' => 'required',
             'employee_code' => 'required',
             'year_id' => 'required',
-            'budget_id' => 'required',
-            'category_id' => 'required'  
+            'budget_id' => 'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);

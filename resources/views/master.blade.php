@@ -575,19 +575,29 @@ $(document).ready(function(){
         $(this).val(num_parts.join("."));
         //alert(num_parts.join("."));
     });
-
+    
 $(".budget_items").hide();    
     $(".issue_year").on("change",function(){
         var year_id = $(this).val();
-        var category_id = $('.issue_category').val();
-        $.get("{{ url('get_budget_items') }}/"+year_id+"/"+category_id, function(data){
+        var inv_id = $('.invid').val();
+        $.get("{{ url('get_budget_items') }}/"+year_id+"/"+inv_id, function(data){
             $(".items_list").empty();
+            if(data == "0"){
+                $(".items_list").append(`
+                <tr>
+                <td style='text-align: center;' colspan='13'>
+                Budget not available for selected inventory!
+                </td>
+                </tr>
+                `);
+            }
+            else{
             var i = 1;
             $.each( data, function( key, value ) {
                 $(".items_list").append(`
                 <tr>
                 <td class='text-align-right'>
-                <input type="checkbox" class="form-check-input" id="budget_id" name='budget_id[]' value="`+value.id+`">
+                <input type="radio" class="form-check-input" id="budget_id" name='budget_id[]' value="`+value.id+`">
                 <label class="form-check-label" for="budget_id">`+i+`</label></td>
                 <td>`+value.type.type+`</td>
                 <td>`+value.subcategory.sub_cat_name+`</td>
@@ -604,8 +614,9 @@ $(".budget_items").hide();
                 </tr>
                 `); 
                 i++;
-                $(".budget_items").show();
             });  
+            }
+            $(".budget_items").show();
         });    
     });      
 

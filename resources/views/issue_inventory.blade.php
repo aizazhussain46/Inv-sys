@@ -124,7 +124,7 @@
                                             <tr>
                                                 <td>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name='inv_id[]' value="{{ $inventory->id }}">
+                                                    <input type="radio" class="form-check-input invid" id="exampleCheck1" name='inv_id[]' value="{{ $inventory->id }}">
                                                     <label class="form-check-label" for="exampleCheck1">{{ $i++ }}</label>
                                                 </div>
                                                 </td>
@@ -150,17 +150,7 @@
                         <span class="small text-danger">{{ $errors->first('remarks') }}</span>
                         </div>    
                     </div>
-                    <div class="col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <select class="custom-select issue_category" name="category_id" required>
-                            <option value="">Select Category here</option>
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                            @endforeach
-                        </select>
-                        <span class="small text-danger">{{ $errors->first('category_id') }}</span>
-                    </div>
-                    </div>
+                    
                     <div class="col-md-12 col-lg-12">
                     <div class="form-group">
                         <!-- <label class="small mb-1" for="year">Year</label> -->

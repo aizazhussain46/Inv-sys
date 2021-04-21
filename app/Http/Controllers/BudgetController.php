@@ -9,6 +9,7 @@ use App\Exports\BudgetExport;
 use App\Exports\ItemsExport;
 use App\Category;
 use App\Subcategory;
+use App\Inventory;
 use App\User;
 use App\Year;
 use App\Dollar;
@@ -219,9 +220,16 @@ class BudgetController extends Controller
         }    
     }
 
-    public function get_budget_items($year_id,$category_id){
-        $budgets = Budget::where('year_id', $year_id)->where('category_id',$category_id)->get();
-        return $budgets;
+    public function get_budget_items($year_id,$inv_id){
+        $inv = Inventory::find($inv_id);
+        $budgets = Budget::where('year_id', $year_id)
+                    ->where('category_id',$inv->category_id)
+                    ->where('subcategory_id',$inv->subcategory_id)
+                    ->where('remaining', '>', 0)
+                    ->get();
+
+        //return [$inv,$budgets];            
+        return count($budgets)>0?$budgets:'0';
         //return view('get_budget_items', ['budgets'=>$budgets]);
     }
     
