@@ -57,6 +57,7 @@ Route::resource('/dollars', DollarController::class);
 Route::resource('/types', TypeController::class);
 Route::resource('/years', YearController::class);
 Route::resource('/budget', BudgetController::class);
+Route::resource('/resignedemployee', ResignedController::class);
 
 /* Forms */
 Route::get('/add_category', [FormController::class, 'add_category'])->middleware('role:1');

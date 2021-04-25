@@ -142,6 +142,8 @@
                                             <a class="nav-link" href="{{ url('employee') }}">List Employees</a>
                                         </nav>
                                     </div>
+                                    <!-- Resigned Employees -->
+                                    <a class="nav-link" href="{{ url('resignedemployee') }}">Resigned Employees</a>
                                     <!-- Branch -->
                                     <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#branch" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Branch
